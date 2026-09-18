@@ -1,1159 +1,713 @@
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, viewport-fit=cover">
-    <title>Kenali Dirimu, Kenali Gerejamu</title>
-    <meta name="description" content="Kebaktian Pemuda Advent — Sesi Interaktif Lintas Generasi">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, viewport-fit=cover">
+<title>Kenali Dirimu, Kenali Gerejamu</title>
+<meta name="description" content="Kebaktian Pemuda Advent — Sesi Interaktif Lintas Generasi">
 
-    <!-- ===================== CDN: FONTS ===================== -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;0,900;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
-        rel="stylesheet">
+<!-- ===================== CDN: FONTS ===================== -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;0,900;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-    <!-- ===================== CDN: ICONS & ANIMATION ===================== -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+<!-- ===================== CDN: ICONS & ANIMATION ===================== -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 
-    <!-- ===================== CDN: TAILWIND ===================== -->
-    <script src="https://cdn.tailwindcss.com"></script>
+<!-- ===================== CDN: TAILWIND ===================== -->
+<script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- ===================== CDN: CHART.JS (grafik realtime) ===================== -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+<!-- ===================== CDN: CHART.JS (grafik realtime) ===================== -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
 
-    <!-- ===================== CDN: HTML2CANVAS (kartu hasil bisa disimpan) ===================== -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<!-- ===================== CDN: HTML2CANVAS (kartu hasil bisa disimpan) ===================== -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
-    <!-- ===================== CDN: SUPABASE JS SDK v2 ===================== -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<!-- ===================== CDN: SUPABASE JS SDK v2 ===================== -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        display: ['"Playfair Display"', 'serif'],
-                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
-                    },
-                    colors: {
-                        ink: '#05040d',
-                        gold: '#e8c468',
-                        amber: '#f5b942',
-                    },
-                    boxShadow: {
-                        glow: '0 0 60px -10px rgba(232,196,104,0.35)',
-                    }
-                }
-            }
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: {
+          display: ['"Playfair Display"', 'serif'],
+          sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+        },
+        colors: {
+          ink: '#05040d',
+          gold: '#e8c468',
+          amber: '#f5b942',
+        },
+        boxShadow: {
+          glow: '0 0 60px -10px rgba(232,196,104,0.35)',
         }
-    </script>
+      }
+    }
+  }
+</script>
 
-    <style>
-        :root {
-            --bg-ink: #05040d;
-            --bg-ink-2: #0b0a1a;
-            --gold: #e8c468;
-            --gold-soft: #f3dba0;
-            --purple: #7c5cff;
-            --blue: #3fa9ff;
-            --rose: #ff6b8b;
-            --glass-bg: rgba(255, 255, 255, 0.055);
-            --glass-bg-strong: rgba(255, 255, 255, 0.09);
-            --glass-border: rgba(255, 255, 255, 0.14);
-        }
+<style>
+  :root{
+    --bg-ink:#05040d;
+    --bg-ink-2:#0b0a1a;
+    --gold:#e8c468;
+    --gold-soft:#f3dba0;
+    --purple:#7c5cff;
+    --blue:#3fa9ff;
+    --rose:#ff6b8b;
+    --glass-bg:rgba(255,255,255,0.055);
+    --glass-bg-strong:rgba(255,255,255,0.09);
+    --glass-border:rgba(255,255,255,0.14);
+  }
+  *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+  html,body{height:100%;}
+  body{
+    margin:0;
+    background:var(--bg-ink);
+    color:#f5f3ee;
+    font-family:'Plus Jakarta Sans', sans-serif;
+    overflow-x:hidden;
+    min-height:100vh;
+    position:relative;
+  }
+  h1,h2,h3,.font-display{font-family:'Playfair Display', serif;}
+  ::selection{background:var(--gold); color:#1a1305;}
 
-        * {
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
-        }
+  /* ---------- scrollbar ---------- */
+  ::-webkit-scrollbar{width:8px; height:8px;}
+  ::-webkit-scrollbar-track{background:transparent;}
+  ::-webkit-scrollbar-thumb{background:rgba(232,196,104,0.35); border-radius:8px;}
 
-        html,
-        body {
-            height: 100%;
-        }
+  /* ---------- animated cinematic background ---------- */
+  #bg-canvas{position:fixed; inset:0; z-index:0; pointer-events:none;}
+  .bg-blob{
+    position:fixed; border-radius:50%; filter:blur(90px); opacity:.35; z-index:0; pointer-events:none;
+    animation: floatBlob 22s ease-in-out infinite;
+  }
+  .bg-blob.b1{width:520px; height:520px; background:radial-gradient(circle, var(--purple), transparent 70%); top:-160px; left:-120px; animation-duration:26s;}
+  .bg-blob.b2{width:480px; height:480px; background:radial-gradient(circle, var(--blue), transparent 70%); bottom:-160px; right:-100px; animation-duration:30s; animation-delay:-6s;}
+  .bg-blob.b3{width:420px; height:420px; background:radial-gradient(circle, var(--gold), transparent 70%); top:40%; left:60%; animation-duration:34s; animation-delay:-12s;}
+  .bg-blob.b4{width:360px; height:360px; background:radial-gradient(circle, var(--rose), transparent 70%); bottom:20%; left:5%; animation-duration:28s; animation-delay:-4s;}
+  @keyframes floatBlob{
+    0%,100%{transform:translate(0,0) scale(1);}
+    33%{transform:translate(40px,-30px) scale(1.08);}
+    66%{transform:translate(-30px,25px) scale(0.95);}
+  }
+  .bg-grain{position:fixed; inset:0; z-index:1; pointer-events:none; opacity:.05;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
 
-        body {
-            margin: 0;
-            background: var(--bg-ink);
-            color: #f5f3ee;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            overflow-x: hidden;
-            min-height: 100vh;
-            position: relative;
-        }
+  /* ---------- glass system ---------- */
+  .glass{
+    background:var(--glass-bg);
+    backdrop-filter:blur(22px) saturate(140%);
+    -webkit-backdrop-filter:blur(22px) saturate(140%);
+    border:1px solid var(--glass-border);
+    box-shadow:0 8px 40px -8px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.06);
+  }
+  .glass-strong{
+    background:var(--glass-bg-strong);
+    backdrop-filter:blur(26px) saturate(150%);
+    -webkit-backdrop-filter:blur(26px) saturate(150%);
+    border:1px solid var(--glass-border);
+    box-shadow:0 12px 50px -10px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.08);
+  }
+  .glass-card{border-radius:26px;}
+  .text-gradient-gold{
+    background:linear-gradient(120deg, #fff6df, var(--gold) 45%, var(--gold-soft) 65%, #fff6df);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .btn-gold{
+    background:linear-gradient(135deg, var(--gold), #c99a35);
+    color:#241a04; font-weight:700;
+    box-shadow:0 10px 30px -8px rgba(232,196,104,0.55);
+    transition:transform .2s ease, box-shadow .2s ease, filter .2s ease;
+  }
+  .btn-gold:hover{transform:translateY(-2px); filter:brightness(1.06);}
+  .btn-gold:active{transform:translateY(0px) scale(.98);}
+  .btn-ghost{
+    background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.18);
+    transition:all .2s ease;
+  }
+  .btn-ghost:hover{background:rgba(255,255,255,0.12); border-color:rgba(255,255,255,0.32);}
 
-        h1,
-        h2,
-        h3,
-        .font-display {
-            font-family: 'Playfair Display', serif;
-        }
+  .shimmer{position:relative; overflow:hidden;}
+  .shimmer::after{
+    content:''; position:absolute; inset:0; transform:translateX(-100%);
+    background:linear-gradient(90deg, transparent, rgba(255,255,255,0.18), transparent);
+    animation:shimmerMove 2.6s infinite;
+  }
+  @keyframes shimmerMove{100%{transform:translateX(100%);}}
 
-        ::selection {
-            background: var(--gold);
-            color: #1a1305;
-        }
+  .app-screen{position:relative; z-index:2; min-height:100vh;}
 
-        /* ---------- scrollbar ---------- */
-        ::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: transparent;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: rgba(232, 196, 104, 0.35);
-            border-radius: 8px;
-        }
-
-        /* ---------- animated cinematic background ---------- */
-        #bg-canvas {
-            position: fixed;
-            inset: 0;
-            z-index: 0;
-            pointer-events: none;
-        }
-
-        .bg-blob {
-            position: fixed;
-            border-radius: 50%;
-            filter: blur(90px);
-            opacity: .35;
-            z-index: 0;
-            pointer-events: none;
-            animation: floatBlob 22s ease-in-out infinite;
-        }
-
-        .bg-blob.b1 {
-            width: 520px;
-            height: 520px;
-            background: radial-gradient(circle, var(--purple), transparent 70%);
-            top: -160px;
-            left: -120px;
-            animation-duration: 26s;
-        }
-
-        .bg-blob.b2 {
-            width: 480px;
-            height: 480px;
-            background: radial-gradient(circle, var(--blue), transparent 70%);
-            bottom: -160px;
-            right: -100px;
-            animation-duration: 30s;
-            animation-delay: -6s;
-        }
-
-        .bg-blob.b3 {
-            width: 420px;
-            height: 420px;
-            background: radial-gradient(circle, var(--gold), transparent 70%);
-            top: 40%;
-            left: 60%;
-            animation-duration: 34s;
-            animation-delay: -12s;
-        }
-
-        .bg-blob.b4 {
-            width: 360px;
-            height: 360px;
-            background: radial-gradient(circle, var(--rose), transparent 70%);
-            bottom: 20%;
-            left: 5%;
-            animation-duration: 28s;
-            animation-delay: -4s;
-        }
-
-        @keyframes floatBlob {
-
-            0%,
-            100% {
-                transform: translate(0, 0) scale(1);
-            }
-
-            33% {
-                transform: translate(40px, -30px) scale(1.08);
-            }
-
-            66% {
-                transform: translate(-30px, 25px) scale(0.95);
-            }
-        }
-
-        .bg-grain {
-            position: fixed;
-            inset: 0;
-            z-index: 1;
-            pointer-events: none;
-            opacity: .05;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-        }
-
-        /* ---------- glass system ---------- */
-        .glass {
-            background: var(--glass-bg);
-            backdrop-filter: blur(22px) saturate(140%);
-            -webkit-backdrop-filter: blur(22px) saturate(140%);
-            border: 1px solid var(--glass-border);
-            box-shadow: 0 8px 40px -8px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.06);
-        }
-
-        .glass-strong {
-            background: var(--glass-bg-strong);
-            backdrop-filter: blur(26px) saturate(150%);
-            -webkit-backdrop-filter: blur(26px) saturate(150%);
-            border: 1px solid var(--glass-border);
-            box-shadow: 0 12px 50px -10px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.08);
-        }
-
-        .glass-card {
-            border-radius: 26px;
-        }
-
-        .text-gradient-gold {
-            background: linear-gradient(120deg, #fff6df, var(--gold) 45%, var(--gold-soft) 65%, #fff6df);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .btn-gold {
-            background: linear-gradient(135deg, var(--gold), #c99a35);
-            color: #241a04;
-            font-weight: 700;
-            box-shadow: 0 10px 30px -8px rgba(232, 196, 104, 0.55);
-            transition: transform .2s ease, box-shadow .2s ease, filter .2s ease;
-        }
-
-        .btn-gold:hover {
-            transform: translateY(-2px);
-            filter: brightness(1.06);
-        }
-
-        .btn-gold:active {
-            transform: translateY(0px) scale(.98);
-        }
-
-        .btn-ghost {
-            background: rgba(255, 255, 255, 0.06);
-            border: 1px solid rgba(255, 255, 255, 0.18);
-            transition: all .2s ease;
-        }
-
-        .btn-ghost:hover {
-            background: rgba(255, 255, 255, 0.12);
-            border-color: rgba(255, 255, 255, 0.32);
-        }
-
-        .shimmer {
-            position: relative;
-            overflow: hidden;
-        }
-
-        .shimmer::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            transform: translateX(-100%);
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.18), transparent);
-            animation: shimmerMove 2.6s infinite;
-        }
-
-        @keyframes shimmerMove {
-            100% {
-                transform: translateX(100%);
-            }
-        }
-
-        .app-screen {
-            position: relative;
-            z-index: 2;
-            min-height: 100vh;
-        }
-
-        /* ---------- bottom nav (client) ---------- */
-        #bottom-nav {
-            position: fixed;
-            left: 50%;
-            bottom: 16px;
-            transform: translateX(-50%);
-            z-index: 40;
-            border-radius: 999px;
-            padding: 8px;
-            display: flex;
-            gap: 2px;
-            pointer-events: none;
-            /* only nav-btn children are clickable; content behind the pill stays reachable */
-        }
-
-        .nav-btn {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 2px;
-            padding: 8px 12px;
-            border-radius: 999px;
-            color: rgba(255, 255, 255, 0.55);
-            font-size: 10px;
-            font-weight: 600;
-            letter-spacing: .02em;
-            transition: all .25s ease;
-            cursor: pointer;
-            min-width: 58px;
-            pointer-events: auto;
-        }
-
-        /* keep scroll-into-view (and manual scrolling) from stopping a CTA button
+  /* ---------- bottom nav (client) ---------- */
+  #bottom-nav{
+    position:fixed; left:50%; bottom:16px; transform:translateX(-50%);
+    z-index:40; border-radius:999px; padding:8px; display:flex; gap:2px;
+    pointer-events:none; /* only nav-btn children are clickable; content behind the pill stays reachable */
+  }
+  .nav-btn{
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    gap:2px; padding:8px 12px; border-radius:999px; color:rgba(255,255,255,0.55);
+    font-size:10px; font-weight:600; letter-spacing:.02em; transition:all .25s ease; cursor:pointer;
+    min-width:58px; pointer-events:auto;
+  }
+  /* keep scroll-into-view (and manual scrolling) from stopping a CTA button
      right underneath the fixed bottom nav / floating timer */
-        #app * {
-            scroll-margin-bottom: 110px;
-            scroll-margin-top: 90px;
-        }
+  #app *{ scroll-margin-bottom:110px; scroll-margin-top:90px; }
+  .nav-btn i{font-size:15px;}
+  .nav-btn.active{color:#241a04; background:linear-gradient(135deg,var(--gold),#c99a35); box-shadow:0 6px 18px -4px rgba(232,196,104,.6);}
 
-        .nav-btn i {
-            font-size: 15px;
-        }
+  /* ---------- floating timer ---------- */
+  #floating-timer{
+    position:fixed; top:14px; right:14px; z-index:50; border-radius:20px;
+    padding:10px 16px; display:none; align-items:center; gap:10px;
+    animation: fadeInDown .4s ease;
+  }
+  #floating-timer.show{display:flex;}
+  #floating-timer .ring{width:14px;height:14px;border-radius:50%;background:var(--rose); box-shadow:0 0 12px var(--rose); animation:pulseDot 1.4s infinite;}
+  @keyframes pulseDot{0%,100%{opacity:1;}50%{opacity:.35;}}
 
-        .nav-btn.active {
-            color: #241a04;
-            background: linear-gradient(135deg, var(--gold), #c99a35);
-            box-shadow: 0 6px 18px -4px rgba(232, 196, 104, .6);
-        }
+  /* ---------- toast ---------- */
+  #toast-wrap{position:fixed; bottom:90px; left:50%; transform:translateX(-50%); z-index:80; display:flex; flex-direction:column; gap:8px; align-items:center; width:92%; max-width:420px;}
+  .toast{padding:12px 18px; border-radius:14px; font-size:13px; font-weight:600; text-align:center; animation:fadeInUp .3s ease;}
 
-        /* ---------- floating timer ---------- */
-        #floating-timer {
-            position: fixed;
-            top: 14px;
-            right: 14px;
-            z-index: 50;
-            border-radius: 20px;
-            padding: 10px 16px;
-            display: none;
-            align-items: center;
-            gap: 10px;
-            animation: fadeInDown .4s ease;
-        }
+  /* ---------- generic fade utils ---------- */
+  @keyframes fadeInUp{from{opacity:0; transform:translateY(14px);} to{opacity:1; transform:translateY(0);}}
+  @keyframes fadeInDown{from{opacity:0; transform:translateY(-14px);} to{opacity:1; transform:translateY(0);}}
+  .card-hover{transition:transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s ease, border-color .35s ease;}
+  .card-hover:hover{transform:translateY(-6px); border-color:rgba(232,196,104,0.5);}
+  .locked-card{filter:grayscale(.75) brightness(.55); position:relative;}
 
-        #floating-timer.show {
-            display: flex;
-        }
+  .badge-role{display:inline-flex; align-items:center; gap:6px; padding:4px 12px; border-radius:999px; font-size:11px; font-weight:700; letter-spacing:.03em;}
 
-        #floating-timer .ring {
-            width: 14px;
-            height: 14px;
-            border-radius: 50%;
-            background: var(--rose);
-            box-shadow: 0 0 12px var(--rose);
-            animation: pulseDot 1.4s infinite;
-        }
+  /* ---------- progress dots (presenter) ---------- */
+  .pdot{width:8px; height:8px; border-radius:50%; background:rgba(255,255,255,0.25); transition:all .3s ease;}
+  .pdot.active{width:26px; background:var(--gold); box-shadow:0 0 10px var(--gold);}
 
-        @keyframes pulseDot {
+  input[type=text],input[type=radio],textarea,select{color:#f5f3ee;}
+  textarea, input[type=text]{
+    background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.18); border-radius:14px;
+    padding:12px 14px; width:100%; outline:none; transition:border-color .2s ease, background .2s ease;
+  }
+  textarea:focus, input[type=text]:focus{border-color:var(--gold); background:rgba(255,255,255,0.09);}
 
-            0%,
-            100% {
-                opacity: 1;
-            }
+  .likert-opt{border:1px solid rgba(255,255,255,0.16); border-radius:14px; padding:10px; text-align:center; cursor:pointer; transition:all .2s ease; font-weight:700;}
+  .likert-opt.selected{background:linear-gradient(135deg,var(--gold),#c99a35); color:#241a04; border-color:transparent;}
 
-            50% {
-                opacity: .35;
-            }
-        }
+  .quiz-opt{border:1px solid rgba(255,255,255,0.16); border-radius:16px; padding:14px 16px; cursor:pointer; transition:all .2s ease; display:flex; gap:12px; align-items:flex-start;}
+  .quiz-opt:hover{border-color:rgba(232,196,104,0.5); background:rgba(255,255,255,0.05);}
+  .quiz-opt.selected{border-color:var(--gold); background:rgba(232,196,104,0.12);}
+  .quiz-letter{width:28px; height:28px; border-radius:50%; border:1px solid rgba(255,255,255,0.3); display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:800; flex-shrink:0;}
+  .quiz-opt.selected .quiz-letter{background:var(--gold); color:#241a04; border-color:transparent;}
 
-        /* ---------- toast ---------- */
-        #toast-wrap {
-            position: fixed;
-            bottom: 90px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 80;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            align-items: center;
-            width: 92%;
-            max-width: 420px;
-        }
+  .case-locked-ribbon{position:absolute; top:14px; right:-32px; transform:rotate(35deg); background:#ff5c5c; color:#fff; font-size:10px; font-weight:800; padding:4px 40px; letter-spacing:.05em;}
 
-        .toast {
-            padding: 12px 18px;
-            border-radius: 14px;
-            font-size: 13px;
-            font-weight: 600;
-            text-align: center;
-            animation: fadeInUp .3s ease;
-        }
+  #app{position:relative; z-index:2;}
+  .spinner{width:34px; height:34px; border-radius:50%; border:3px solid rgba(255,255,255,0.18); border-top-color:var(--gold); animation:spin .8s linear infinite;}
+  @keyframes spin{to{transform:rotate(360deg);}}
 
-        /* ---------- generic fade utils ---------- */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(14px);
-            }
+  .demo-banner{position:fixed; top:0; left:0; right:0; z-index:100; background:linear-gradient(90deg,#ff5c5c,#ff9d5c); color:#2b0a0a; font-weight:700; font-size:12px; text-align:center; padding:6px 10px;}
 
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-14px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .card-hover {
-            transition: transform .35s cubic-bezier(.2, .8, .2, 1), box-shadow .35s ease, border-color .35s ease;
-        }
-
-        .card-hover:hover {
-            transform: translateY(-6px);
-            border-color: rgba(232, 196, 104, 0.5);
-        }
-
-        .locked-card {
-            filter: grayscale(.75) brightness(.55);
-            position: relative;
-        }
-
-        .badge-role {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 4px 12px;
-            border-radius: 999px;
-            font-size: 11px;
-            font-weight: 700;
-            letter-spacing: .03em;
-        }
-
-        /* ---------- progress dots (presenter) ---------- */
-        .pdot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.25);
-            transition: all .3s ease;
-        }
-
-        .pdot.active {
-            width: 26px;
-            background: var(--gold);
-            box-shadow: 0 0 10px var(--gold);
-        }
-
-        input[type=text],
-        input[type=radio],
-        textarea,
-        select {
-            color: #f5f3ee;
-        }
-
-        textarea,
-        input[type=text] {
-            background: rgba(255, 255, 255, 0.06);
-            border: 1px solid rgba(255, 255, 255, 0.18);
-            border-radius: 14px;
-            padding: 12px 14px;
-            width: 100%;
-            outline: none;
-            transition: border-color .2s ease, background .2s ease;
-        }
-
-        textarea:focus,
-        input[type=text]:focus {
-            border-color: var(--gold);
-            background: rgba(255, 255, 255, 0.09);
-        }
-
-        .likert-opt {
-            border: 1px solid rgba(255, 255, 255, 0.16);
-            border-radius: 14px;
-            padding: 10px;
-            text-align: center;
-            cursor: pointer;
-            transition: all .2s ease;
-            font-weight: 700;
-        }
-
-        .likert-opt.selected {
-            background: linear-gradient(135deg, var(--gold), #c99a35);
-            color: #241a04;
-            border-color: transparent;
-        }
-
-        .quiz-opt {
-            border: 1px solid rgba(255, 255, 255, 0.16);
-            border-radius: 16px;
-            padding: 14px 16px;
-            cursor: pointer;
-            transition: all .2s ease;
-            display: flex;
-            gap: 12px;
-            align-items: flex-start;
-        }
-
-        .quiz-opt:hover {
-            border-color: rgba(232, 196, 104, 0.5);
-            background: rgba(255, 255, 255, 0.05);
-        }
-
-        .quiz-opt.selected {
-            border-color: var(--gold);
-            background: rgba(232, 196, 104, 0.12);
-        }
-
-        .quiz-letter {
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 12px;
-            font-weight: 800;
-            flex-shrink: 0;
-        }
-
-        .quiz-opt.selected .quiz-letter {
-            background: var(--gold);
-            color: #241a04;
-            border-color: transparent;
-        }
-
-        .case-locked-ribbon {
-            position: absolute;
-            top: 14px;
-            right: -32px;
-            transform: rotate(35deg);
-            background: #ff5c5c;
-            color: #fff;
-            font-size: 10px;
-            font-weight: 800;
-            padding: 4px 40px;
-            letter-spacing: .05em;
-        }
-
-        #app {
-            position: relative;
-            z-index: 2;
-        }
-
-        .spinner {
-            width: 34px;
-            height: 34px;
-            border-radius: 50%;
-            border: 3px solid rgba(255, 255, 255, 0.18);
-            border-top-color: var(--gold);
-            animation: spin .8s linear infinite;
-        }
-
-        @keyframes spin {
-            to {
-                transform: rotate(360deg);
-            }
-        }
-
-        .demo-banner {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 100;
-            background: linear-gradient(90deg, #ff5c5c, #ff9d5c);
-            color: #2b0a0a;
-            font-weight: 700;
-            font-size: 12px;
-            text-align: center;
-            padding: 6px 10px;
-        }
-
-        @media (max-width: 480px) {
-            .nav-btn {
-                min-width: 48px;
-                padding: 7px 8px;
-            }
-        }
-    </style>
+  @media (max-width: 480px){
+    .nav-btn{min-width:48px; padding:7px 8px;}
+  }
+</style>
 </head>
-
 <body>
 
-    <div id="bg-canvas"></div>
-    <div class="bg-blob b1"></div>
-    <div class="bg-blob b2"></div>
-    <div class="bg-blob b3"></div>
-    <div class="bg-blob b4"></div>
-    <div class="bg-grain"></div>
+<div id="bg-canvas"></div>
+<div class="bg-blob b1"></div>
+<div class="bg-blob b2"></div>
+<div class="bg-blob b3"></div>
+<div class="bg-blob b4"></div>
+<div class="bg-grain"></div>
 
-    <div id="demo-banner-slot"></div>
+<div id="demo-banner-slot"></div>
 
-    <div id="app" class="app-screen"></div>
-    <div id="floating-timer" class="glass-strong glass-card"></div>
-    <div id="bottom-nav" class="glass-strong"></div>
-    <div id="toast-wrap"></div>
-    <div id="loading-overlay"
-        style="display:none; position:fixed; inset:0; z-index:200; align-items:center; justify-content:center; background:rgba(5,4,13,0.55); backdrop-filter:blur(4px);">
-        <div class="spinner"></div>
-    </div>
+<div id="app" class="app-screen"></div>
+<div id="floating-timer" class="glass-strong glass-card"></div>
+<div id="bottom-nav" class="glass-strong"></div>
+<div id="toast-wrap"></div>
+<div id="loading-overlay" style="display:none; position:fixed; inset:0; z-index:200; align-items:center; justify-content:center; background:rgba(5,4,13,0.55); backdrop-filter:blur(4px);">
+  <div class="spinner"></div>
+</div>
 
-    <script>
-        /* =========================================================================
-           KENALI DIRIMU, KENALI GEREJAMU — SINGLE FILE WEB APP
-           Frontend: Tailwind + FontAwesome + Animate.css + Chart.js + html2canvas
-           Backend : Supabase (Postgres + Realtime) via supabase-js v2 (CDN)
-           ========================================================================= */
+<script>
+/* =========================================================================
+   KENALI DIRIMU, KENALI GEREJAMU — SINGLE FILE WEB APP
+   Frontend: Tailwind + FontAwesome + Animate.css + Chart.js + html2canvas
+   Backend : Supabase (Postgres + Realtime) via supabase-js v2 (CDN)
+   ========================================================================= */
 
-        /* ---------------------- 1. KONFIGURASI SUPABASE ------------------------ */
-        const SUPABASE_URL = window.ENV_SUPABASE_URL || 'YOUR_SUPABASE_URL_HERE';
-        const SUPABASE_ANON_KEY = window.ENV_SUPABASE_ANON_KEY || 'YOUR_SUPABASE_ANON_KEY_HERE';
+/* ---------------------- 1. KONFIGURASI SUPABASE ------------------------ */
+const SUPABASE_URL = window.ENV_SUPABASE_URL || 'https://todcytrubjrbbkxyxdxb.supabase.co';
+const SUPABASE_ANON_KEY = window.ENV_SUPABASE_ANON_KEY || 'sb_publishable_3Bk5aNC7FQVFXctTMzad8A_gLCwsNrl';
 
-        const IS_CONFIGURED = !!SUPABASE_URL && !!SUPABASE_ANON_KEY &&
-            !SUPABASE_URL.includes('YOUR_SUPABASE_URL_HERE') &&
-            !SUPABASE_ANON_KEY.includes('YOUR_SUPABASE_ANON_KEY_HERE');
+const IS_CONFIGURED = !!SUPABASE_URL && !!SUPABASE_ANON_KEY &&
+  !SUPABASE_URL.includes('YOUR_SUPABASE_URL_HERE') &&
+  !SUPABASE_ANON_KEY.includes('YOUR_SUPABASE_ANON_KEY_HERE');
 
-        let sb = null;
-        if (IS_CONFIGURED) {
-            try {
-                sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
-                    realtime: { params: { eventsPerSecond: 10 } }
-                });
-            } catch (e) { console.error('Gagal membuat Supabase client:', e); }
-        } else {
-            document.getElementById('demo-banner-slot').innerHTML =
-                '<div class="demo-banner"><i class="fa-solid fa-triangle-exclamation"></i>&nbsp; MODE DEMO — Supabase belum dikonfigurasi. Edit SUPABASE_URL &amp; SUPABASE_ANON_KEY di dalam index.html untuk mengaktifkan database &amp; realtime.</div>';
-        }
+let sb = null;
+if (IS_CONFIGURED) {
+  try {
+    sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+      realtime: { params: { eventsPerSecond: 10 } }
+    });
+  } catch (e) { console.error('Gagal membuat Supabase client:', e); }
+} else {
+  document.getElementById('demo-banner-slot').innerHTML =
+    '<div class="demo-banner"><i class="fa-solid fa-triangle-exclamation"></i>&nbsp; MODE DEMO — Supabase belum dikonfigurasi. Edit SUPABASE_URL &amp; SUPABASE_ANON_KEY di dalam index.html untuk mengaktifkan database &amp; realtime.</div>';
+}
 
-        /* ---------------------- 2. DATA KONTEN ACARA ---------------------------- */
+/* ---------------------- 2. DATA KONTEN ACARA ---------------------------- */
 
-        const ROLE_META = {
-            MENTOR: {
-                icon: 'fa-brain', title: 'Mentor Hikmat', subtitle: 'Senior',
-                desc: 'Pembimbing sejuk yang siap membagikan pengalaman hidup, memberikan nasihat tenang, dan mendampingi pemuda dari dekat tanpa menggurui.',
-                color: '#7c5cff'
-            },
-            PENDOA: {
-                icon: 'fa-hands-praying', title: 'Pendoa Syafaat', subtitle: 'Senior',
-                desc: 'Pilar rohani gereja. Doa dan kehangatan moralmu menopang keberhasilan pelayanan anak muda di balik layar.',
-                color: '#3fa9ff'
-            },
-            PELINDUNG: {
-                icon: 'fa-shield-heart', title: 'Pelindung & Fasilitator', subtitle: 'Senior',
-                desc: 'Pahlawan pembuka jalan. Kehadiranmu memastikan pemuda memiliki sarana, fasilitas, izin birokrasi, dan bantuan dana untuk berkarya.',
-                color: '#2ecfa8'
-            },
-            INOVATOR: {
-                icon: 'fa-lightbulb', title: 'Pelopor & Inovator', subtitle: 'Pemuda',
-                desc: 'Mesin ide kreatif. Pikiran dan gagasan segeramu membuat pelayanan gereja tetap hidup, menarik, interaktif, dan relevan dengan zaman.',
-                color: '#f5b942'
-            },
-            EKSEKUTOR: {
-                icon: 'fa-screwdriver-wrench', title: 'Eksekutor Lapangan', subtitle: 'Pemuda',
-                desc: 'Tulang punggung operasional. Keahlian teknis, fisik yang sigap, dan kerja cepatmu memastikan setiap acara berjalan lancar.',
-                color: '#ff8a5c'
-            },
-            PENJANGKAU: {
-                icon: 'fa-people-arrows', title: 'Penjangkau Relasi', subtitle: 'Pemuda',
-                desc: 'Jiwa kekeluargaan gereja. Keramahanmu merangkul mereka yang kesepian, dingin, atau pasif untuk kembali merasa hangat di rumah Tuhan.',
-                color: '#ff6b8b'
-            },
-        };
-        const ROLE_ORDER = ['MENTOR', 'PENDOA', 'PELINDUNG', 'INOVATOR', 'EKSEKUTOR', 'PENJANGKAU'];
+const ROLE_META = {
+  MENTOR:     { icon:'fa-brain',        title:'Mentor Hikmat',        subtitle:'Senior',
+    desc:'Pembimbing sejuk yang siap membagikan pengalaman hidup, memberikan nasihat tenang, dan mendampingi pemuda dari dekat tanpa menggurui.',
+    color:'#7c5cff' },
+  PENDOA:     { icon:'fa-hands-praying',title:'Pendoa Syafaat',       subtitle:'Senior',
+    desc:'Pilar rohani gereja. Doa dan kehangatan moralmu menopang keberhasilan pelayanan anak muda di balik layar.',
+    color:'#3fa9ff' },
+  PELINDUNG:  { icon:'fa-shield-heart', title:'Pelindung & Fasilitator', subtitle:'Senior',
+    desc:'Pahlawan pembuka jalan. Kehadiranmu memastikan pemuda memiliki sarana, fasilitas, izin birokrasi, dan bantuan dana untuk berkarya.',
+    color:'#2ecfa8' },
+  INOVATOR:   { icon:'fa-lightbulb',    title:'Pelopor & Inovator',   subtitle:'Pemuda',
+    desc:'Mesin ide kreatif. Pikiran dan gagasan segeramu membuat pelayanan gereja tetap hidup, menarik, interaktif, dan relevan dengan zaman.',
+    color:'#f5b942' },
+  EKSEKUTOR:  { icon:'fa-screwdriver-wrench', title:'Eksekutor Lapangan', subtitle:'Pemuda',
+    desc:'Tulang punggung operasional. Keahlian teknis, fisik yang sigap, dan kerja cepatmu memastikan setiap acara berjalan lancar.',
+    color:'#ff8a5c' },
+  PENJANGKAU: { icon:'fa-people-arrows',title:'Penjangkau Relasi',    subtitle:'Pemuda',
+    desc:'Jiwa kekeluargaan gereja. Keramahanmu merangkul mereka yang kesepian, dingin, atau pasif untuk kembali merasa hangat di rumah Tuhan.',
+    color:'#ff6b8b' },
+};
+const ROLE_ORDER = ['MENTOR','PENDOA','PELINDUNG','INOVATOR','EKSEKUTOR','PENJANGKAU'];
 
-        // CATATAN: Pertanyaan diagnostik berikut adalah CONTOH DEFAULT yang selaras
-        // dengan tema & goal acara (dokumen sumber tidak menyertakan teks pertanyaan
-        // diagnostik spesifik — hanya menyebut "6 Pertanyaan Pemuda & 6 Pertanyaan
-        // Senior"). Silakan sunting array DIAGNOSTIC_QUESTIONS di bawah ini sesuai
-        // kebutuhan jemaat Anda. Skala jawaban 1 (Sangat Tidak Setuju) - 5 (Sangat Setuju).
-        const LIKERT_LABELS = ['Sangat\nTidak Setuju', 'Tidak\nSetuju', 'Netral', 'Setuju', 'Sangat\nSetuju'];
+// CATATAN: Pertanyaan diagnostik berikut adalah CONTOH DEFAULT yang selaras
+// dengan tema & goal acara (dokumen sumber tidak menyertakan teks pertanyaan
+// diagnostik spesifik — hanya menyebut "6 Pertanyaan Pemuda & 6 Pertanyaan
+// Senior"). Silakan sunting array DIAGNOSTIC_QUESTIONS di bawah ini sesuai
+// kebutuhan jemaat Anda. Skala jawaban 1 (Sangat Tidak Setuju) - 5 (Sangat Setuju).
+const LIKERT_LABELS = ['Sangat\nTidak Setuju','Tidak\nSetuju','Netral','Setuju','Sangat\nSetuju'];
 
-        const DIAGNOSTIC_QUESTIONS = {
-            pemuda: [
-                'Saya merasa ide dan pendapat saya didengar serta dihargai oleh Majelis/senior di gereja.',
-                'Saya merasa aman untuk mencoba dan boleh salah ketika melayani, tanpa takut dikritik tajam di depan umum.',
-                'Saya merasa dipercaya untuk memegang tanggung jawab pelayanan, bukan hanya menjadi "tenaga kasar".',
-                'Saya merasa ada pendampingan / mentoring yang nyata dari orang yang lebih senior ketika saya melayani.',
-                'Saya merasa gereja adalah tempat yang hangat dan nyaman, bukan tempat yang penuh tuntutan.',
-                'Saya siap dan bersedia dilatih untuk menjadi Majelis / pemimpin departemen di masa depan.',
-            ],
-            senior: [
-                'Saya memahami dengan jelas alasan jujur mengapa pemuda di gereja kami enggan atau ragu melayani.',
-                'Saya merasa yakin dengan cara pendekatan saya terhadap pemuda: merangkul, bukan menuntut atau mengkritik.',
-                'Saya secara aktif memberi ruang dan kepercayaan bagi pemuda untuk mencoba ide-ide baru mereka.',
-                'Saya meluangkan waktu untuk mendampingi / mentoring pemuda secara personal, bukan hanya formal.',
-                'Saya percaya generasi muda gereja kami mampu dipersiapkan menjadi pemimpin masa depan.',
-                'Saya terbuka menerima masukan dan kritik yang membangun dari generasi muda tanpa merasa direndahkan.',
-            ],
-        };
+const DIAGNOSTIC_QUESTIONS = {
+  pemuda: [
+    'Saya merasa ide dan pendapat saya didengar serta dihargai oleh Majelis/senior di gereja.',
+    'Saya merasa aman untuk mencoba dan boleh salah ketika melayani, tanpa takut dikritik tajam di depan umum.',
+    'Saya merasa dipercaya untuk memegang tanggung jawab pelayanan, bukan hanya menjadi "tenaga kasar".',
+    'Saya merasa ada pendampingan / mentoring yang nyata dari orang yang lebih senior ketika saya melayani.',
+    'Saya merasa gereja adalah tempat yang hangat dan nyaman, bukan tempat yang penuh tuntutan.',
+    'Saya siap dan bersedia dilatih untuk menjadi Majelis / pemimpin departemen di masa depan.',
+  ],
+  senior: [
+    'Saya memahami dengan jelas alasan jujur mengapa pemuda di gereja kami enggan atau ragu melayani.',
+    'Saya merasa yakin dengan cara pendekatan saya terhadap pemuda: merangkul, bukan menuntut atau mengkritik.',
+    'Saya secara aktif memberi ruang dan kepercayaan bagi pemuda untuk mencoba ide-ide baru mereka.',
+    'Saya meluangkan waktu untuk mendampingi / mentoring pemuda secara personal, bukan hanya formal.',
+    'Saya percaya generasi muda gereja kami mampu dipersiapkan menjadi pemimpin masa depan.',
+    'Saya terbuka menerima masukan dan kritik yang membangun dari generasi muda tanpa merasa direndahkan.',
+  ],
+};
 
-        // Kartu Refleksi Diagnostik Pribadi — ditampilkan di HP peserta setelah submit,
-        // berdasarkan rata-rata skor 1-5 jawabannya sendiri (ambang batas: 3.0).
-        const DIAGNOSTIC_REFLECTIONS = {
-            pemuda: {
-                low: {
-                    title: 'Butuh Ruang & Kehangatan', icon: 'fa-seedling',
-                    desc: 'Kamu merasa pelayanan di gereja saat ini cukup menekan dan belum sepenuhnya aman. Sesi diskusi kelompok nanti adalah ruang aman untuk menyampaikan isi hatimu dengan sopan.'
-                },
-                high: {
-                    title: 'Siap Berdampak', icon: 'fa-fire',
-                    desc: 'Kamu memiliki optimisme tinggi untuk melayani! Bawa energi positif dan ide-ide kreatifmu ke dalam kelompok diskusi nanti.'
-                },
-            },
-            senior: {
-                low: {
-                    title: 'Butuh Pendekatan Baru', icon: 'fa-hands-holding-circle',
-                    desc: 'Anda menyadari adanya jarak komunikasi dengan generasi muda. Malam ini adalah momen indah untuk mulai mendengar, merangkul, dan mendoakan mereka.'
-                },
-                high: {
-                    title: 'Mentor Pengayom', icon: 'fa-hands-praying',
-                    desc: 'Anda memiliki keterbukaan yang luar biasa bagi pemuda. Kehadiran dan hikmat Anda sangat dibutuhkan untuk membimbing mereka di gereja ini.'
-                },
-            },
-        };
+// Kartu Refleksi Diagnostik Pribadi — ditampilkan di HP peserta setelah submit,
+// berdasarkan rata-rata skor 1-5 jawabannya sendiri (ambang batas: 3.0).
+const DIAGNOSTIC_REFLECTIONS = {
+  pemuda: {
+    low:  { title:'Butuh Ruang & Kehangatan', icon:'fa-seedling',
+      desc:'Kamu merasa pelayanan di gereja saat ini cukup menekan dan belum sepenuhnya aman. Sesi diskusi kelompok nanti adalah ruang aman untuk menyampaikan isi hatimu dengan sopan.' },
+    high: { title:'Siap Berdampak', icon:'fa-fire',
+      desc:'Kamu memiliki optimisme tinggi untuk melayani! Bawa energi positif dan ide-ide kreatifmu ke dalam kelompok diskusi nanti.' },
+  },
+  senior: {
+    low:  { title:'Butuh Pendekatan Baru', icon:'fa-hands-holding-circle',
+      desc:'Anda menyadari adanya jarak komunikasi dengan generasi muda. Malam ini adalah momen indah untuk mulai mendengar, merangkul, dan mendoakan mereka.' },
+    high: { title:'Mentor Pengayom', icon:'fa-hands-praying',
+      desc:'Anda memiliki keterbukaan yang luar biasa bagi pemuda. Kehadiran dan hikmat Anda sangat dibutuhkan untuk membimbing mereka di gereja ini.' },
+  },
+};
 
-        // Gap Analysis — satu entri per nomor pertanyaan (Q1-Q6), dipakai Presenter View
-        // untuk otomatis menyorot pasangan pertanyaan pemuda/senior dengan gap rata-rata terbesar.
-        const DIAGNOSTIC_GAP_INSIGHTS = [
-            {
-                label: 'Pemahaman & Didengarkan',
-                seniorHigh: 'Senior merasa sudah cukup memahami pergumulan pemuda, sementara Pemuda belum merasa suaranya benar-benar didengar dan dihargai.',
-                pemudaHigh: 'Pemuda merasa cukup didengar, namun Senior sendiri belum yakin sudah memahami alasan jujur di balik keraguan pemuda melayani.'
-            },
-            {
-                label: 'Rasa Aman dari Kritik',
-                seniorHigh: 'Senior merasa sudah merangkul dan tidak menuntut, sementara Pemuda masih merasa was-was dikritik tajam di depan umum saat melayani.',
-                pemudaHigh: 'Pemuda merasa cukup aman untuk mencoba dan boleh salah, namun Senior sendiri belum sepenuhnya yakin dengan cara pendekatannya.'
-            },
-            {
-                label: 'Kepercayaan & Ruang Berkarya',
-                seniorHigh: 'Senior merasa sudah memberi ruang dan kepercayaan, sementara Pemuda masih merasa hanya dipakai sebagai "tenaga kasar", bukan pemegang tanggung jawab.',
-                pemudaHigh: 'Pemuda merasa cukup dipercaya memegang tanggung jawab, namun Senior sendiri masih ragu untuk aktif memberi ruang bagi ide-ide baru pemuda.'
-            },
-            {
-                label: 'Pendampingan / Mentoring',
-                seniorHigh: 'Senior merasa sudah membimbing, sementara Pemuda merasa belum didampingi secara personal.',
-                pemudaHigh: 'Pemuda merasa cukup didampingi, namun Senior sendiri merasa belum meluangkan cukup waktu untuk mentoring personal.'
-            },
-            {
-                label: 'Kehangatan Gereja & Harapan Regenerasi',
-                seniorHigh: 'Senior percaya generasi muda mampu dipersiapkan menjadi pemimpin, sementara Pemuda sendiri belum merasa gereja adalah tempat yang cukup hangat dan bebas dari tuntutan.',
-                pemudaHigh: 'Pemuda merasa gereja sudah menjadi tempat yang hangat dan nyaman, namun Senior sendiri belum sepenuhnya yakin generasi muda siap dipersiapkan menjadi pemimpin.'
-            },
-            {
-                label: 'Keterbukaan & Kesiapan Kepemimpinan',
-                seniorHigh: 'Senior merasa sudah terbuka menerima masukan dari pemuda, sementara Pemuda sendiri belum merasa cukup siap untuk dilatih menjadi Majelis / pemimpin departemen.',
-                pemudaHigh: 'Pemuda merasa sudah siap dilatih menjadi pemimpin, namun Senior sendiri belum sepenuhnya terbuka menerima masukan dan kritik dari generasi muda.'
-            },
-        ];
+// Gap Analysis — satu entri per nomor pertanyaan (Q1-Q6), dipakai Presenter View
+// untuk otomatis menyorot pasangan pertanyaan pemuda/senior dengan gap rata-rata terbesar.
+const DIAGNOSTIC_GAP_INSIGHTS = [
+  { label:'Pemahaman & Didengarkan',
+    seniorHigh:'Senior merasa sudah cukup memahami pergumulan pemuda, sementara Pemuda belum merasa suaranya benar-benar didengar dan dihargai.',
+    pemudaHigh:'Pemuda merasa cukup didengar, namun Senior sendiri belum yakin sudah memahami alasan jujur di balik keraguan pemuda melayani.' },
+  { label:'Rasa Aman dari Kritik',
+    seniorHigh:'Senior merasa sudah merangkul dan tidak menuntut, sementara Pemuda masih merasa was-was dikritik tajam di depan umum saat melayani.',
+    pemudaHigh:'Pemuda merasa cukup aman untuk mencoba dan boleh salah, namun Senior sendiri belum sepenuhnya yakin dengan cara pendekatannya.' },
+  { label:'Kepercayaan & Ruang Berkarya',
+    seniorHigh:'Senior merasa sudah memberi ruang dan kepercayaan, sementara Pemuda masih merasa hanya dipakai sebagai "tenaga kasar", bukan pemegang tanggung jawab.',
+    pemudaHigh:'Pemuda merasa cukup dipercaya memegang tanggung jawab, namun Senior sendiri masih ragu untuk aktif memberi ruang bagi ide-ide baru pemuda.' },
+  { label:'Pendampingan / Mentoring',
+    seniorHigh:'Senior merasa sudah membimbing, sementara Pemuda merasa belum didampingi secara personal.',
+    pemudaHigh:'Pemuda merasa cukup didampingi, namun Senior sendiri merasa belum meluangkan cukup waktu untuk mentoring personal.' },
+  { label:'Kehangatan Gereja & Harapan Regenerasi',
+    seniorHigh:'Senior percaya generasi muda mampu dipersiapkan menjadi pemimpin, sementara Pemuda sendiri belum merasa gereja adalah tempat yang cukup hangat dan bebas dari tuntutan.',
+    pemudaHigh:'Pemuda merasa gereja sudah menjadi tempat yang hangat dan nyaman, namun Senior sendiri belum sepenuhnya yakin generasi muda siap dipersiapkan menjadi pemimpin.' },
+  { label:'Keterbukaan & Kesiapan Kepemimpinan',
+    seniorHigh:'Senior merasa sudah terbuka menerima masukan dari pemuda, sementara Pemuda sendiri belum merasa cukup siap untuk dilatih menjadi Majelis / pemimpin departemen.',
+    pemudaHigh:'Pemuda merasa sudah siap dilatih menjadi pemimpin, namun Senior sendiri belum sepenuhnya terbuka menerima masukan dan kritik dari generasi muda.' },
+];
 
-        // Kuis A — Orang Tua / Senior (7 pertanyaan, opsi diacak saat ditampilkan)
-        const QUIZ_SENIOR = [
-            {
-                q: 'Dorongan Hati dalam Pelayanan', options: [
-                    { text: 'Mendoakan di balik layar dan memberikan penguatan moral/rohani.', role: 'PENDOA' },
-                    { text: 'Membagikan pengalaman hidup dan membimbing anak muda secara pribadi.', role: 'MENTOR' },
-                    { text: 'Membantu menyediakan dana, fasilitas, atau kemudahan izin bagi acara gereja.', role: 'PELINDUNG' },
-                    { text: 'Memastikan ketertiban, kerapihan, dan kekhidmatan ibadah tetap terjaga.', role: 'MENTOR' },
-                ]
-            },
-            {
-                q: 'Karunia / Keahlian Utama', options: [
-                    { text: 'Jaringan relasi, penyediaan sarana/akses, dan perlindungan.', role: 'PELINDUNG' },
-                    { text: 'Hikmat, ketenangan, dan pertimbangan keputusan yang matang.', role: 'MENTOR' },
-                    { text: 'Kepekaan rohani, doa syafaat yang tekun, dan rasa empati.', role: 'PENDOA' },
-                    { text: 'Kesediaan meluangkan waktu untuk hadir dan menyapa mereka.', role: 'PENDOA' },
-                ]
-            },
-            {
-                q: 'Sikap Saat Pemuda Punya Ide Baru', options: [
-                    { text: 'Mendoakan agar niat baik mereka direstui Tuhan dan berjalan lancar.', role: 'PENDOA' },
-                    { text: 'Pasang badan mendukung dan membantu urus izin ke Majelis Jemaat.', role: 'PELINDUNG' },
-                    { text: 'Mengajak mereka duduk bersama untuk mendiskusikan untung-ruginya dengan bijak.', role: 'MENTOR' },
-                    { text: 'Meminta mereka menguji dulu gagasannya agar tidak melanggar aturan.', role: 'MENTOR' },
-                ]
-            },
-            {
-                q: 'Pendekatan Menghadapi Pemuda yang Masalah / Pasif', options: [
-                    { text: 'Mencari tahu apakah dia butuh bantuan fisik, pekerjaan, atau biaya.', role: 'PELINDUNG' },
-                    { text: 'Mendatangi dan mengajak obrol santai dari hati ke hati tanpa menghakimi.', role: 'MENTOR' },
-                    { text: 'Mencatat namanya dan membawakannya secara khusus dalam doa harian.', role: 'PENDOA' },
-                    { text: 'Mengajak orang tuanya / pengurus PA untuk bersama-sama merangkulnya.', role: 'PENDOA' },
-                ]
-            },
-            {
-                q: 'Peran Nyata di Kepengurusan Gereja', options: [
-                    { text: 'Tim Doa Syafaat Jemaat: Menopang seluruh kegiatan dengan doa.', role: 'PENDOA' },
-                    { text: 'Penanggung Jawab Sarana/Sponsor: Membuka jalan dana dan fasilitas.', role: 'PELINDUNG' },
-                    { text: 'Penasihat / Mentor Departemen: Tempat anak muda bertanya dan berkonsultasi.', role: 'MENTOR' },
-                    { text: 'Pengayom Jemaat: Memastikan semua anggota merasa aman dan dirawat.', role: 'PENDOA' },
-                ]
-            },
-            {
-                q: 'Gaya Bahasa / Komunikasi', options: [
-                    { text: 'Suka memberi arahan, cerita pengalaman masa lalu, dan nasihat sejuk.', role: 'MENTOR' },
-                    { text: 'Langsung pada inti masalah: "Apa yang bisa saya bantu buat kalian?"', role: 'PELINDUNG' },
-                    { text: 'Lebih banyak mendengar, tersenyum, dan menguatkan dengan doa.', role: 'PENDOA' },
-                    { text: 'Ramah, suka menyapa, dan menanyakan kabar keluarga mereka.', role: 'PENDOA' },
-                ]
-            },
-            {
-                q: 'Harapan Terbesar Bagi Pemuda', options: [
-                    { text: 'Memiliki fasilitas dan ruang pelayanan yang layak serta didukung penuh jemaat.', role: 'PELINDUNG' },
-                    { text: 'Memiliki kehidupan doa yang kuat dan rajin beribadah.', role: 'PENDOA' },
-                    { text: 'Bertumbuh menjadi pemimpin-pemimpin baru yang matang dan mandiri.', role: 'MENTOR' },
-                    { text: 'Merasa betah, aman, dan mencintai gereja sebagai rumahnya sendiri.', role: 'MENTOR' },
-                ]
-            },
-        ];
+// Kuis A — Orang Tua / Senior (7 pertanyaan, opsi diacak saat ditampilkan)
+const QUIZ_SENIOR = [
+  { q:'Dorongan Hati dalam Pelayanan', options:[
+    {text:'Mendoakan di balik layar dan memberikan penguatan moral/rohani.', role:'PENDOA'},
+    {text:'Membagikan pengalaman hidup dan membimbing anak muda secara pribadi.', role:'MENTOR'},
+    {text:'Membantu menyediakan dana, fasilitas, atau kemudahan izin bagi acara gereja.', role:'PELINDUNG'},
+    {text:'Memastikan ketertiban, kerapihan, dan kekhidmatan ibadah tetap terjaga.', role:'MENTOR'},
+  ]},
+  { q:'Karunia / Keahlian Utama', options:[
+    {text:'Jaringan relasi, penyediaan sarana/akses, dan perlindungan.', role:'PELINDUNG'},
+    {text:'Hikmat, ketenangan, dan pertimbangan keputusan yang matang.', role:'MENTOR'},
+    {text:'Kepekaan rohani, doa syafaat yang tekun, dan rasa empati.', role:'PENDOA'},
+    {text:'Kesediaan meluangkan waktu untuk hadir dan menyapa mereka.', role:'PENDOA'},
+  ]},
+  { q:'Sikap Saat Pemuda Punya Ide Baru', options:[
+    {text:'Mendoakan agar niat baik mereka direstui Tuhan dan berjalan lancar.', role:'PENDOA'},
+    {text:'Pasang badan mendukung dan membantu urus izin ke Majelis Jemaat.', role:'PELINDUNG'},
+    {text:'Mengajak mereka duduk bersama untuk mendiskusikan untung-ruginya dengan bijak.', role:'MENTOR'},
+    {text:'Meminta mereka menguji dulu gagasannya agar tidak melanggar aturan.', role:'MENTOR'},
+  ]},
+  { q:'Pendekatan Menghadapi Pemuda yang Masalah / Pasif', options:[
+    {text:'Mencari tahu apakah dia butuh bantuan fisik, pekerjaan, atau biaya.', role:'PELINDUNG'},
+    {text:'Mendatangi dan mengajak obrol santai dari hati ke hati tanpa menghakimi.', role:'MENTOR'},
+    {text:'Mencatat namanya dan membawakannya secara khusus dalam doa harian.', role:'PENDOA'},
+    {text:'Mengajak orang tuanya / pengurus PA untuk bersama-sama merangkulnya.', role:'PENDOA'},
+  ]},
+  { q:'Peran Nyata di Kepengurusan Gereja', options:[
+    {text:'Tim Doa Syafaat Jemaat: Menopang seluruh kegiatan dengan doa.', role:'PENDOA'},
+    {text:'Penanggung Jawab Sarana/Sponsor: Membuka jalan dana dan fasilitas.', role:'PELINDUNG'},
+    {text:'Penasihat / Mentor Departemen: Tempat anak muda bertanya dan berkonsultasi.', role:'MENTOR'},
+    {text:'Pengayom Jemaat: Memastikan semua anggota merasa aman dan dirawat.', role:'PENDOA'},
+  ]},
+  { q:'Gaya Bahasa / Komunikasi', options:[
+    {text:'Suka memberi arahan, cerita pengalaman masa lalu, dan nasihat sejuk.', role:'MENTOR'},
+    {text:'Langsung pada inti masalah: "Apa yang bisa saya bantu buat kalian?"', role:'PELINDUNG'},
+    {text:'Lebih banyak mendengar, tersenyum, dan menguatkan dengan doa.', role:'PENDOA'},
+    {text:'Ramah, suka menyapa, dan menanyakan kabar keluarga mereka.', role:'PENDOA'},
+  ]},
+  { q:'Harapan Terbesar Bagi Pemuda', options:[
+    {text:'Memiliki fasilitas dan ruang pelayanan yang layak serta didukung penuh jemaat.', role:'PELINDUNG'},
+    {text:'Memiliki kehidupan doa yang kuat dan rajin beribadah.', role:'PENDOA'},
+    {text:'Bertumbuh menjadi pemimpin-pemimpin baru yang matang dan mandiri.', role:'MENTOR'},
+    {text:'Merasa betah, aman, dan mencintai gereja sebagai rumahnya sendiri.', role:'MENTOR'},
+  ]},
+];
 
-        // Kuis B — Pemuda / Remaja (7 pertanyaan, opsi diacak saat ditampilkan)
-        const QUIZ_PEMUDA = [
-            {
-                q: 'Daya Tarik Utama Pelayanan', options: [
-                    { text: 'Bekerja teknis di lapangan: megang sound system, multimedia, atau perlengkapan.', role: 'EKSEKUTOR' },
-                    { text: 'Bikin konsep acara seru, ide kreatif, desain visual, atau video/media.', role: 'INOVATOR' },
-                    { text: 'Ngobrol, menyapa teman-teman, merangkul yang pemalu, & bikin suasana ramai.', role: 'PENJANGKAU' },
-                    { text: 'Memandu acara, musik/pujian, atau hal-hal yang sifatnya tampil di depan.', role: 'INOVATOR' },
-                ]
-            },
-            {
-                q: 'Keahlian Unik (Superpower-mu)', options: [
-                    { text: 'Keramahan, kehangatan, bisa jadi pendengar yang baik buat teman.', role: 'PENJANGKAU' },
-                    { text: 'Kreativitas, daya cipta, ide out of the box, dan keahlian digital/sosmed.', role: 'INOVATOR' },
-                    { text: 'Ketangguhan kerja, fisik yang kuat, gerak cepat, dan andal urusan teknis.', role: 'EKSEKUTOR' },
-                    { text: 'Kemampuan mengatur waktu, menyusun alur acara, dan koordinasi tim.', role: 'EKSEKUTOR' },
-                ]
-            },
-            {
-                q: 'Respon Saat Acara Mengalami Kekacauan', options: [
-                    { text: 'Bekerja cepat benerin alat, kabel, atau perlengkapan fisik yang rusak.', role: 'EKSEKUTOR' },
-                    { text: 'Langsung putar otak nyari ide alternatif kreatif biar acara tetap jalan seru.', role: 'INOVATOR' },
-                    { text: 'Mendatangi peserta/tamu, ngobrol santai biar mereka tidak bosan nunggu.', role: 'PENJANGKAU' },
-                    { text: 'Tetap tenang dan menunggu arahan dari ketua/koordinator acara.', role: 'PENJANGKAU' },
-                ]
-            },
-            {
-                q: 'Posisi Paling Nyaman Saat Eksekusi Acara', options: [
-                    { text: 'Tim Konsep & Media: Yang memikirkan ide, flyer, dekor, dan alur acara.', role: 'INOVATOR' },
-                    { text: 'Tim Acara & Persekitaran: Yang menyapa tamu, konsumsi, & merangkul orang.', role: 'PENJANGKAU' },
-                    { text: 'Tim Perlengkapan & Operasional: Yang memastikan panggung & alat beres.', role: 'EKSEKUTOR' },
-                    { text: 'Pemimpin / Koordinator: Yang membagi tugas dan memantau semua tim.', role: 'INOVATOR' },
-                ]
-            },
-            {
-                q: 'Hal yang Paling Ingin Kamu Ubah di Gereja', options: [
-                    { text: 'Kualitas fasilitas, sound system, alat musik, dan kerapihan gedung gereja.', role: 'EKSEKUTOR' },
-                    { text: 'Kemasan acara dan ibadah agar lebih modern, interaktif, dan relevan buat pemuda.', role: 'INOVATOR' },
-                    { text: 'Kehangatan komunitas: tidak ada lagi anak muda yang merasa sendirian/cuek.', role: 'PENJANGKAU' },
-                    { text: 'Hubungan antar-generasi: agar pemuda dan senior bisa lebih dekat dan akrab.', role: 'PENJANGKAU' },
-                ]
-            },
-            {
-                q: 'Gaya Komunikasi Sehari-hari', options: [
-                    { text: 'Suka ngajak kumpul, nongkrong/ngopi bareng, dan bikin orang tertawa.', role: 'PENJANGKAU' },
-                    { text: 'Jarang banyak obrol di chat, tapi langsung hadir pas butuh bantuan fisik.', role: 'EKSEKUTOR' },
-                    { text: 'Suka melempar ide baru lewat gambar, ide Reels, atau chat grup WA.', role: 'INOVATOR' },
-                    { text: 'Suka ngobrol mendalam satu lawan satu (deep talk) tentang masalah pribadi.', role: 'PENJANGKAU' },
-                ]
-            },
-            {
-                q: 'Impian Hasil Akhir', options: [
-                    { text: 'Bikin acara/kegiatan viral dan unik yang bikin orang luar tertarik datang.', role: 'INOVATOR' },
-                    { text: 'Merangkul anak muda pasif/dingin sampai mereka aktif dan punya banyak teman.', role: 'PENJANGKAU' },
-                    { text: 'Menyelesaikan semua program kerja dengan lancar tanpa ada masalah teknis.', role: 'EKSEKUTOR' },
-                    { text: 'Dipercaya Majelis untuk memegang tanggung jawab acara-acara besar jemaat.', role: 'EKSEKUTOR' },
-                ]
-            },
-        ];
+// Kuis B — Pemuda / Remaja (7 pertanyaan, opsi diacak saat ditampilkan)
+const QUIZ_PEMUDA = [
+  { q:'Daya Tarik Utama Pelayanan', options:[
+    {text:'Bekerja teknis di lapangan: megang sound system, multimedia, atau perlengkapan.', role:'EKSEKUTOR'},
+    {text:'Bikin konsep acara seru, ide kreatif, desain visual, atau video/media.', role:'INOVATOR'},
+    {text:'Ngobrol, menyapa teman-teman, merangkul yang pemalu, & bikin suasana ramai.', role:'PENJANGKAU'},
+    {text:'Memandu acara, musik/pujian, atau hal-hal yang sifatnya tampil di depan.', role:'INOVATOR'},
+  ]},
+  { q:'Keahlian Unik (Superpower-mu)', options:[
+    {text:'Keramahan, kehangatan, bisa jadi pendengar yang baik buat teman.', role:'PENJANGKAU'},
+    {text:'Kreativitas, daya cipta, ide out of the box, dan keahlian digital/sosmed.', role:'INOVATOR'},
+    {text:'Ketangguhan kerja, fisik yang kuat, gerak cepat, dan andal urusan teknis.', role:'EKSEKUTOR'},
+    {text:'Kemampuan mengatur waktu, menyusun alur acara, dan koordinasi tim.', role:'EKSEKUTOR'},
+  ]},
+  { q:'Respon Saat Acara Mengalami Kekacauan', options:[
+    {text:'Bekerja cepat benerin alat, kabel, atau perlengkapan fisik yang rusak.', role:'EKSEKUTOR'},
+    {text:'Langsung putar otak nyari ide alternatif kreatif biar acara tetap jalan seru.', role:'INOVATOR'},
+    {text:'Mendatangi peserta/tamu, ngobrol santai biar mereka tidak bosan nunggu.', role:'PENJANGKAU'},
+    {text:'Tetap tenang dan menunggu arahan dari ketua/koordinator acara.', role:'PENJANGKAU'},
+  ]},
+  { q:'Posisi Paling Nyaman Saat Eksekusi Acara', options:[
+    {text:'Tim Konsep & Media: Yang memikirkan ide, flyer, dekor, dan alur acara.', role:'INOVATOR'},
+    {text:'Tim Acara & Persekitaran: Yang menyapa tamu, konsumsi, & merangkul orang.', role:'PENJANGKAU'},
+    {text:'Tim Perlengkapan & Operasional: Yang memastikan panggung & alat beres.', role:'EKSEKUTOR'},
+    {text:'Pemimpin / Koordinator: Yang membagi tugas dan memantau semua tim.', role:'INOVATOR'},
+  ]},
+  { q:'Hal yang Paling Ingin Kamu Ubah di Gereja', options:[
+    {text:'Kualitas fasilitas, sound system, alat musik, dan kerapihan gedung gereja.', role:'EKSEKUTOR'},
+    {text:'Kemasan acara dan ibadah agar lebih modern, interaktif, dan relevan buat pemuda.', role:'INOVATOR'},
+    {text:'Kehangatan komunitas: tidak ada lagi anak muda yang merasa sendirian/cuek.', role:'PENJANGKAU'},
+    {text:'Hubungan antar-generasi: agar pemuda dan senior bisa lebih dekat dan akrab.', role:'PENJANGKAU'},
+  ]},
+  { q:'Gaya Komunikasi Sehari-hari', options:[
+    {text:'Suka ngajak kumpul, nongkrong/ngopi bareng, dan bikin orang tertawa.', role:'PENJANGKAU'},
+    {text:'Jarang banyak obrol di chat, tapi langsung hadir pas butuh bantuan fisik.', role:'EKSEKUTOR'},
+    {text:'Suka melempar ide baru lewat gambar, ide Reels, atau chat grup WA.', role:'INOVATOR'},
+    {text:'Suka ngobrol mendalam satu lawan satu (deep talk) tentang masalah pribadi.', role:'PENJANGKAU'},
+  ]},
+  { q:'Impian Hasil Akhir', options:[
+    {text:'Bikin acara/kegiatan viral dan unik yang bikin orang luar tertarik datang.', role:'INOVATOR'},
+    {text:'Merangkul anak muda pasif/dingin sampai mereka aktif dan punya banyak teman.', role:'PENJANGKAU'},
+    {text:'Menyelesaikan semua program kerja dengan lancar tanpa ada masalah teknis.', role:'EKSEKUTOR'},
+    {text:'Dipercaya Majelis untuk memegang tanggung jawab acara-acara besar jemaat.', role:'EKSEKUTOR'},
+  ]},
+];
 
-        const CASE_STUDIES = [
-            {
-                id: 1, title: 'Satu Kali Salah, Selamanya Diingat', subtitle: 'Takut Dikritik',
-                subjects: 'Kevin (Pemuda) & Pak Aryo (Majelis Senior) di Mimbar Ibadah',
-                scenario: 'Kevin sangat gugup saat berdiri di mimbar. Di pertengahan acara, Kevin salah membaca urutan acara dan sempat gagap saat memimpin doa. Selain itu, tim sound system sempat mengalami feedback berdengung.\n\nSetelah ibadah selesai, Pak Aryo (Majelis Senior) langsung mendatangi Kevin di depan pemuda lainnya dan berkata dengan nada tegas: "Kevin, kamu ini gimana sih? Tidak persiapan ya? Acara gereja itu harus khidmat, jangan main-main di mimbar!"\n\nKevin merasa sangat malu, tersinggung, dan kapok. Sejak hari itu, Kevin menolak setiap kali diminta menjadi petugas acara lagi.',
-                focus: 'Bagaimana memberikan evaluasi yang membangun (mentoring) tanpa memadamkan semangat pemuda?',
-                icon: 'fa-comment-slash'
-            },
-            {
-                id: 2, title: 'Semangat di Awal, Hilang di Tengah', subtitle: 'Konsistensi & Komitmen',
-                subjects: 'Doni (Ketua PA) & Ibu Isabel (Penasihat / Majelis) di Program Kerja',
-                scenario: 'Di awal tahun, Doni sangat bersemangat mempresentasikan program-program besar pemuda (Retreat, Olahraga, & Social Media). Majelis sudah menyetujui dan memberikan anggaran.\n\nNamun memasuki bulan ke-4, Doni mulai sibuk dengan pekerjaan sampingan dan kuliahnya. Doni jarang hadir di gereja Sabat, tidak merespon di WA Group, dan persiapan acara pemuda menjadi terbengkalai. Ibu Isabel dan Majelis harus turun tangan secara mendadak di menit-menit akhir untuk menyelamatkan acara agar gereja tidak malu.\n\nIbu Isabel mengeluh: "Anak muda zaman sekarang semangatnya cuma obor tetek (hangat-hangat tahi ayam). Giliran diberi tanggung jawab, malah menghilang."',
-                focus: 'Mengapa pemuda gampang burnout dan bagaimana langkah pemuda membuktikan komitmen nyata?',
-                icon: 'fa-battery-quarter'
-            },
-            {
-                id: 3, title: 'Hanya Dipakai Jadi Tenaga Kasar', subtitle: 'Kepercayaan & Apresiasi',
-                subjects: 'Sarah (Pemuda Kreatif) & Panitia Acara Gereja',
-                scenario: 'Sarah memiliki banyak ide segar untuk membuat konsep acara gereja yang menarik bagi orang luar, lengkap dengan dekorasi estetis dan konten media sosial.\n\nNamun di gereja, Sarah dan teman-teman pemuda hanya dipanggil saat panitia butuh tenaga untuk: angkat-angkat kursi, pasang terop, cuci piring, atau bikin spanduk dadakan. Ketika Sarah mencoba memberikan usulan konsep acara di rapat panitia, usulannya dipotong dengan alasan: "Sudah, kita pakai cara yang biasa saja seperti tahun lalu, yang penting cepat beres."\n\nSarah merasa bakat dan pikirannya tidak dihargai, melainkan hanya tenaganya yang diperas tanpa diberi ruang berkreasi.',
-                focus: 'Bagaimana melibatkan pemuda sejak tahap konsep/perencanaan, bukan hanya sebagai pelaksana teknis?',
-                icon: 'fa-chair'
-            },
-            {
-                id: 4, title: 'Antara Harapan dan Kehadiran Nyata', subtitle: 'Pendampingan & Relasi Personal',
-                subjects: 'Maya (Pemuda) & Orang Tua / Senior Jemaat',
-                scenario: 'Dalam rapat jemaat maupun imbauan di mimbar, Maya dan teman-teman pemuda sering mendengar dorongan agar generasi muda lebih aktif, memiliki komitmen rohani, dan hadir di setiap kegiatan gereja.\n\nNamun di sisi lain, Maya merasakan adanya jarak komunikasi. Jarang ada senior atau orang tua yang mengambil waktu untuk menyapa secara pribadi, mendengarkan pergumulan anak muda, atau berjalan berdampingan dalam keseharian mereka. Pemuda merasa ada jembatan yang belum terhubung: harapan dari senior terasa sangat tinggi, tetapi pendekatan yang hangat dan kehadiran nyata di lapangan masih terasa minim.',
-                focus: 'Mengapa hubungan personal yang hangat sangat penting dan bagaimana senior dapat hadir secara nyata mendampingi pemuda?',
-                icon: 'fa-user-group'
-            },
-            {
-                id: 5, title: 'Diberi Jabatan, Tapi Dilepas Tanpa Peta', subtitle: 'Sistem Mentoring',
-                subjects: 'Rio (Majelis Muda Terpilih) & Pak Yudi (Mantan Ketua Senior)',
-                scenario: 'Rio memberanikan diri menerima kepercayaan menjadi Majelis Jemaat tahun ini. Namun setelah dilantik, Pak Yudi hanya menepuk bahu Rio dan berkata: "Selamat ya Rio, sekarang giliran anak muda yang pegang. Kamu pasti bisa!"\n\nSetelah itu, Rio dilepas begitu saja. Rio tidak diajari cara membuat Laporan Departemen, bingung menghadapi konflik antar anggota, dan canggung saat harus memimpin rapat majelis yang isinya orang-orang tua. Rio merasa frustrasi, stres, dan merasa dijadikan "pajangan regenerasi" saja.',
-                focus: 'Merancang skema nyata "1 Senior + 1 Pemuda" (Co-Pilot Mentoring) dalam kepengurusan gereja.',
-                icon: 'fa-map-location-dot'
-            },
-        ];
+const CASE_STUDIES = [
+  { id:1, title:'Satu Kali Salah, Selamanya Diingat', subtitle:'Takut Dikritik',
+    subjects:'Kevin (Pemuda) & Pak Aryo (Majelis Senior) di Mimbar Ibadah',
+    scenario:'Kevin sangat gugup saat berdiri di mimbar. Di pertengahan acara, Kevin salah membaca urutan acara dan sempat gagap saat memimpin doa. Selain itu, tim sound system sempat mengalami feedback berdengung.\n\nSetelah ibadah selesai, Pak Aryo (Majelis Senior) langsung mendatangi Kevin di depan pemuda lainnya dan berkata dengan nada tegas: "Kevin, kamu ini gimana sih? Tidak persiapan ya? Acara gereja itu harus khidmat, jangan main-main di mimbar!"\n\nKevin merasa sangat malu, tersinggung, dan kapok. Sejak hari itu, Kevin menolak setiap kali diminta menjadi petugas acara lagi.',
+    focus:'Bagaimana memberikan evaluasi yang membangun (mentoring) tanpa memadamkan semangat pemuda?',
+    icon:'fa-comment-slash' },
+  { id:2, title:'Semangat di Awal, Hilang di Tengah', subtitle:'Konsistensi & Komitmen',
+    subjects:'Doni (Ketua PA) & Ibu Isabel (Penasihat / Majelis) di Program Kerja',
+    scenario:'Di awal tahun, Doni sangat bersemangat mempresentasikan program-program besar pemuda (Retreat, Olahraga, & Social Media). Majelis sudah menyetujui dan memberikan anggaran.\n\nNamun memasuki bulan ke-4, Doni mulai sibuk dengan pekerjaan sampingan dan kuliahnya. Doni jarang hadir di gereja Sabat, tidak merespon di WA Group, dan persiapan acara pemuda menjadi terbengkalai. Ibu Isabel dan Majelis harus turun tangan secara mendadak di menit-menit akhir untuk menyelamatkan acara agar gereja tidak malu.\n\nIbu Isabel mengeluh: "Anak muda zaman sekarang semangatnya cuma obor tetek (hangat-hangat tahi ayam). Giliran diberi tanggung jawab, malah menghilang."',
+    focus:'Mengapa pemuda gampang burnout dan bagaimana langkah pemuda membuktikan komitmen nyata?',
+    icon:'fa-battery-quarter' },
+  { id:3, title:'Hanya Dipakai Jadi Tenaga Kasar', subtitle:'Kepercayaan & Apresiasi',
+    subjects:'Sarah (Pemuda Kreatif) & Panitia Acara Gereja',
+    scenario:'Sarah memiliki banyak ide segar untuk membuat konsep acara gereja yang menarik bagi orang luar, lengkap dengan dekorasi estetis dan konten media sosial.\n\nNamun di gereja, Sarah dan teman-teman pemuda hanya dipanggil saat panitia butuh tenaga untuk: angkat-angkat kursi, pasang terop, cuci piring, atau bikin spanduk dadakan. Ketika Sarah mencoba memberikan usulan konsep acara di rapat panitia, usulannya dipotong dengan alasan: "Sudah, kita pakai cara yang biasa saja seperti tahun lalu, yang penting cepat beres."\n\nSarah merasa bakat dan pikirannya tidak dihargai, melainkan hanya tenaganya yang diperas tanpa diberi ruang berkreasi.',
+    focus:'Bagaimana melibatkan pemuda sejak tahap konsep/perencanaan, bukan hanya sebagai pelaksana teknis?',
+    icon:'fa-chair' },
+  { id:4, title:'Antara Harapan dan Kehadiran Nyata', subtitle:'Pendampingan & Relasi Personal',
+    subjects:'Maya (Pemuda) & Orang Tua / Senior Jemaat',
+    scenario:'Dalam rapat jemaat maupun imbauan di mimbar, Maya dan teman-teman pemuda sering mendengar dorongan agar generasi muda lebih aktif, memiliki komitmen rohani, dan hadir di setiap kegiatan gereja.\n\nNamun di sisi lain, Maya merasakan adanya jarak komunikasi. Jarang ada senior atau orang tua yang mengambil waktu untuk menyapa secara pribadi, mendengarkan pergumulan anak muda, atau berjalan berdampingan dalam keseharian mereka. Pemuda merasa ada jembatan yang belum terhubung: harapan dari senior terasa sangat tinggi, tetapi pendekatan yang hangat dan kehadiran nyata di lapangan masih terasa minim.',
+    focus:'Mengapa hubungan personal yang hangat sangat penting dan bagaimana senior dapat hadir secara nyata mendampingi pemuda?',
+    icon:'fa-user-group' },
+  { id:5, title:'Diberi Jabatan, Tapi Dilepas Tanpa Peta', subtitle:'Sistem Mentoring',
+    subjects:'Rio (Majelis Muda Terpilih) & Pak Yudi (Mantan Ketua Senior)',
+    scenario:'Rio memberanikan diri menerima kepercayaan menjadi Majelis Jemaat tahun ini. Namun setelah dilantik, Pak Yudi hanya menepuk bahu Rio dan berkata: "Selamat ya Rio, sekarang giliran anak muda yang pegang. Kamu pasti bisa!"\n\nSetelah itu, Rio dilepas begitu saja. Rio tidak diajari cara membuat Laporan Departemen, bingung menghadapi konflik antar anggota, dan canggung saat harus memimpin rapat majelis yang isinya orang-orang tua. Rio merasa frustrasi, stres, dan merasa dijadikan "pajangan regenerasi" saja.',
+    focus:'Merancang skema nyata "1 Senior + 1 Pemuda" (Co-Pilot Mentoring) dalam kepengurusan gereja.',
+    icon:'fa-map-location-dot' },
+];
 
-        const COMMITMENT_ITEMS = [
-            'Kami berkomitmen saling mendoakan secara rutin setiap minggu.',
-            'Kami berkomitmen menyapa & bertemu personal minimal sebulan sekali.',
-            'Kami berkomitmen memberi ruang bicara tanpa menghakimi atau mengkritik tajam.',
-            'Kami berkomitmen saling mengapresiasi setiap usaha pelayanan, sekecil apa pun.',
-            'Senior berkomitmen mendukung & membuka jalan bagi ide-ide baru dari pemuda.',
-            'Pemuda berkomitmen aktif belajar dan terbuka menerima bimbingan senior.',
-        ];
+const COMMITMENT_ITEMS = [
+  'Kami berkomitmen saling mendoakan secara rutin setiap minggu.',
+  'Kami berkomitmen menyapa & bertemu personal minimal sebulan sekali.',
+  'Kami berkomitmen memberi ruang bicara tanpa menghakimi atau mengkritik tajam.',
+  'Kami berkomitmen saling mengapresiasi setiap usaha pelayanan, sekecil apa pun.',
+  'Senior berkomitmen mendukung & membuka jalan bagi ide-ide baru dari pemuda.',
+  'Pemuda berkomitmen aktif belajar dan terbuka menerima bimbingan senior.',
+];
 
-        const BIBLE_VERSES = [
-            { ref: 'Amsal 20:29', text: 'Kemuliaan orang muda ialah kekuatannya, dan semarak orang tua ialah uban.' },
-            { ref: 'Maleakhi 4:6', text: 'Maka Ia akan membuat hati bapa-bapa berbalik kepada anak-anaknya dan hati anak-anak kepada bapa-bapanya...' },
-            { ref: '1 Timotius 4:12', text: 'Jangan seorang pun menganggap engkau rendah karena engkau muda. Jadilah teladan bagi orang-orang percaya...' },
-            { ref: '1 Korintus 12:27', text: 'Kamu semua adalah tubuh Kristus dan kamu masing-masing adalah anggotanya.' },
-        ];
+const BIBLE_VERSES = [
+  { ref:'Amsal 20:29', text:'Kemuliaan orang muda ialah kekuatannya, dan semarak orang tua ialah uban.' },
+  { ref:'Maleakhi 4:6', text:'Maka Ia akan membuat hati bapa-bapa berbalik kepada anak-anaknya dan hati anak-anak kepada bapa-bapanya...' },
+  { ref:'1 Timotius 4:12', text:'Jangan seorang pun menganggap engkau rendah karena engkau muda. Jadilah teladan bagi orang-orang percaya...' },
+  { ref:'1 Korintus 12:27', text:'Kamu semua adalah tubuh Kristus dan kamu masing-masing adalah anggotanya.' },
+];
 
-        const EGW_QUOTES = [
-            { source: 'Testimonies, Vol. 3, hlm. 488', text: 'Mengapa orang muda tidak berkumpul bersama untuk bersekutu dan berdoa, memohon pertolongan Tuhan dalam merencanakan langkah-langkah pelayanan yang berani? Tuhan merindukan agar kaum muda menjadi saluran berkah-Nya...' },
-            { source: 'Messages to Young People, hlm. 21', text: 'Tuhan tidak meminta kamu untuk menunggu sampai kamu merasa mampu atau memiliki pengetahuan yang sempurna sebelum kamu melayani. Dia meminta kamu untuk mempergunakan apa yang ada padamu hari ini, di mana kamu berada.' },
-            { source: 'Gospel Workers, hlm. 210', text: 'Kaum muda membutuhkan lebih dari sekadar teguran; mereka membutuhkan dorongan dan bantuan yang simpatik. Para pemimpin di dalam rumah dan gereja harus belajar bagaimana membimbing orang muda, memberi mereka tanggung jawab, dan membiarkan mereka belajar memikul beban pekerjaan Tuhan.' },
-            { source: 'Testimonies, Vol. 6, hlm. 435', text: 'Jangan biarkan para pekerja senior merasa bahwa karena mereka memiliki pengalaman, tidak ada ide baru dari yang muda yang patut didengar. Berikan tempat bagi semangat kaum muda. Percayailah mereka dengan tanggung jawab, dan bimbinglah mereka dengan kasih, bukan dengan sikap mendominasi.' },
-            { source: 'Ministry of Healing, hlm. 354', text: 'Banyak pemuda terhalang dari pelayanan karena mereka merasa ide-ide mereka tidak dihargai, atau karena setiap kesalahan kecil yang mereka buat langsung dikritik dengan tajam. Jika kita ingin pemuda mencintai gereja, gereja harus menjadi tempat yang paling hangat dan paling aman bagi mereka.' },
-        ];
+const EGW_QUOTES = [
+  { source:'Testimonies, Vol. 3, hlm. 488', text:'Mengapa orang muda tidak berkumpul bersama untuk bersekutu dan berdoa, memohon pertolongan Tuhan dalam merencanakan langkah-langkah pelayanan yang berani? Tuhan merindukan agar kaum muda menjadi saluran berkah-Nya...' },
+  { source:'Messages to Young People, hlm. 21', text:'Tuhan tidak meminta kamu untuk menunggu sampai kamu merasa mampu atau memiliki pengetahuan yang sempurna sebelum kamu melayani. Dia meminta kamu untuk mempergunakan apa yang ada padamu hari ini, di mana kamu berada.' },
+  { source:'Gospel Workers, hlm. 210', text:'Kaum muda membutuhkan lebih dari sekadar teguran; mereka membutuhkan dorongan dan bantuan yang simpatik. Para pemimpin di dalam rumah dan gereja harus belajar bagaimana membimbing orang muda, memberi mereka tanggung jawab, dan membiarkan mereka belajar memikul beban pekerjaan Tuhan.' },
+  { source:'Testimonies, Vol. 6, hlm. 435', text:'Jangan biarkan para pekerja senior merasa bahwa karena mereka memiliki pengalaman, tidak ada ide baru dari yang muda yang patut didengar. Berikan tempat bagi semangat kaum muda. Percayailah mereka dengan tanggung jawab, dan bimbinglah mereka dengan kasih, bukan dengan sikap mendominasi.' },
+  { source:'Ministry of Healing, hlm. 354', text:'Banyak pemuda terhalang dari pelayanan karena mereka merasa ide-ide mereka tidak dihargai, atau karena setiap kesalahan kecil yang mereka buat langsung dikritik dengan tajam. Jika kita ingin pemuda mencintai gereja, gereja harus menjadi tempat yang paling hangat dan paling aman bagi mereka.' },
+];
 
-        const PRAYER_STEPS = [
-            'Pemuda mendoakan kesehatan, hikmat, dan dedikasi Orang Tua di kelompok.',
-            'Orang Tua merangkul dan mendoakan masa depan serta keberanian Pemuda melayani.',
-            'Pendeta Jemaat memimpin doa dedikasi bersama.',
-        ];
+const PRAYER_STEPS = [
+  'Pemuda mendoakan kesehatan, hikmat, dan dedikasi Orang Tua di kelompok.',
+  'Orang Tua merangkul dan mendoakan masa depan serta keberanian Pemuda melayani.',
+  'Pendeta Jemaat memimpin doa dedikasi bersama.',
+];
 
-        /* ---------------------- 3. HELPERS UMUM --------------------------------- */
+/* ---------------------- 3. HELPERS UMUM --------------------------------- */
 
-        function uid() {
-            return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
-                const r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8); return v.toString(16);
-            });
-        }
+function uid(){ return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c=>{
+  const r = Math.random()*16|0, v = c==='x'?r:(r&0x3|0x8); return v.toString(16);
+}); }
 
-        function shuffle(arr) {
-            const a = arr.slice();
-            for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1));[a[i], a[j]] = [a[j], a[i]]; }
-            return a;
-        }
+function shuffle(arr){
+  const a = arr.slice();
+  for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; }
+  return a;
+}
 
-        function escapeHtml(str) {
-            if (str === null || str === undefined) return '';
-            return String(str).replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m]));
-        }
+function escapeHtml(str){
+  if (str === null || str === undefined) return '';
+  return String(str).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+}
 
-        function notify(msg, type) {
-            type = type || 'info';
-            const colors = { info: 'rgba(63,169,255,0.92)', success: 'rgba(46,207,168,0.92)', error: 'rgba(255,92,92,0.92)' };
-            const el = document.createElement('div');
-            el.className = 'toast glass-strong';
-            el.style.background = colors[type] || colors.info;
-            el.style.color = '#0b0a1a';
-            el.innerHTML = escapeHtml(msg);
-            document.getElementById('toast-wrap').appendChild(el);
-            setTimeout(() => { el.style.transition = 'opacity .4s ease, transform .4s ease'; el.style.opacity = '0'; el.style.transform = 'translateY(10px)'; setTimeout(() => el.remove(), 420); }, 3200);
-        }
+function notify(msg, type){
+  type = type || 'info';
+  const colors = { info:'rgba(63,169,255,0.92)', success:'rgba(46,207,168,0.92)', error:'rgba(255,92,92,0.92)' };
+  const el = document.createElement('div');
+  el.className = 'toast glass-strong';
+  el.style.background = colors[type] || colors.info;
+  el.style.color = '#0b0a1a';
+  el.innerHTML = escapeHtml(msg);
+  document.getElementById('toast-wrap').appendChild(el);
+  setTimeout(()=>{ el.style.transition='opacity .4s ease, transform .4s ease'; el.style.opacity='0'; el.style.transform='translateY(10px)'; setTimeout(()=>el.remove(), 420); }, 3200);
+}
 
-        function showLoading(v) {
-            document.getElementById('loading-overlay').style.display = v ? 'flex' : 'none';
-        }
+function showLoading(v){
+  document.getElementById('loading-overlay').style.display = v ? 'flex' : 'none';
+}
 
-        async function safeQuery(promise, errMsg) {
-            if (!sb) {
-                notify(errMsg || 'Supabase belum dikonfigurasi — data tidak tersimpan (mode demo).', 'error');
-                return { data: null, error: { message: 'not-configured' } };
-            }
-            try {
-                const res = await promise;
-                if (res.error) {
-                    console.error(res.error);
-                    notify(errMsg || ('Terjadi kesalahan: ' + res.error.message), 'error');
-                }
-                return res;
-            } catch (e) {
-                console.error(e);
-                notify(errMsg || 'Gagal terhubung ke database.', 'error');
-                return { data: null, error: e };
-            }
-        }
+async function safeQuery(promise, errMsg){
+  if (!sb){
+    notify(errMsg || 'Supabase belum dikonfigurasi — data tidak tersimpan (mode demo).', 'error');
+    return { data:null, error:{ message:'not-configured' } };
+  }
+  try{
+    const res = await promise;
+    if (res.error){
+      console.error(res.error);
+      notify(errMsg || ('Terjadi kesalahan: ' + res.error.message), 'error');
+    }
+    return res;
+  }catch(e){
+    console.error(e);
+    notify(errMsg || 'Gagal terhubung ke database.', 'error');
+    return { data:null, error:e };
+  }
+}
 
-        function fmtTime(totalSeconds) {
-            totalSeconds = Math.max(0, Math.round(totalSeconds));
-            const m = Math.floor(totalSeconds / 60).toString().padStart(2, '0');
-            const s = Math.floor(totalSeconds % 60).toString().padStart(2, '0');
-            return m + ':' + s;
-        }
+function fmtTime(totalSeconds){
+  totalSeconds = Math.max(0, Math.round(totalSeconds));
+  const m = Math.floor(totalSeconds/60).toString().padStart(2,'0');
+  const s = Math.floor(totalSeconds%60).toString().padStart(2,'0');
+  return m+':'+s;
+}
 
-        function roleBadgeHtml(roleKey, size) {
-            const r = ROLE_META[roleKey];
-            if (!r) return '';
-            const small = size === 'sm';
-            return `<span class="badge-role" style="background:${r.color}22; color:${r.color}; border:1px solid ${r.color}55;">
+function roleBadgeHtml(roleKey, size){
+  const r = ROLE_META[roleKey];
+  if (!r) return '';
+  const small = size === 'sm';
+  return `<span class="badge-role" style="background:${r.color}22; color:${r.color}; border:1px solid ${r.color}55;">
     <i class="fa-solid ${r.icon}"></i> ${r.title}
   </span>`;
-        }
+}
 
-        /* ---------------------- 4. STATE MANAGEMENT ----------------------------- */
+/* ---------------------- 4. STATE MANAGEMENT ----------------------------- */
 
-        const LS_KEY = 'kdkg_state_v1';
-        function loadLocalState() {
-            try {
-                const raw = localStorage.getItem(LS_KEY);
-                return raw ? JSON.parse(raw) : {};
-            } catch (e) { return {}; }
-        }
-        function saveLocalState() {
-            try { localStorage.setItem(LS_KEY, JSON.stringify(STATE)); } catch (e) { }
-        }
+const LS_KEY = 'kdkg_state_v1';
+function loadLocalState(){
+  try{
+    const raw = localStorage.getItem(LS_KEY);
+    return raw ? JSON.parse(raw) : {};
+  }catch(e){ return {}; }
+}
+function saveLocalState(){
+  try{ localStorage.setItem(LS_KEY, JSON.stringify(STATE)); }catch(e){}
+}
 
-        const STATE = Object.assign({
-            identity: null,            // 'pemuda' | 'senior'
-            diagnosticDone: false,
-            diagnosticAvg: null,       // rata-rata skor 1-5 jawaban diagnostik peserta ini
-            quizDone: false,
-            dominantRole: null,
-            roleScores: null,
-            groupId: null,
-            groupName: null,
-            groupCaseId: null,
-            reflectionDone: false,
-            clientScreen: 'welcome',   // welcome | diagnostic | quiz | quizResult | cases | reflection | wall
-        }, loadLocalState());
+const STATE = Object.assign({
+  identity: null,            // 'pemuda' | 'senior'
+  diagnosticDone: false,
+  diagnosticAvg: null,       // rata-rata skor 1-5 jawaban diagnostik peserta ini
+  quizDone: false,
+  dominantRole: null,
+  roleScores: null,
+  groupId: null,
+  groupName: null,
+  groupCaseId: null,
+  reflectionDone: false,
+  clientScreen: 'welcome',   // welcome | diagnostic | quiz | quizResult | cases | reflection | wall
+}, loadLocalState());
 
-        let presenterControl = { timer_seconds: 900, is_running: false, timer_started_at: null, timer_label: 'Waktu Diskusi Kelompok' };
-        let presenterSlideIndex = 0;
-        let groupDiscussionsCache = [];
-        let diagnosticCache = [];
-        let roleResultsCache = [];
-        let charts = {};
-        let timerInterval = null;
+let presenterControl = { timer_seconds:900, is_running:false, timer_started_at:null, timer_label:'Waktu Diskusi Kelompok' };
+let presenterSlideIndex = 0;
+let groupDiscussionsCache = [];
+let diagnosticCache = [];
+let roleResultsCache = [];
+let charts = {};
+let timerInterval = null;
 
-        /* ---------------------- 5. ROUTER / APP SHELL --------------------------- */
+/* ---------------------- 5. ROUTER / APP SHELL --------------------------- */
 
-        function isPresenterRoute() {
-            return location.hash.startsWith('#presenter');
-        }
+function isPresenterRoute(){
+  return location.hash.startsWith('#presenter');
+}
 
-        function route() {
-            const app = document.getElementById('app');
-            app.classList.add('animate__animated', 'animate__fadeIn');
-            if (isPresenterRoute()) {
-                document.getElementById('bottom-nav').style.display = 'none';
-                renderPresenter();
-            } else {
-                document.getElementById('bottom-nav').style.display = 'flex';
-                renderClientNav();
-                renderClientScreen();
-            }
-        }
+function route(){
+  const app = document.getElementById('app');
+  app.classList.add('animate__animated','animate__fadeIn');
+  if (isPresenterRoute()){
+    document.getElementById('bottom-nav').style.display = 'none';
+    renderPresenter();
+  } else {
+    document.getElementById('bottom-nav').style.display = 'flex';
+    renderClientNav();
+    renderClientScreen();
+  }
+}
 
-        window.addEventListener('hashchange', route);
+window.addEventListener('hashchange', route);
 
-        function goClientScreen(screen) {
-            STATE.clientScreen = screen;
-            saveLocalState();
-            renderClientNav();
-            renderClientScreen();
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
+function goClientScreen(screen){
+  STATE.clientScreen = screen;
+  saveLocalState();
+  renderClientNav();
+  renderClientScreen();
+  window.scrollTo({top:0, behavior:'smooth'});
+}
 
-        /* ---------------------- 6. BOTTOM NAV + FLOATING TIMER ------------------- */
+/* ---------------------- 6. BOTTOM NAV + FLOATING TIMER ------------------- */
 
-        const NAV_ITEMS = [
-            { key: 'welcome', icon: 'fa-house', label: 'Beranda' },
-            { key: 'diagnostic', icon: 'fa-clipboard-question', label: 'Diagnostik' },
-            { key: 'quiz', icon: 'fa-star', label: 'Peran' },
-            { key: 'cases', icon: 'fa-layer-group', label: 'Kelompok' },
-            { key: 'wall', icon: 'fa-heart', label: 'Komitmen' },
-        ];
+const NAV_ITEMS = [
+  { key:'welcome',    icon:'fa-house',            label:'Beranda' },
+  { key:'diagnostic',  icon:'fa-clipboard-question', label:'Diagnostik' },
+  { key:'quiz',        icon:'fa-star',              label:'Peran' },
+  { key:'cases',       icon:'fa-layer-group',       label:'Kelompok' },
+  { key:'wall',        icon:'fa-heart',             label:'Komitmen' },
+];
 
-        function renderClientNav() {
-            const nav = document.getElementById('bottom-nav');
-            nav.innerHTML = NAV_ITEMS.map(item => {
-                const active = STATE.clientScreen === item.key || (item.key === 'quiz' && STATE.clientScreen === 'quizResult') || (item.key === 'cases' && STATE.clientScreen === 'reflection');
-                return `<div class="nav-btn ${active ? 'active' : ''}" onclick="goClientScreen('${item.key}')">
+function renderClientNav(){
+  const nav = document.getElementById('bottom-nav');
+  nav.innerHTML = NAV_ITEMS.map(item=>{
+    const active = STATE.clientScreen === item.key || (item.key==='quiz' && STATE.clientScreen==='quizResult') || (item.key==='cases' && STATE.clientScreen==='reflection');
+    return `<div class="nav-btn ${active?'active':''}" onclick="goClientScreen('${item.key}')">
       <i class="fa-solid ${item.icon}"></i><span>${item.label}</span>
     </div>`;
-            }).join('');
-        }
+  }).join('');
+}
 
-        function renderFloatingTimer() {
-            const el = document.getElementById('floating-timer');
-            const remaining = computeTimerRemaining();
-            if (remaining === null) { el.classList.remove('show'); return; }
-            el.classList.add('show');
-            el.innerHTML = `<span class="ring"></span>
+function renderFloatingTimer(){
+  const el = document.getElementById('floating-timer');
+  const remaining = computeTimerRemaining();
+  if (remaining === null){ el.classList.remove('show'); return; }
+  el.classList.add('show');
+  el.innerHTML = `<span class="ring"></span>
     <div>
-      <div style="font-size:10px; opacity:.7; letter-spacing:.04em;">${escapeHtml(presenterControl.timer_label || 'Waktu Diskusi')}</div>
+      <div style="font-size:10px; opacity:.7; letter-spacing:.04em;">${escapeHtml(presenterControl.timer_label||'Waktu Diskusi')}</div>
       <div class="font-display" style="font-size:20px; font-weight:700; line-height:1;">${fmtTime(remaining)}</div>
     </div>`;
-        }
+}
 
-        // timer_started_at !== null berarti sesi timer "aktif" (berjalan ATAU dijeda).
-        // Reset akan mengembalikan timer_started_at ke null sehingga timer disembunyikan.
-        function computeTimerRemaining() {
-            if (!presenterControl || presenterControl.timer_started_at === null || presenterControl.timer_started_at === undefined) return null;
-            if (presenterControl.is_running) {
-                const started = new Date(presenterControl.timer_started_at).getTime();
-                const elapsed = (Date.now() - started) / 1000;
-                const remain = presenterControl.timer_seconds - elapsed;
-                return Math.max(0, remain);
-            }
-            // dijeda: timer_seconds menyimpan sisa waktu yang dibekukan
-            return Math.max(0, presenterControl.timer_seconds);
-        }
+// timer_started_at !== null berarti sesi timer "aktif" (berjalan ATAU dijeda).
+// Reset akan mengembalikan timer_started_at ke null sehingga timer disembunyikan.
+function computeTimerRemaining(){
+  if (!presenterControl || presenterControl.timer_started_at === null || presenterControl.timer_started_at === undefined) return null;
+  if (presenterControl.is_running){
+    const started = new Date(presenterControl.timer_started_at).getTime();
+    const elapsed = (Date.now() - started) / 1000;
+    const remain = presenterControl.timer_seconds - elapsed;
+    return Math.max(0, remain);
+  }
+  // dijeda: timer_seconds menyimpan sisa waktu yang dibekukan
+  return Math.max(0, presenterControl.timer_seconds);
+}
 
-        function startTimerTicker() {
-            if (timerInterval) clearInterval(timerInterval);
-            timerInterval = setInterval(() => {
-                renderFloatingTimer();
-                if (isPresenterRoute()) updatePresenterTimerDisplay();
-            }, 1000);
-        }
+function startTimerTicker(){
+  if (timerInterval) clearInterval(timerInterval);
+  timerInterval = setInterval(()=>{
+    renderFloatingTimer();
+    if (isPresenterRoute()) updatePresenterTimerDisplay();
+  }, 1000);
+}
 
-        /* ---------------------- 7. CLIENT VIEW: DISPATCH ------------------------- */
+/* ---------------------- 7. CLIENT VIEW: DISPATCH ------------------------- */
 
-        function renderClientScreen() {
-            const app = document.getElementById('app');
-            switch (STATE.clientScreen) {
-                case 'diagnostic': app.innerHTML = screenDiagnostic(); attachDiagnosticHandlers(); break;
-                case 'quiz': app.innerHTML = screenQuiz(); attachQuizHandlers(); break;
-                case 'quizResult': app.innerHTML = screenQuizResult(); break;
-                case 'cases': app.innerHTML = screenCases(); subscribeGroupDiscussionsClient(); loadGroupDiscussions(); break;
-                case 'reflection': app.innerHTML = screenReflection(); break;
-                case 'wall': app.innerHTML = screenWall(); subscribeGroupDiscussionsClient(); loadGroupDiscussions(); break;
-                default: app.innerHTML = screenWelcome();
-            }
-            renderFloatingTimer();
-        }
+function renderClientScreen(){
+  const app = document.getElementById('app');
+  switch(STATE.clientScreen){
+    case 'diagnostic': app.innerHTML = screenDiagnostic(); attachDiagnosticHandlers(); break;
+    case 'quiz': app.innerHTML = screenQuiz(); attachQuizHandlers(); break;
+    case 'quizResult': app.innerHTML = screenQuizResult(); break;
+    case 'cases': app.innerHTML = screenCases(); subscribeGroupDiscussionsClient(); loadGroupDiscussions(); break;
+    case 'reflection': app.innerHTML = screenReflection(); break;
+    case 'wall': app.innerHTML = screenWall(); subscribeGroupDiscussionsClient(); loadGroupDiscussions(); break;
+    default: app.innerHTML = screenWelcome();
+  }
+  renderFloatingTimer();
+}
 
-        function wrapClientPage(innerHtml, opts) {
-            opts = opts || {};
-            return `
+function wrapClientPage(innerHtml, opts){
+  opts = opts || {};
+  return `
   <div class="min-h-screen px-5 pt-8 pb-40 max-w-xl mx-auto">
     ${opts.hideHeader ? '' : `
     <div class="flex items-center justify-between mb-6 animate__animated animate__fadeInDown">
@@ -1161,14 +715,14 @@
         <i class="fa-solid fa-cross" style="color:var(--gold)"></i>
         <span>Kenali Dirimu, Kenali Gerejamu</span>
       </div>
-      ${STATE.identity ? `<span class="badge-role" style="background:rgba(255,255,255,.08); color:#fff; border:1px solid rgba(255,255,255,.2);"><i class="fa-solid ${STATE.identity === 'pemuda' ? 'fa-fire' : 'fa-seedling'}"></i> ${STATE.identity === 'pemuda' ? 'Pemuda' : 'Senior'}</span>` : ''}
+      ${STATE.identity ? `<span class="badge-role" style="background:rgba(255,255,255,.08); color:#fff; border:1px solid rgba(255,255,255,.2);"><i class="fa-solid ${STATE.identity==='pemuda'?'fa-fire':'fa-seedling'}"></i> ${STATE.identity==='pemuda'?'Pemuda':'Senior'}</span>` : ''}
     </div>`}
     ${innerHtml}
   </div>`;
-        }
+}
 
-        function screenWelcome() {
-            return wrapClientPage(`
+function screenWelcome(){
+  return wrapClientPage(`
     <div class="text-center mt-6 animate__animated animate__fadeInUp">
       <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass mb-6 text-xs tracking-widest uppercase" style="color:var(--gold)">
         <i class="fa-solid fa-hands-holding-circle"></i> Kebaktian Pemuda Advent
@@ -1188,11 +742,11 @@
         <b class="text-gradient-gold">Orang Tua / Senior</b> jemaat sore ini?
       </p>
       <div class="grid grid-cols-2 gap-3">
-        <button onclick="selectIdentity('pemuda')" class="btn-ghost rounded-2xl py-5 flex flex-col items-center gap-2 ${STATE.identity === 'pemuda' ? 'btn-gold' : ''}">
+        <button onclick="selectIdentity('pemuda')" class="btn-ghost rounded-2xl py-5 flex flex-col items-center gap-2 ${STATE.identity==='pemuda'?'btn-gold':''}">
           <i class="fa-solid fa-fire text-2xl"></i>
           <span class="font-semibold text-sm">Pemuda</span>
         </button>
-        <button onclick="selectIdentity('senior')" class="btn-ghost rounded-2xl py-5 flex flex-col items-center gap-2 ${STATE.identity === 'senior' ? 'btn-gold' : ''}">
+        <button onclick="selectIdentity('senior')" class="btn-ghost rounded-2xl py-5 flex flex-col items-center gap-2 ${STATE.identity==='senior'?'btn-gold':''}">
           <i class="fa-solid fa-seedling text-2xl"></i>
           <span class="font-semibold text-sm">Orang Tua / Senior</span>
         </button>
@@ -1223,39 +777,39 @@
       <a href="#presenter" class="text-[10px] opacity-30 hover:opacity-60 transition-opacity"><i class="fa-solid fa-tv mr-1"></i>Mode Presenter</a>
     </div>
   `);
-        }
+}
 
-        function selectIdentity(id) {
-            STATE.identity = id;
-            saveLocalState();
-            goClientScreen('welcome');
-        }
+function selectIdentity(id){
+  STATE.identity = id;
+  saveLocalState();
+  goClientScreen('welcome');
+}
 
-        /* ---------------------- 8. DIAGNOSTIC QUESTIONNAIRE ----------------------- */
+/* ---------------------- 8. DIAGNOSTIC QUESTIONNAIRE ----------------------- */
 
-        let diagnosticAnswers = {};
+let diagnosticAnswers = {};
 
-        function screenDiagnostic() {
-            if (!STATE.identity) {
-                return wrapClientPage(`<div class="glass glass-card p-6 text-center mt-10">
+function screenDiagnostic(){
+  if (!STATE.identity){
+    return wrapClientPage(`<div class="glass glass-card p-6 text-center mt-10">
       <p class="opacity-80 mb-4">Silakan pilih identitasmu terlebih dahulu di Beranda.</p>
       <button onclick="goClientScreen('welcome')" class="btn-gold rounded-2xl px-6 py-3 font-bold">Kembali ke Beranda</button>
     </div>`);
-            }
-            if (STATE.diagnosticDone) {
-                return wrapClientPage(diagnosticReflectionCardHtml());
-            }
-            const questions = DIAGNOSTIC_QUESTIONS[STATE.identity];
-            return wrapClientPage(`
+  }
+  if (STATE.diagnosticDone){
+    return wrapClientPage(diagnosticReflectionCardHtml());
+  }
+  const questions = DIAGNOSTIC_QUESTIONS[STATE.identity];
+  return wrapClientPage(`
     <div class="animate__animated animate__fadeInUp">
       <h2 class="font-display text-2xl font-bold mb-1">Kuesioner Diagnostik</h2>
       <p class="opacity-60 text-xs mb-6">Jawab sejujurnya. Tidak ada jawaban benar/salah — suaramu berharga bagi gereja.</p>
       <div id="diagnostic-form" class="space-y-5">
-        ${questions.map((q, i) => `
+        ${questions.map((q, i)=>`
           <div class="glass glass-card p-5">
-            <p class="text-sm font-medium mb-4 leading-relaxed">${i + 1}. ${escapeHtml(q)}</p>
+            <p class="text-sm font-medium mb-4 leading-relaxed">${i+1}. ${escapeHtml(q)}</p>
             <div class="grid grid-cols-5 gap-1.5" data-qindex="${i}">
-              ${[1, 2, 3, 4, 5].map(v => `
+              ${[1,2,3,4,5].map(v=>`
                 <div class="likert-opt text-[10px] py-2 px-1" data-value="${v}" onclick="setDiagnosticAnswer(${i},${v})">${v}</div>
               `).join('')}
             </div>
@@ -1270,16 +824,16 @@
       </button>
     </div>
   `);
-        }
+}
 
-        // Kartu Refleksi Diagnostik Pribadi, ditampilkan setelah peserta submit —
-        // isinya bergantung pada identitas (pemuda/senior) dan rata-rata skor 1-5 miliknya sendiri.
-        function diagnosticReflectionCardHtml() {
-            const avg = typeof STATE.diagnosticAvg === 'number' ? STATE.diagnosticAvg : 0;
-            const level = avg >= 3.0 ? 'high' : 'low';
-            const bucket = DIAGNOSTIC_REFLECTIONS[STATE.identity] || DIAGNOSTIC_REFLECTIONS.pemuda;
-            const r = bucket[level];
-            return `
+// Kartu Refleksi Diagnostik Pribadi, ditampilkan setelah peserta submit —
+// isinya bergantung pada identitas (pemuda/senior) dan rata-rata skor 1-5 miliknya sendiri.
+function diagnosticReflectionCardHtml(){
+  const avg = typeof STATE.diagnosticAvg === 'number' ? STATE.diagnosticAvg : 0;
+  const level = avg >= 3.0 ? 'high' : 'low';
+  const bucket = DIAGNOSTIC_REFLECTIONS[STATE.identity] || DIAGNOSTIC_REFLECTIONS.pemuda;
+  const r = bucket[level];
+  return `
     <div class="glass-strong glass-card p-8 text-center mt-6 animate__animated animate__zoomIn">
       <div class="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4" style="background:rgba(232,196,104,.14); border:1px solid rgba(232,196,104,.4);">
         <i class="fa-solid ${r.icon} text-2xl" style="color:var(--gold)"></i>
@@ -1290,94 +844,94 @@
       <button onclick="goClientScreen('quiz')" class="btn-gold rounded-2xl px-6 py-3 font-bold w-full">Lanjut ke Kuis Penemuan Peran <i class="fa-solid fa-arrow-right ml-1"></i></button>
       <button onclick="resetDiagnostic()" class="text-[11px] opacity-40 hover:opacity-70 mt-4">Isi ulang jawaban diagnostik</button>
     </div>`;
-        }
+}
 
-        function setDiagnosticAnswer(qIndex, value) {
-            diagnosticAnswers[qIndex] = value;
-            const group = document.querySelector(`[data-qindex="${qIndex}"]`);
-            if (!group) return;
-            group.querySelectorAll('.likert-opt').forEach(el => {
-                el.classList.toggle('selected', parseInt(el.dataset.value, 10) === value);
-            });
-        }
+function setDiagnosticAnswer(qIndex, value){
+  diagnosticAnswers[qIndex] = value;
+  const group = document.querySelector(`[data-qindex="${qIndex}"]`);
+  if (!group) return;
+  group.querySelectorAll('.likert-opt').forEach(el=>{
+    el.classList.toggle('selected', parseInt(el.dataset.value,10) === value);
+  });
+}
 
-        function attachDiagnosticHandlers() { diagnosticAnswers = {}; }
+function attachDiagnosticHandlers(){ diagnosticAnswers = {}; }
 
-        function resetDiagnostic() {
-            STATE.diagnosticDone = false;
-            saveLocalState();
-            goClientScreen('diagnostic');
-        }
+function resetDiagnostic(){
+  STATE.diagnosticDone = false;
+  saveLocalState();
+  goClientScreen('diagnostic');
+}
 
-        async function submitDiagnostic() {
-            const questions = DIAGNOSTIC_QUESTIONS[STATE.identity];
-            if (Object.keys(diagnosticAnswers).length < questions.length) {
-                notify('Mohon jawab semua pertanyaan terlebih dahulu.', 'error');
-                return;
-            }
-            showLoading(true);
-            // diagnostic_responses bersifat ternormalisasi: 1 baris per pertanyaan
-            const rows = questions.map((q, i) => ({
-                user_type: STATE.identity,
-                question_id: i + 1,
-                answer_value: diagnosticAnswers[i],
-            }));
-            const { error } = await safeQuery(sb && sb.from('diagnostic_responses').insert(rows), 'Gagal mengirim jawaban diagnostik.');
-            showLoading(false);
-            if (error) return; // jangan tandai selesai kalau insert-nya gagal (mis. RLS belum diaktifkan)
-            const avg = questions.reduce((sum, _, i) => sum + diagnosticAnswers[i], 0) / questions.length;
-            STATE.diagnosticDone = true;
-            STATE.diagnosticAvg = avg;
-            saveLocalState();
-            notify('Jawaban diagnostik terkirim. Terima kasih!', 'success');
-            goClientScreen('diagnostic');
-        }
+async function submitDiagnostic(){
+  const questions = DIAGNOSTIC_QUESTIONS[STATE.identity];
+  if (Object.keys(diagnosticAnswers).length < questions.length){
+    notify('Mohon jawab semua pertanyaan terlebih dahulu.', 'error');
+    return;
+  }
+  showLoading(true);
+  // diagnostic_responses bersifat ternormalisasi: 1 baris per pertanyaan
+  const rows = questions.map((q,i)=>({
+    user_type: STATE.identity,
+    question_id: i+1,
+    answer_value: diagnosticAnswers[i],
+  }));
+  const { error } = await safeQuery(sb && sb.from('diagnostic_responses').insert(rows), 'Gagal mengirim jawaban diagnostik.');
+  showLoading(false);
+  if (error) return; // jangan tandai selesai kalau insert-nya gagal (mis. RLS belum diaktifkan)
+  const avg = questions.reduce((sum,_,i)=>sum + diagnosticAnswers[i], 0) / questions.length;
+  STATE.diagnosticDone = true;
+  STATE.diagnosticAvg = avg;
+  saveLocalState();
+  notify('Jawaban diagnostik terkirim. Terima kasih!', 'success');
+  goClientScreen('diagnostic');
+}
 
-        /* ---------------------- 9. KUIS PENEMUAN PERAN ---------------------------- */
+/* ---------------------- 9. KUIS PENEMUAN PERAN ---------------------------- */
 
-        let quizShuffled = null;
-        let quizAnswers = {};
+let quizShuffled = null;
+let quizAnswers = {};
 
-        function buildQuizShuffled() {
-            const src = STATE.identity === 'pemuda' ? QUIZ_PEMUDA : QUIZ_SENIOR;
-            quizShuffled = src.map(item => ({ q: item.q, options: shuffle(item.options) }));
-        }
+function buildQuizShuffled(){
+  const src = STATE.identity === 'pemuda' ? QUIZ_PEMUDA : QUIZ_SENIOR;
+  quizShuffled = src.map(item => ({ q:item.q, options: shuffle(item.options) }));
+}
 
-        function screenQuiz() {
-            if (!STATE.identity) {
-                return wrapClientPage(`<div class="glass glass-card p-6 text-center mt-10">
+function screenQuiz(){
+  if (!STATE.identity){
+    return wrapClientPage(`<div class="glass glass-card p-6 text-center mt-10">
       <p class="opacity-80 mb-4">Silakan pilih identitasmu terlebih dahulu di Beranda.</p>
       <button onclick="goClientScreen('welcome')" class="btn-gold rounded-2xl px-6 py-3 font-bold">Kembali ke Beranda</button>
     </div>`);
-            }
-            if (!STATE.diagnosticDone) {
-                return wrapClientPage(`<div class="glass glass-card p-6 text-center mt-10">
+  }
+  if (!STATE.diagnosticDone){
+    return wrapClientPage(`<div class="glass glass-card p-6 text-center mt-10">
       <p class="opacity-80 mb-4">Selesaikan Kuesioner Diagnostik terlebih dahulu ya.</p>
       <button onclick="goClientScreen('diagnostic')" class="btn-gold rounded-2xl px-6 py-3 font-bold">Ke Kuesioner Diagnostik</button>
     </div>`);
-            }
-            if (STATE.quizDone && STATE.dominantRole) {
-                return wrapClientPage(`<div class="glass glass-card p-8 text-center mt-10 animate__animated animate__fadeIn">
+  }
+  if (STATE.quizDone && STATE.dominantRole){
+    return wrapClientPage(`<div class="glass glass-card p-8 text-center mt-10 animate__animated animate__fadeIn">
       <i class="fa-solid fa-circle-check text-4xl mb-4" style="color:var(--gold)"></i>
       <h2 class="font-display text-xl font-bold mb-2">Kuis Selesai!</h2>
       <p class="opacity-75 text-sm mb-6">Peranmu sudah ditemukan.</p>
       <button onclick="goClientScreen('quizResult')" class="btn-gold rounded-2xl px-6 py-3 font-bold w-full">Lihat Kartu Peranku <i class="fa-solid fa-arrow-right ml-1"></i></button>
       <button onclick="resetQuiz()" class="text-[11px] opacity-40 hover:opacity-70 mt-4">Ulangi kuis peran</button>
     </div>`);
-            }
-            if (!quizShuffled) buildQuizShuffled();
-            return wrapClientPage(`
+  }
+  if (!quizShuffled) buildQuizShuffled();
+  return wrapClientPage(`
     <div class="animate__animated animate__fadeInUp">
       <h2 class="font-display text-2xl font-bold mb-1">Temukan Peranmu</h2>
       <p class="opacity-60 text-xs mb-6">7 pertanyaan singkat. Pilih yang paling menggambarkan dirimu.</p>
       <div id="quiz-form" class="space-y-5">
-        ${quizShuffled.map((item, i) => `
+        ${quizShuffled.map((item,i)=>`
           <div class="glass glass-card p-5">
-            <p class="text-sm font-semibold mb-3 leading-relaxed">${i + 1}. ${escapeHtml(item.q)}</p>
+            <p class="text-sm font-semibold mb-3 leading-relaxed">${i+1}. ${escapeHtml(item.q)}</p>
             <div class="space-y-2" data-qindex="${i}">
-              ${item.options.map((opt, oi) => `
+              ${item.options.map((opt,oi)=>`
                 <div class="quiz-opt" data-oi="${oi}" data-role="${opt.role}" onclick="setQuizAnswer(${i},${oi},'${opt.role}')">
-                  <div class="quiz-letter">${String.fromCharCode(65 + oi)}</div>
+                  <div class="quiz-letter">${String.fromCharCode(65+oi)}</div>
                   <div class="text-xs leading-relaxed opacity-90">${escapeHtml(opt.text)}</div>
                 </div>
               `).join('')}
@@ -1390,58 +944,58 @@
       </button>
     </div>
   `);
-        }
+}
 
-        function attachQuizHandlers() { quizAnswers = {}; }
+function attachQuizHandlers(){ quizAnswers = {}; }
 
-        function resetQuiz() {
-            STATE.quizDone = false;
-            STATE.dominantRole = null;
-            STATE.roleScores = null;
-            quizShuffled = null;
-            saveLocalState();
-            goClientScreen('quiz');
-        }
+function resetQuiz(){
+  STATE.quizDone = false;
+  STATE.dominantRole = null;
+  STATE.roleScores = null;
+  quizShuffled = null;
+  saveLocalState();
+  goClientScreen('quiz');
+}
 
-        function setQuizAnswer(qIndex, oi, role) {
-            quizAnswers[qIndex] = role;
-            const group = document.querySelector(`#quiz-form [data-qindex="${qIndex}"]`);
-            if (!group) return;
-            group.querySelectorAll('.quiz-opt').forEach(el => {
-                el.classList.toggle('selected', parseInt(el.dataset.oi, 10) === oi);
-            });
-        }
+function setQuizAnswer(qIndex, oi, role){
+  quizAnswers[qIndex] = role;
+  const group = document.querySelector(`#quiz-form [data-qindex="${qIndex}"]`);
+  if (!group) return;
+  group.querySelectorAll('.quiz-opt').forEach(el=>{
+    el.classList.toggle('selected', parseInt(el.dataset.oi,10) === oi);
+  });
+}
 
-        async function submitQuiz() {
-            if (Object.keys(quizAnswers).length < quizShuffled.length) {
-                notify('Mohon jawab semua pertanyaan terlebih dahulu.', 'error');
-                return;
-            }
-            const scores = {}; ROLE_ORDER.forEach(r => scores[r] = 0);
-            Object.values(quizAnswers).forEach(role => { scores[role] = (scores[role] || 0) + 1; });
-            let dominant = ROLE_ORDER[0];
-            ROLE_ORDER.forEach(r => { if (scores[r] > scores[dominant]) dominant = r; });
+async function submitQuiz(){
+  if (Object.keys(quizAnswers).length < quizShuffled.length){
+    notify('Mohon jawab semua pertanyaan terlebih dahulu.', 'error');
+    return;
+  }
+  const scores = {}; ROLE_ORDER.forEach(r=>scores[r]=0);
+  Object.values(quizAnswers).forEach(role=>{ scores[role] = (scores[role]||0) + 1; });
+  let dominant = ROLE_ORDER[0];
+  ROLE_ORDER.forEach(r=>{ if (scores[r] > scores[dominant]) dominant = r; });
 
-            showLoading(true);
-            const { error } = await safeQuery(sb && sb.from('role_results').insert({
-                user_type: STATE.identity,
-                role_name: dominant,
-            }), 'Gagal mengirim hasil kuis peran.');
-            showLoading(false);
-            if (error) return; // jangan tandai selesai kalau insert-nya gagal
+  showLoading(true);
+  const { error } = await safeQuery(sb && sb.from('role_results').insert({
+    user_type: STATE.identity,
+    role_name: dominant,
+  }), 'Gagal mengirim hasil kuis peran.');
+  showLoading(false);
+  if (error) return; // jangan tandai selesai kalau insert-nya gagal
 
-            STATE.quizDone = true;
-            STATE.dominantRole = dominant;
-            STATE.roleScores = scores;
-            saveLocalState();
-            notify('Peranmu telah ditemukan!', 'success');
-            goClientScreen('quizResult');
-        }
+  STATE.quizDone = true;
+  STATE.dominantRole = dominant;
+  STATE.roleScores = scores;
+  saveLocalState();
+  notify('Peranmu telah ditemukan!', 'success');
+  goClientScreen('quizResult');
+}
 
-        function screenQuizResult() {
-            if (!STATE.dominantRole) return screenQuiz();
-            const r = ROLE_META[STATE.dominantRole];
-            return wrapClientPage(`
+function screenQuizResult(){
+  if (!STATE.dominantRole) return screenQuiz();
+  const r = ROLE_META[STATE.dominantRole];
+  return wrapClientPage(`
     <div class="text-center mb-4 animate__animated animate__fadeIn">
       <p class="opacity-60 text-xs uppercase tracking-widest">Kartu Peran Pelayananmu</p>
     </div>
@@ -1453,9 +1007,9 @@
           <i class="fa-solid ${r.icon} text-4xl" style="color:${r.color}"></i>
         </div>
         <h2 class="font-display text-3xl font-bold mb-1" style="color:${r.color}">${r.title}</h2>
-        <p class="opacity-60 text-xs mb-5 uppercase tracking-widest">${r.subtitle === 'Senior' ? 'Peran Orang Tua / Senior' : 'Peran Pemuda'}</p>
+        <p class="opacity-60 text-xs mb-5 uppercase tracking-widest">${r.subtitle==='Senior'?'Peran Orang Tua / Senior':'Peran Pemuda'}</p>
         <p class="text-sm opacity-85 leading-relaxed max-w-xs mx-auto">${r.desc}</p>
-        <div class="mt-6 pt-5 border-t border-white/10 text-[11px] opacity-50">Kebaktian Pemuda Advent • ${new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}</div>
+        <div class="mt-6 pt-5 border-t border-white/10 text-[11px] opacity-50">Kebaktian Pemuda Advent • ${new Date().toLocaleDateString('id-ID',{day:'numeric',month:'long',year:'numeric'})}</div>
       </div>
     </div>
     <div class="grid grid-cols-2 gap-3 mt-5">
@@ -1467,73 +1021,73 @@
       </button>
     </div>
   `);
-        }
+}
 
-        function downloadRoleCard() {
-            const el = document.getElementById('role-card');
-            if (!el || !window.html2canvas) { notify('Fitur simpan gambar tidak tersedia.', 'error'); return; }
-            html2canvas(el, { backgroundColor: '#0b0a1a', scale: 2 }).then(canvas => {
-                const link = document.createElement('a');
-                link.download = 'kartu-peran-' + (STATE.dominantRole || 'peran').toLowerCase() + '.png';
-                link.href = canvas.toDataURL('image/png');
-                link.click();
-            });
-        }
+function downloadRoleCard(){
+  const el = document.getElementById('role-card');
+  if (!el || !window.html2canvas){ notify('Fitur simpan gambar tidak tersedia.', 'error'); return; }
+  html2canvas(el, { backgroundColor:'#0b0a1a', scale:2 }).then(canvas=>{
+    const link = document.createElement('a');
+    link.download = 'kartu-peran-' + (STATE.dominantRole||'peran').toLowerCase() + '.png';
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+  });
+}
 
-        /* ---------------------- 10. CASE STUDY GRID + REALTIME LOCKING ----------- */
+/* ---------------------- 10. CASE STUDY GRID + REALTIME LOCKING ----------- */
 
-        let groupChannel = null;
-        let groupNameDraft = '';
+let groupChannel = null;
+let groupNameDraft = '';
 
-        async function loadGroupDiscussions() {
-            if (!sb) return;
-            const { data, error } = await sb.from('group_discussions').select('*').order('case_id', { ascending: true });
-            if (!error && data) {
-                groupDiscussionsCache = data;
-                if (isPresenterRoute()) renderPresenterCommitmentWallSlide();
-                else if (STATE.clientScreen === 'cases') refreshCaseGridLocks();
-                else if (STATE.clientScreen === 'wall') refreshWallList();
-            }
-        }
+async function loadGroupDiscussions(){
+  if (!sb) return;
+  const { data, error } = await sb.from('group_discussions').select('*').order('case_id', { ascending:true });
+  if (!error && data){
+    groupDiscussionsCache = data;
+    if (isPresenterRoute()) renderPresenterCommitmentWallSlide();
+    else if (STATE.clientScreen === 'cases') refreshCaseGridLocks();
+    else if (STATE.clientScreen === 'wall') refreshWallList();
+  }
+}
 
-        function subscribeGroupDiscussionsClient() {
-            if (!sb || groupChannel) return;
-            groupChannel = sb.channel('group_discussions_changes')
-                .on('postgres_changes', { event: '*', schema: 'public', table: 'group_discussions' }, payload => {
-                    loadGroupDiscussions();
-                })
-                .subscribe();
-        }
+function subscribeGroupDiscussionsClient(){
+  if (!sb || groupChannel) return;
+  groupChannel = sb.channel('group_discussions_changes')
+    .on('postgres_changes', { event:'*', schema:'public', table:'group_discussions' }, payload=>{
+      loadGroupDiscussions();
+    })
+    .subscribe();
+}
 
-        let previewCaseId = null;
+let previewCaseId = null;
 
-        function screenCases() {
-            if (!STATE.dominantRole) {
-                return wrapClientPage(`<div class="glass glass-card p-6 text-center mt-10">
+function screenCases(){
+  if (!STATE.dominantRole){
+    return wrapClientPage(`<div class="glass glass-card p-6 text-center mt-10">
       <p class="opacity-80 mb-4">Selesaikan Kuis Penemuan Peran terlebih dahulu ya.</p>
       <button onclick="goClientScreen('quiz')" class="btn-gold rounded-2xl px-6 py-3 font-bold">Ke Kuis Peran</button>
     </div>`);
-            }
-            if (STATE.groupCaseId) {
-                const chosen = CASE_STUDIES.find(c => c.id === STATE.groupCaseId);
-                return wrapClientPage(`
+  }
+  if (STATE.groupCaseId){
+    const chosen = CASE_STUDIES.find(c=>c.id===STATE.groupCaseId);
+    return wrapClientPage(`
       <div class="glass glass-card p-6 text-center mt-6 animate__animated animate__fadeIn">
         <i class="fa-solid fa-layer-group text-3xl mb-3" style="color:var(--gold)"></i>
-        <p class="opacity-60 text-xs uppercase tracking-widest mb-1">Kelompok ${escapeHtml(STATE.groupName || '')}</p>
-        <h2 class="font-display text-xl font-bold mb-2">Case ${chosen ? chosen.id : ''}: ${chosen ? escapeHtml(chosen.title) : ''}</h2>
-        <p class="text-sm opacity-70 leading-relaxed whitespace-pre-line text-left">${chosen ? escapeHtml(chosen.scenario) : ''}</p>
+        <p class="opacity-60 text-xs uppercase tracking-widest mb-1">Kelompok ${escapeHtml(STATE.groupName||'')}</p>
+        <h2 class="font-display text-xl font-bold mb-2">Case ${chosen?chosen.id:''}: ${chosen?escapeHtml(chosen.title):''}</h2>
+        <p class="text-sm opacity-70 leading-relaxed whitespace-pre-line text-left">${chosen?escapeHtml(chosen.scenario):''}</p>
       </div>
       <button onclick="goClientScreen('reflection')" class="btn-gold w-full rounded-2xl py-4 font-bold mt-5">
         ${STATE.reflectionDone ? 'Lihat / Ubah Refleksi Kelompok' : 'Lanjut ke Form Refleksi'} <i class="fa-solid fa-arrow-right ml-1"></i>
       </button>
     `);
-            }
-            if (previewCaseId) {
-                const c = CASE_STUDIES.find(cs => cs.id === previewCaseId);
-                if (!c) { previewCaseId = null; }
-                else {
-                    const lockedBy = groupDiscussionsCache.find(g => g.case_id === c.id);
-                    return wrapClientPage(`
+  }
+  if (previewCaseId){
+    const c = CASE_STUDIES.find(cs=>cs.id===previewCaseId);
+    if (!c){ previewCaseId = null; }
+    else {
+      const lockedBy = groupDiscussionsCache.find(g=>g.case_id===c.id);
+      return wrapClientPage(`
         <div class="animate__animated animate__fadeIn">
           <button onclick="closeCasePreview()" class="text-xs opacity-60 hover:opacity-100 mb-5 inline-flex items-center gap-1.5">
             <i class="fa-solid fa-arrow-left"></i> Kembali ke Daftar Kasus
@@ -1557,8 +1111,8 @@
             </div>
 
             ${lockedBy
-                            ? `<p class="text-xs mt-5 opacity-70 text-center"><i class="fa-solid fa-lock mr-1"></i>Kasus ini sudah diambil oleh <b>${escapeHtml(lockedBy.group_name)}</b></p>`
-                            : `<div class="mt-5">
+              ? `<p class="text-xs mt-5 opacity-70 text-center"><i class="fa-solid fa-lock mr-1"></i>Kasus ini sudah diambil oleh <b>${escapeHtml(lockedBy.group_name)}</b></p>`
+              : `<div class="mt-5">
                   <label class="text-xs opacity-70 mb-2 block font-semibold">Nama Kelompok</label>
                   <input type="text" id="group-name-input" placeholder="Contoh: Kelompok Sinergi 1" value="${escapeHtml(groupNameDraft)}"
                     oninput="groupNameDraft=this.value">
@@ -1566,13 +1120,13 @@
                 <button onclick="attemptSelectCase(${c.id})" class="btn-gold w-full rounded-2xl py-4 font-bold mt-4">
                   Pilih Kasus Ini <i class="fa-solid fa-check ml-1"></i>
                 </button>`
-                        }
+            }
           </div>
         </div>
       `);
-                }
-            }
-            return wrapClientPage(`
+    }
+  }
+  return wrapClientPage(`
     <div class="animate__animated animate__fadeInUp">
       <h2 class="font-display text-2xl font-bold mb-1">Pilih Studi Kasus</h2>
       <p class="opacity-60 text-xs mb-5">Tap kasus untuk melihat detail lengkap dulu. Satu kasus hanya bisa dipilih oleh satu kelompok — begitu dipilih, kasus akan terkunci secara langsung untuk kelompok lain.</p>
@@ -1585,17 +1139,17 @@
       </div>
 
       <div id="case-grid" class="grid grid-cols-1 gap-4">
-        ${CASE_STUDIES.map(c => caseCardHtml(c)).join('')}
+        ${CASE_STUDIES.map(c=>caseCardHtml(c)).join('')}
       </div>
     </div>
   `);
-        }
+}
 
-        function caseCardHtml(c) {
-            const lockedBy = groupDiscussionsCache.find(g => g.case_id === c.id);
-            const locked = !!lockedBy;
-            return `
-    <div class="glass glass-card p-5 card-hover relative ${locked ? 'locked-card' : ''}" onclick="previewCase(${c.id})" style="cursor:pointer;">
+function caseCardHtml(c){
+  const lockedBy = groupDiscussionsCache.find(g=>g.case_id===c.id);
+  const locked = !!lockedBy;
+  return `
+    <div class="glass glass-card p-5 card-hover relative ${locked?'locked-card':''}" onclick="previewCase(${c.id})" style="cursor:pointer;">
       ${locked ? `<div class="case-locked-ribbon"><i class="fa-solid fa-lock"></i> TERPILIH</div>` : ''}
       <div class="flex items-start gap-4">
         <div class="w-12 h-12 rounded-2xl flex items-center justify-center flex-shrink-0" style="background:rgba(232,196,104,0.14); border:1px solid rgba(232,196,104,0.35);">
@@ -1609,89 +1163,89 @@
         </div>
       </div>
     </div>`;
-        }
+}
 
-        function refreshCaseGridLocks() {
-            const grid = document.getElementById('case-grid');
-            if (grid) { grid.innerHTML = CASE_STUDIES.map(c => caseCardHtml(c)).join(''); return; }
-            // Kalau sedang di layar preview/detail kasus, render ulang supaya status "TERPILIH" ikut update realtime.
-            if (previewCaseId && STATE.clientScreen === 'cases' && !STATE.groupCaseId) {
-                const app = document.getElementById('app');
-                if (app) app.innerHTML = screenCases();
-            }
-        }
+function refreshCaseGridLocks(){
+  const grid = document.getElementById('case-grid');
+  if (grid) { grid.innerHTML = CASE_STUDIES.map(c=>caseCardHtml(c)).join(''); return; }
+  // Kalau sedang di layar preview/detail kasus, render ulang supaya status "TERPILIH" ikut update realtime.
+  if (previewCaseId && STATE.clientScreen === 'cases' && !STATE.groupCaseId){
+    const app = document.getElementById('app');
+    if (app) app.innerHTML = screenCases();
+  }
+}
 
-        function previewCase(id) {
-            previewCaseId = id;
-            const app = document.getElementById('app');
-            if (app) app.innerHTML = screenCases();
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
+function previewCase(id){
+  previewCaseId = id;
+  const app = document.getElementById('app');
+  if (app) app.innerHTML = screenCases();
+  window.scrollTo({top:0, behavior:'smooth'});
+}
 
-        function closeCasePreview() {
-            previewCaseId = null;
-            const app = document.getElementById('app');
-            if (app) app.innerHTML = screenCases();
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
+function closeCasePreview(){
+  previewCaseId = null;
+  const app = document.getElementById('app');
+  if (app) app.innerHTML = screenCases();
+  window.scrollTo({top:0, behavior:'smooth'});
+}
 
-        async function attemptSelectCase(caseId) {
-            const input = document.getElementById('group-name-input');
-            const name = (input ? input.value : groupNameDraft || '').trim();
-            if (!name) {
-                notify('Isi nama kelompok terlebih dahulu.', 'error');
-                if (input) input.focus();
-                return;
-            }
-            if (!sb) {
-                notify('Supabase belum dikonfigurasi — tidak bisa menyimpan pilihan kasus (mode demo).', 'error');
-                return;
-            }
-            showLoading(true);
-            const { data, error } = await sb.from('group_discussions').insert({
-                group_name: name,
-                case_id: caseId,
-            }).select().single();
-            showLoading(false);
+async function attemptSelectCase(caseId){
+  const input = document.getElementById('group-name-input');
+  const name = (input ? input.value : groupNameDraft || '').trim();
+  if (!name){
+    notify('Isi nama kelompok terlebih dahulu.', 'error');
+    if (input) input.focus();
+    return;
+  }
+  if (!sb){
+    notify('Supabase belum dikonfigurasi — tidak bisa menyimpan pilihan kasus (mode demo).', 'error');
+    return;
+  }
+  showLoading(true);
+  const { data, error } = await sb.from('group_discussions').insert({
+    group_name: name,
+    case_id: caseId,
+  }).select().single();
+  showLoading(false);
 
-            if (error) {
-                if (error.code === '23505') {
-                    notify('Yah, kasus ini baru saja diambil kelompok lain. Silakan pilih kasus lain.', 'error');
-                    loadGroupDiscussions();
-                } else {
-                    notify('Gagal menyimpan pilihan: ' + error.message, 'error');
-                }
-                return;
-            }
+  if (error){
+    if (error.code === '23505'){
+      notify('Yah, kasus ini baru saja diambil kelompok lain. Silakan pilih kasus lain.', 'error');
+      loadGroupDiscussions();
+    } else {
+      notify('Gagal menyimpan pilihan: ' + error.message, 'error');
+    }
+    return;
+  }
 
-            STATE.groupName = name;
-            STATE.groupId = data.id;
-            STATE.groupCaseId = caseId;
-            previewCaseId = null;
-            saveLocalState();
-            notify('Studi kasus berhasil dikunci untuk kelompokmu!', 'success');
-            goClientScreen('cases');
-        }
+  STATE.groupName = name;
+  STATE.groupId = data.id;
+  STATE.groupCaseId = caseId;
+  previewCaseId = null;
+  saveLocalState();
+  notify('Studi kasus berhasil dikunci untuk kelompokmu!', 'success');
+  goClientScreen('cases');
+}
 
-        /* ---------------------- 11. FORM REFLEKSI + KOMITMEN ---------------------- */
+/* ---------------------- 11. FORM REFLEKSI + KOMITMEN ---------------------- */
 
-        let reflectionChecklist = new Set();
+let reflectionChecklist = new Set();
 
-        function screenReflection() {
-            if (!STATE.groupCaseId) {
-                return wrapClientPage(`<div class="glass glass-card p-6 text-center mt-10">
+function screenReflection(){
+  if (!STATE.groupCaseId){
+    return wrapClientPage(`<div class="glass glass-card p-6 text-center mt-10">
       <p class="opacity-80 mb-4">Pilih studi kasus kelompokmu terlebih dahulu.</p>
       <button onclick="goClientScreen('cases')" class="btn-gold rounded-2xl px-6 py-3 font-bold">Ke Studi Kasus</button>
     </div>`);
-            }
-            const chosen = CASE_STUDIES.find(c => c.id === STATE.groupCaseId);
-            const existing = groupDiscussionsCache.find(g => g.id === STATE.groupId) || {};
-            if (STATE.reflectionDone) {
-                return wrapClientPage(`
+  }
+  const chosen = CASE_STUDIES.find(c=>c.id===STATE.groupCaseId);
+  const existing = groupDiscussionsCache.find(g=>g.id===STATE.groupId) || {};
+  if (STATE.reflectionDone){
+    return wrapClientPage(`
       <div class="glass glass-card p-8 text-center mt-6 animate__animated animate__fadeIn">
         <i class="fa-solid fa-heart-circle-check text-4xl mb-4" style="color:var(--gold)"></i>
         <h2 class="font-display text-xl font-bold mb-2">Refleksi Terkirim!</h2>
-        <p class="opacity-70 text-sm mb-6">Komitmen kelompok <b>${escapeHtml(STATE.groupName || '')}</b> sudah tercatat di Dinding Komitmen Digital.</p>
+        <p class="opacity-70 text-sm mb-6">Komitmen kelompok <b>${escapeHtml(STATE.groupName||'')}</b> sudah tercatat di Dinding Komitmen Digital.</p>
         <div class="grid grid-cols-2 gap-3">
           <button onclick="goClientScreen('wall')" class="btn-ghost rounded-2xl py-3.5 font-semibold text-sm">Lihat Dinding Komitmen</button>
           <button onclick="downloadCommitmentCard()" class="btn-gold rounded-2xl py-3.5 font-bold text-sm">Simpan Kartu</button>
@@ -1699,13 +1253,13 @@
       </div>
       <div id="commitment-card" class="glass-strong glass-card p-6 mt-5 text-center" style="border-color:rgba(232,196,104,.4);">
         <p class="text-[10px] uppercase tracking-widest opacity-50 mb-2">Kartu Komitmen</p>
-        <h3 class="font-display text-lg font-bold mb-1">${escapeHtml(STATE.groupName || '')}</h3>
+        <h3 class="font-display text-lg font-bold mb-1">${escapeHtml(STATE.groupName||'')}</h3>
         <p class="text-xs opacity-60 mb-3">Case ${chosen.id}: ${escapeHtml(chosen.title)}</p>
         <p class="text-sm italic opacity-85">"${escapeHtml((existing.commitments && existing.commitments.note) || '')}"</p>
       </div>
     `);
-            }
-            return wrapClientPage(`
+  }
+  return wrapClientPage(`
     <div class="animate__animated animate__fadeInUp">
       <div class="glass glass-card p-5 mb-5">
         <p class="text-[10px] uppercase tracking-widest opacity-50 mb-1">Case ${chosen.id} • ${escapeHtml(chosen.subtitle)}</p>
@@ -1717,34 +1271,33 @@
       <div class="glass glass-card p-5 mb-4">
         <label class="text-sm font-semibold mb-2 block"><i class="fa-solid fa-heart mr-1" style="color:var(--rose)"></i> 1. Memahami Perasaan & Pergumulan</label>
         <p class="text-[11px] opacity-55 mb-2">Apa yang dirasakan tokoh dalam kasus ini? Bagaimana kelompokmu berempati pada mereka?</p>
-        <textarea id="ref-empathy" rows="3" placeholder="Tulis hasil diskusi kelompok...">${escapeHtml(existing.understanding_text || '')}</textarea>
+        <textarea id="ref-empathy" rows="3" placeholder="Tulis hasil diskusi kelompok...">${escapeHtml(existing.understanding_text||'')}</textarea>
       </div>
 
       <div class="glass glass-card p-5 mb-4">
         <label class="text-sm font-semibold mb-2 block"><i class="fa-solid fa-comments mr-1" style="color:var(--blue)"></i> 2. Pendekatan & Komunikasi yang Nyaman</label>
         <p class="text-[11px] opacity-55 mb-2">Bagaimana cara terbaik agar pemuda & senior bisa saling mendekat dalam kasus ini?</p>
-        <textarea id="ref-comm" rows="3" placeholder="Tulis hasil diskusi kelompok...">${escapeHtml(existing.communication_text || '')}</textarea>
+        <textarea id="ref-comm" rows="3" placeholder="Tulis hasil diskusi kelompok...">${escapeHtml(existing.communication_text||'')}</textarea>
       </div>
 
       <div class="glass glass-card p-5 mb-4">
         <label class="text-sm font-semibold mb-3 block"><i class="fa-solid fa-list-check mr-1" style="color:var(--gold)"></i> 3. Checklist Komitmen Kebersamaan</label>
         <div class="space-y-2.5" id="commitment-checklist">
-          ${COMMITMENT_ITEMS.map((item, i) => {
-                const preChecked = existing.commitments && Array.isArray(existing.commitments.checklist) && existing.commitments.checklist.includes(item);
-                if (preChecked) reflectionChecklist.add(item);
-                return `
+          ${COMMITMENT_ITEMS.map((item,i)=>{
+            const preChecked = existing.commitments && Array.isArray(existing.commitments.checklist) && existing.commitments.checklist.includes(item);
+            if (preChecked) reflectionChecklist.add(item);
+            return `
             <label class="flex items-start gap-3 text-xs opacity-90 cursor-pointer">
-              <input type="checkbox" ${preChecked ? 'checked' : ''} onchange="toggleCommitmentItem('${i}', this.checked)" class="mt-0.5 w-4 h-4 accent-[#e8c468] flex-shrink-0">
+              <input type="checkbox" ${preChecked?'checked':''} onchange="toggleCommitmentItem('${i}', this.checked)" class="mt-0.5 w-4 h-4 accent-[#e8c468] flex-shrink-0">
               <span class="leading-relaxed">${escapeHtml(item)}</span>
             </label>
-          `;
-            }).join('')}
+          `;}).join('')}
         </div>
       </div>
 
       <div class="glass glass-card p-5 mb-4">
         <label class="text-sm font-semibold mb-2 block"><i class="fa-solid fa-quote-left mr-1" style="color:var(--gold)"></i> Satu Kalimat Komitmen Kelompok</label>
-        <textarea id="ref-commitment-note" rows="2" placeholder="Contoh: Kami berkomitmen menjadi keluarga rohani yang saling menguatkan.">${escapeHtml((existing.commitments && existing.commitments.note) || '')}</textarea>
+        <textarea id="ref-commitment-note" rows="2" placeholder="Contoh: Kami berkomitmen menjadi keluarga rohani yang saling menguatkan.">${escapeHtml((existing.commitments && existing.commitments.note)||'')}</textarea>
       </div>
 
       <button onclick="submitReflection()" class="btn-gold w-full rounded-2xl py-4 font-bold">
@@ -1752,55 +1305,55 @@
       </button>
     </div>
   `);
-        }
+}
 
-        function toggleCommitmentItem(idx, checked) {
-            const item = COMMITMENT_ITEMS[idx];
-            if (checked) reflectionChecklist.add(item); else reflectionChecklist.delete(item);
-        }
+function toggleCommitmentItem(idx, checked){
+  const item = COMMITMENT_ITEMS[idx];
+  if (checked) reflectionChecklist.add(item); else reflectionChecklist.delete(item);
+}
 
-        async function submitReflection() {
-            const empathy = (document.getElementById('ref-empathy') || {}).value || '';
-            const comm = (document.getElementById('ref-comm') || {}).value || '';
-            const note = (document.getElementById('ref-commitment-note') || {}).value || '';
-            if (!empathy.trim() || !comm.trim() || !note.trim()) {
-                notify('Mohon lengkapi seluruh bagian refleksi.', 'error');
-                return;
-            }
-            if (!STATE.groupId) {
-                notify('Data kelompok tidak ditemukan. Silakan pilih ulang studi kasus.', 'error');
-                return;
-            }
-            showLoading(true);
-            const { error } = await safeQuery(sb && sb.from('group_discussions').update({
-                understanding_text: empathy,
-                communication_text: comm,
-                commitments: { checklist: Array.from(reflectionChecklist), note: note },
-            }).eq('id', STATE.groupId), 'Gagal mengirim refleksi.');
-            showLoading(false);
-            if (error) return;
-            STATE.reflectionDone = true;
-            saveLocalState();
-            notify('Refleksi & komitmen kelompok berhasil dikirim!', 'success');
-            loadGroupDiscussions();
-            goClientScreen('reflection');
-        }
+async function submitReflection(){
+  const empathy = (document.getElementById('ref-empathy')||{}).value || '';
+  const comm = (document.getElementById('ref-comm')||{}).value || '';
+  const note = (document.getElementById('ref-commitment-note')||{}).value || '';
+  if (!empathy.trim() || !comm.trim() || !note.trim()){
+    notify('Mohon lengkapi seluruh bagian refleksi.', 'error');
+    return;
+  }
+  if (!STATE.groupId){
+    notify('Data kelompok tidak ditemukan. Silakan pilih ulang studi kasus.', 'error');
+    return;
+  }
+  showLoading(true);
+  const { error } = await safeQuery(sb && sb.from('group_discussions').update({
+    understanding_text: empathy,
+    communication_text: comm,
+    commitments: { checklist: Array.from(reflectionChecklist), note: note },
+  }).eq('id', STATE.groupId), 'Gagal mengirim refleksi.');
+  showLoading(false);
+  if (error) return;
+  STATE.reflectionDone = true;
+  saveLocalState();
+  notify('Refleksi & komitmen kelompok berhasil dikirim!', 'success');
+  loadGroupDiscussions();
+  goClientScreen('reflection');
+}
 
-        function downloadCommitmentCard() {
-            const el = document.getElementById('commitment-card');
-            if (!el || !window.html2canvas) { notify('Fitur simpan gambar tidak tersedia.', 'error'); return; }
-            html2canvas(el, { backgroundColor: '#0b0a1a', scale: 2 }).then(canvas => {
-                const link = document.createElement('a');
-                link.download = 'kartu-komitmen-' + (STATE.groupName || 'kelompok').toLowerCase().replace(/\s+/g, '-') + '.png';
-                link.href = canvas.toDataURL('image/png');
-                link.click();
-            });
-        }
+function downloadCommitmentCard(){
+  const el = document.getElementById('commitment-card');
+  if (!el || !window.html2canvas){ notify('Fitur simpan gambar tidak tersedia.', 'error'); return; }
+  html2canvas(el, { backgroundColor:'#0b0a1a', scale:2 }).then(canvas=>{
+    const link = document.createElement('a');
+    link.download = 'kartu-komitmen-' + (STATE.groupName||'kelompok').toLowerCase().replace(/\s+/g,'-') + '.png';
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+  });
+}
 
-        /* ---------------------- 12. DINDING KOMITMEN DIGITAL ----------------------- */
+/* ---------------------- 12. DINDING KOMITMEN DIGITAL ----------------------- */
 
-        function screenWall() {
-            return wrapClientPage(`
+function screenWall(){
+  return wrapClientPage(`
     <div class="animate__animated animate__fadeInUp">
       <h2 class="font-display text-2xl font-bold mb-1">Dinding Komitmen Digital</h2>
       <p class="opacity-60 text-xs mb-5">Komitmen setiap kelompok muncul secara langsung di sini.</p>
@@ -1809,49 +1362,49 @@
       </div>
     </div>
   `);
-        }
+}
 
-        function wallCardsHtml() {
-            const completed = groupDiscussionsCache.filter(g => g.commitments && g.commitments.note);
-            if (!completed.length) {
-                return `<div class="glass glass-card p-8 text-center opacity-60 text-sm">Belum ada komitmen kelompok yang masuk. Jadilah yang pertama!</div>`;
-            }
-            return completed.map(g => {
-                const c = CASE_STUDIES.find(cs => cs.id === g.case_id) || {};
-                return `<div class="glass glass-card p-5 animate__animated animate__fadeInUp">
+function wallCardsHtml(){
+  const completed = groupDiscussionsCache.filter(g=>g.commitments && g.commitments.note);
+  if (!completed.length){
+    return `<div class="glass glass-card p-8 text-center opacity-60 text-sm">Belum ada komitmen kelompok yang masuk. Jadilah yang pertama!</div>`;
+  }
+  return completed.map(g=>{
+    const c = CASE_STUDIES.find(cs=>cs.id===g.case_id) || {};
+    return `<div class="glass glass-card p-5 animate__animated animate__fadeInUp">
       <div class="flex items-center justify-between mb-2">
         <h3 class="font-display font-bold text-sm">${escapeHtml(g.group_name)}</h3>
         <span class="text-[10px] opacity-50">Case ${g.case_id}</span>
       </div>
-      <p class="text-[11px] opacity-50 mb-2">${escapeHtml(c.title || '')}</p>
+      <p class="text-[11px] opacity-50 mb-2">${escapeHtml(c.title||'')}</p>
       <p class="text-sm italic opacity-90" style="color:var(--gold)">"${escapeHtml(g.commitments.note)}"</p>
     </div>`;
-            }).join('');
-        }
+  }).join('');
+}
 
-        function refreshWallList() {
-            const list = document.getElementById('wall-list');
-            if (list) list.innerHTML = wallCardsHtml();
-        }
+function refreshWallList(){
+  const list = document.getElementById('wall-list');
+  if (list) list.innerHTML = wallCardsHtml();
+}
 
-        /* =========================================================================
-           13. PRESENTER VIEW
-           ========================================================================= */
+/* =========================================================================
+   13. PRESENTER VIEW
+   ========================================================================= */
 
-        const CLOSING_SUBSLIDES = [
-            'closingIntro',
-            ...BIBLE_VERSES.map((_, i) => `closingVerse${i}`),
-            ...EGW_QUOTES.map((_, i) => `closingEgw${i}`),
-            'closingPrayer',
-            'closingThanks',
-        ];
-        const PRESENTER_SLIDES = ['title', 'why', 'reality', 'stages', 'qr', 'diagnostic', 'roles', 'timer', 'wall', ...CLOSING_SUBSLIDES];
-        let presenterSubscribed = false;
-        let presenterDataLoaded = false;
+const CLOSING_SUBSLIDES = [
+  'closingIntro',
+  ...BIBLE_VERSES.map((_,i)=>`closingVerse${i}`),
+  ...EGW_QUOTES.map((_,i)=>`closingEgw${i}`),
+  'closingPrayer',
+  'closingThanks',
+];
+const PRESENTER_SLIDES = ['title','why','reality','stages','qr','diagnostic','roles','timer','wall', ...CLOSING_SUBSLIDES];
+let presenterSubscribed = false;
+let presenterDataLoaded = false;
 
-        function renderPresenter() {
-            const app = document.getElementById('app');
-            app.innerHTML = `
+function renderPresenter(){
+  const app = document.getElementById('app');
+  app.innerHTML = `
     <div class="min-h-screen flex flex-col relative">
       <div class="flex items-center justify-between px-6 py-4">
         <div class="flex items-center gap-2 text-xs opacity-60">
@@ -1868,84 +1421,84 @@
       </div>
     </div>
   `;
-            if (!presenterDataLoaded) {
-                presenterDataLoaded = true;
-                loadPresenterControl();
-                loadDiagnosticData();
-                loadRoleResults();
-                loadGroupDiscussions();
-            }
-            if (!presenterSubscribed) {
-                presenterSubscribed = true;
-                subscribePresenterControlRealtime();
-                subscribeDiagnosticRealtime();
-                subscribeRoleResultsRealtime();
-            }
-            renderPresenterSlide();
-        }
+  if (!presenterDataLoaded){
+    presenterDataLoaded = true;
+    loadPresenterControl();
+    loadDiagnosticData();
+    loadRoleResults();
+    loadGroupDiscussions();
+  }
+  if (!presenterSubscribed){
+    presenterSubscribed = true;
+    subscribePresenterControlRealtime();
+    subscribeDiagnosticRealtime();
+    subscribeRoleResultsRealtime();
+  }
+  renderPresenterSlide();
+}
 
-        function renderPresenterDots() {
-            const dots = document.getElementById('presenter-dots');
-            const counter = document.getElementById('presenter-counter');
-            if (!dots) return;
-            dots.innerHTML = PRESENTER_SLIDES.map((s, i) => `<div class="pdot ${i === presenterSlideIndex ? 'active' : ''}"></div>`).join('');
-            if (counter) counter.textContent = (presenterSlideIndex + 1) + ' / ' + PRESENTER_SLIDES.length;
-        }
+function renderPresenterDots(){
+  const dots = document.getElementById('presenter-dots');
+  const counter = document.getElementById('presenter-counter');
+  if (!dots) return;
+  dots.innerHTML = PRESENTER_SLIDES.map((s,i)=>`<div class="pdot ${i===presenterSlideIndex?'active':''}"></div>`).join('');
+  if (counter) counter.textContent = (presenterSlideIndex+1) + ' / ' + PRESENTER_SLIDES.length;
+}
 
-        function goToSlide(i) {
-            presenterSlideIndex = Math.max(0, Math.min(PRESENTER_SLIDES.length - 1, i));
-            renderPresenterSlide();
-        }
-        function nextSlide() { goToSlide(presenterSlideIndex + 1); }
-        function prevSlide() { goToSlide(presenterSlideIndex - 1); }
+function goToSlide(i){
+  presenterSlideIndex = Math.max(0, Math.min(PRESENTER_SLIDES.length-1, i));
+  renderPresenterSlide();
+}
+function nextSlide(){ goToSlide(presenterSlideIndex+1); }
+function prevSlide(){ goToSlide(presenterSlideIndex-1); }
 
-        document.addEventListener('keydown', (e) => {
-            if (!isPresenterRoute()) return;
-            if (e.key === 'ArrowRight' || e.key === ' ') { nextSlide(); }
-            if (e.key === 'ArrowLeft') { prevSlide(); }
-        });
+document.addEventListener('keydown', (e)=>{
+  if (!isPresenterRoute()) return;
+  if (e.key === 'ArrowRight' || e.key === ' ') { nextSlide(); }
+  if (e.key === 'ArrowLeft') { prevSlide(); }
+});
 
-        function renderPresenterSlide() {
-            renderPresenterDots();
-            const slide = PRESENTER_SLIDES[presenterSlideIndex];
-            const container = document.getElementById('presenter-slide');
-            if (!container) return;
-            container.innerHTML = `<div class="w-full max-w-5xl mx-auto animate__animated animate__fadeIn">${renderPresenterSlideContent(slide)}</div>`;
-            if (slide === 'diagnostic') requestAnimationFrame(() => { renderDiagnosticChart(); renderDiagnosticGapCard(); });
-            if (slide === 'roles') requestAnimationFrame(renderRoleChart);
-            if (slide === 'wall') renderPresenterCommitmentWallSlide();
-        }
+function renderPresenterSlide(){
+  renderPresenterDots();
+  const slide = PRESENTER_SLIDES[presenterSlideIndex];
+  const container = document.getElementById('presenter-slide');
+  if (!container) return;
+  container.innerHTML = `<div class="w-full max-w-5xl mx-auto animate__animated animate__fadeIn">${renderPresenterSlideContent(slide)}</div>`;
+  if (slide === 'diagnostic') requestAnimationFrame(()=>{ renderDiagnosticChart(); renderDiagnosticGapCard(); });
+  if (slide === 'roles') requestAnimationFrame(renderRoleChart);
+  if (slide === 'wall') renderPresenterCommitmentWallSlide();
+}
 
-        function renderPresenterSlideContent(slide) {
-            const map = {
-                title: presenterSlideTitle,
-                why: presenterSlideWhy,
-                reality: presenterSlideReality,
-                stages: presenterSlideStages,
-                qr: presenterSlideQr,
-                diagnostic: presenterSlideDiagnostic,
-                roles: presenterSlideRoles,
-                timer: presenterSlideTimer,
-                wall: presenterSlideWall,
-                closingIntro: presenterSlideClosingIntro,
-                closingPrayer: presenterSlideClosingPrayer,
-                closingThanks: presenterSlideClosingThanks,
-            };
-            if (map[slide]) return map[slide]();
-            if (slide.indexOf('closingVerse') === 0) {
-                const idx = parseInt(slide.slice('closingVerse'.length), 10);
-                return presenterSlideVerse(BIBLE_VERSES[idx], idx, BIBLE_VERSES.length);
-            }
-            if (slide.indexOf('closingEgw') === 0) {
-                const idx = parseInt(slide.slice('closingEgw'.length), 10);
-                return presenterSlideEgw(EGW_QUOTES[idx], idx, EGW_QUOTES.length);
-            }
-            return '';
-        }
+function renderPresenterSlideContent(slide){
+  const map = {
+    title: presenterSlideTitle,
+    why: presenterSlideWhy,
+    reality: presenterSlideReality,
+    stages: presenterSlideStages,
+    qr: presenterSlideQr,
+    diagnostic: presenterSlideDiagnostic,
+    roles: presenterSlideRoles,
+    timer: presenterSlideTimer,
+    wall: presenterSlideWall,
+    closingIntro: presenterSlideClosingIntro,
+    closingPrayer: presenterSlideClosingPrayer,
+    closingThanks: presenterSlideClosingThanks,
+  };
+  if (map[slide]) return map[slide]();
+  if (slide.indexOf('closingVerse') === 0){
+    const idx = parseInt(slide.slice('closingVerse'.length), 10);
+    return presenterSlideVerse(BIBLE_VERSES[idx], idx, BIBLE_VERSES.length);
+  }
+  if (slide.indexOf('closingEgw') === 0){
+    const idx = parseInt(slide.slice('closingEgw'.length), 10);
+    return presenterSlideEgw(EGW_QUOTES[idx], idx, EGW_QUOTES.length);
+  }
+  return '';
+}
 
-        /* ---- Slide 1: Title ---- */
-        function presenterSlideTitle() {
-            return `
+/* ---- Slide 1: Title ---- */
+function presenterSlideTitle(){
+  return `
   <div class="text-center">
     <div class="inline-flex items-center gap-2 px-5 py-2 rounded-full glass mb-8 text-xs tracking-[0.3em] uppercase animate__animated animate__fadeInDown" style="color:var(--gold)">
       <i class="fa-solid fa-hands-holding-circle"></i> Kebaktian Pemuda Advent
@@ -1965,11 +1518,11 @@
       "Gereja yang berdampak lahir ketika Kekuatan Pemuda menyatu dengan Hikmat Orang Tua."
     </p>
   </div>`;
-        }
+}
 
-        /* ---- Slide 2: Mengapa Kita Ada di Sini ---- */
-        function presenterSlideWhy() {
-            return `
+/* ---- Slide 2: Mengapa Kita Ada di Sini ---- */
+function presenterSlideWhy(){
+  return `
   <div>
     <p class="text-xs uppercase tracking-[0.3em] opacity-50 mb-3 text-center">Mengapa Kita Ada di Sini Sore Ini?</p>
     <h2 class="font-display font-bold text-center mb-10" style="font-size:clamp(1.8rem,4vw,3rem);">Bukan Menunjuk Jari, <span class="text-gradient-gold">Tapi Saling Mendengar</span></h2>
@@ -1989,11 +1542,11 @@
       <p class="text-xs uppercase tracking-widest opacity-50">Amsal 20:29</p>
     </div>
   </div>`;
-        }
+}
 
-        /* ---- Slide 3: Realita Gereja Hari Ini ---- */
-        function presenterSlideReality() {
-            return `
+/* ---- Slide 3: Realita Gereja Hari Ini ---- */
+function presenterSlideReality(){
+  return `
   <div>
     <p class="text-xs uppercase tracking-[0.3em] opacity-50 mb-3 text-center">Menghadapi Realita</p>
     <h2 class="font-display font-bold text-center mb-10" style="font-size:clamp(1.8rem,4vw,3rem);">Gereja Hari Ini</h2>
@@ -2014,23 +1567,23 @@
       <p class="font-display text-xl font-bold text-gradient-gold">Mengubah Asumsi menjadi Aksi, dan Kritik menjadi Kemitraan.</p>
     </div>
   </div>`;
-        }
+}
 
-        /* ---- Slide 4: Tahapan Acara ---- */
-        function presenterSlideStages() {
-            const stages = [
-                { n: 1, t: 'Cek Diagnostik', d: 'Suara jujur jemaat sore ini (via Web/HP).', i: 'fa-clipboard-question' },
-                { n: 2, t: 'Temukan Peranmu', d: 'Kuis singkat menentukan role pelayananmu.', i: 'fa-star' },
-                { n: 3, t: 'Diskusi Sinergi Tim', d: 'Pembentukan kelompok lintas generasi.', i: 'fa-people-group' },
-                { n: 4, t: 'Jawaban Firman & Roh Nubuat', d: 'Solusi Alkitabiah dari Ellen G. White.', i: 'fa-book-bible' },
-                { n: 5, t: 'Komitmen Bersama', d: 'Langkah nyata untuk Sabat depan.', i: 'fa-handshake-angle' },
-            ];
-            return `
+/* ---- Slide 4: Tahapan Acara ---- */
+function presenterSlideStages(){
+  const stages = [
+    {n:1, t:'Cek Diagnostik', d:'Suara jujur jemaat sore ini (via Web/HP).', i:'fa-clipboard-question'},
+    {n:2, t:'Temukan Peranmu', d:'Kuis singkat menentukan role pelayananmu.', i:'fa-star'},
+    {n:3, t:'Diskusi Sinergi Tim', d:'Pembentukan kelompok lintas generasi.', i:'fa-people-group'},
+    {n:4, t:'Jawaban Firman & Roh Nubuat', d:'Solusi Alkitabiah dari Ellen G. White.', i:'fa-book-bible'},
+    {n:5, t:'Komitmen Bersama', d:'Langkah nyata untuk Sabat depan.', i:'fa-handshake-angle'},
+  ];
+  return `
   <div>
     <p class="text-xs uppercase tracking-[0.3em] opacity-50 mb-3 text-center">Alur Acara</p>
     <h2 class="font-display font-bold text-center mb-10" style="font-size:clamp(1.8rem,4vw,3rem);">Tahapan Interaktif Sore Ini</h2>
     <div class="grid sm:grid-cols-5 gap-4">
-      ${stages.map(s => `
+      ${stages.map(s=>`
         <div class="glass glass-card p-5 text-center">
           <div class="w-11 h-11 rounded-full mx-auto mb-3 flex items-center justify-center font-display font-bold" style="background:rgba(232,196,104,0.15); border:1px solid rgba(232,196,104,0.4); color:var(--gold)">${s.n}</div>
           <i class="fa-solid ${s.i} text-lg mb-2 opacity-70"></i>
@@ -2039,13 +1592,13 @@
         </div>`).join('')}
     </div>
   </div>`;
-        }
+}
 
-        /* ---- Slide 5: QR Code ---- */
-        function presenterSlideQr() {
-            const url = location.origin + location.pathname;
-            const qrSrc = 'https://api.qrserver.com/v1/create-qr-code/?size=340x340&bgcolor=ffffff&data=' + encodeURIComponent(url);
-            return `
+/* ---- Slide 5: QR Code ---- */
+function presenterSlideQr(){
+  const url = location.origin + location.pathname;
+  const qrSrc = 'https://api.qrserver.com/v1/create-qr-code/?size=340x340&bgcolor=ffffff&data=' + encodeURIComponent(url);
+  return `
   <div class="text-center">
     <p class="text-xs uppercase tracking-[0.3em] opacity-50 mb-3">Mari Dimulai!</p>
     <h2 class="font-display font-bold mb-8" style="font-size:clamp(1.8rem,4vw,3rem);">Scan QR Code / Akses Link</h2>
@@ -2057,33 +1610,33 @@
       Silakan siapkan smartphone masing-masing. Kuesioner ini sangat simpel, tidak perlu mengetik panjang, dan kerahasiaan Anda terjaga. Suara Anda sangat berharga bagi gereja kita!
     </p>
   </div>`;
-        }
+}
 
-        /* ---- Slide 6: Live Diagnostic Dashboard ---- */
-        async function loadDiagnosticData() {
-            if (!sb) return;
-            const { data, error } = await sb.from('diagnostic_responses').select('*');
-            if (!error && data) {
-                diagnosticCache = data;
-                if (PRESENTER_SLIDES[presenterSlideIndex] === 'diagnostic') {
-                    renderDiagnosticChart();
-                    renderDiagnosticGapCard();
-                }
-            }
-        }
-        function subscribeDiagnosticRealtime() {
-            if (!sb) return;
-            sb.channel('diagnostic_responses_changes')
-                .on('postgres_changes', { event: '*', schema: 'public', table: 'diagnostic_responses' }, () => loadDiagnosticData())
-                .subscribe();
-        }
+/* ---- Slide 6: Live Diagnostic Dashboard ---- */
+async function loadDiagnosticData(){
+  if (!sb) return;
+  const { data, error } = await sb.from('diagnostic_responses').select('*');
+  if (!error && data){
+    diagnosticCache = data;
+    if (PRESENTER_SLIDES[presenterSlideIndex] === 'diagnostic'){
+      renderDiagnosticChart();
+      renderDiagnosticGapCard();
+    }
+  }
+}
+function subscribeDiagnosticRealtime(){
+  if (!sb) return;
+  sb.channel('diagnostic_responses_changes')
+    .on('postgres_changes', { event:'*', schema:'public', table:'diagnostic_responses' }, ()=>loadDiagnosticData())
+    .subscribe();
+}
 
-        function presenterSlideDiagnostic() {
-            // 1 baris = 1 jawaban (per pertanyaan), jadi hitung partisipan lewat question_id===1
-            // (setiap partisipan pasti mengirim tepat 1 baris untuk pertanyaan pertama).
-            const pemudaCount = diagnosticCache.filter(d => d.user_type === 'pemuda' && d.question_id === 1).length;
-            const seniorCount = diagnosticCache.filter(d => d.user_type === 'senior' && d.question_id === 1).length;
-            return `
+function presenterSlideDiagnostic(){
+  // 1 baris = 1 jawaban (per pertanyaan), jadi hitung partisipan lewat question_id===1
+  // (setiap partisipan pasti mengirim tepat 1 baris untuk pertanyaan pertama).
+  const pemudaCount = diagnosticCache.filter(d=>d.user_type==='pemuda' && d.question_id===1).length;
+  const seniorCount = diagnosticCache.filter(d=>d.user_type==='senior' && d.question_id===1).length;
+  return `
   <div>
     <p class="text-xs uppercase tracking-[0.3em] opacity-50 mb-3 text-center">Live Results</p>
     <h2 class="font-display font-bold text-center mb-2" style="font-size:clamp(1.6rem,3.6vw,2.6rem);">Kuesioner Diagnostik <span class="text-gradient-gold">Realtime</span></h2>
@@ -2093,36 +1646,36 @@
     </div>
     <div id="diagnostic-gap-card"></div>
   </div>`;
-        }
+}
 
-        // Cari pasangan pertanyaan (Q1-Q6) dengan selisih rata-rata Pemuda vs Senior terbesar.
-        function computeDiagnosticGap() {
-            const avgFor = (type, qId) => {
-                const vals = diagnosticCache.filter(d => d.user_type === type && d.question_id === qId).map(d => d.answer_value).filter(v => typeof v === 'number');
-                return vals.length ? vals.reduce((a, b) => a + b, 0) / vals.length : null;
-            };
-            let best = null;
-            for (let q = 1; q <= 6; q++) {
-                const avgP = avgFor('pemuda', q);
-                const avgS = avgFor('senior', q);
-                if (avgP === null || avgS === null) continue;
-                const gap = Math.abs(avgS - avgP);
-                if (!best || gap > best.gap) best = { q, avgP, avgS, gap };
-            }
-            return best;
-        }
+// Cari pasangan pertanyaan (Q1-Q6) dengan selisih rata-rata Pemuda vs Senior terbesar.
+function computeDiagnosticGap(){
+  const avgFor = (type, qId)=>{
+    const vals = diagnosticCache.filter(d=>d.user_type===type && d.question_id===qId).map(d=>d.answer_value).filter(v=>typeof v==='number');
+    return vals.length ? vals.reduce((a,b)=>a+b,0)/vals.length : null;
+  };
+  let best = null;
+  for (let q=1; q<=6; q++){
+    const avgP = avgFor('pemuda', q);
+    const avgS = avgFor('senior', q);
+    if (avgP === null || avgS === null) continue;
+    const gap = Math.abs(avgS - avgP);
+    if (!best || gap > best.gap) best = { q, avgP, avgS, gap };
+  }
+  return best;
+}
 
-        function renderDiagnosticGapCard() {
-            const el = document.getElementById('diagnostic-gap-card');
-            if (!el) return;
-            const best = computeDiagnosticGap();
-            if (!best) {
-                el.innerHTML = `<div class="glass glass-card p-5 text-center text-xs opacity-50">Menunggu jawaban dari Pemuda maupun Senior untuk menghitung Gap Analysis...</div>`;
-                return;
-            }
-            const info = DIAGNOSTIC_GAP_INSIGHTS[best.q - 1];
-            const narrative = best.avgS > best.avgP ? info.seniorHigh : info.pemudaHigh;
-            el.innerHTML = `
+function renderDiagnosticGapCard(){
+  const el = document.getElementById('diagnostic-gap-card');
+  if (!el) return;
+  const best = computeDiagnosticGap();
+  if (!best){
+    el.innerHTML = `<div class="glass glass-card p-5 text-center text-xs opacity-50">Menunggu jawaban dari Pemuda maupun Senior untuk menghitung Gap Analysis...</div>`;
+    return;
+  }
+  const info = DIAGNOSTIC_GAP_INSIGHTS[best.q - 1];
+  const narrative = best.avgS > best.avgP ? info.seniorHigh : info.pemudaHigh;
+  el.innerHTML = `
     <div class="glass-strong glass-card p-6 animate__animated animate__fadeIn" style="border-color:rgba(255,159,67,.5); background:rgba(255,159,67,.08);">
       <div class="flex items-start gap-4">
         <i class="fa-solid fa-triangle-exclamation text-2xl flex-shrink-0 mt-0.5" style="color:#ff9f43;"></i>
@@ -2133,59 +1686,59 @@
         </div>
       </div>
     </div>`;
-        }
+}
 
-        function renderDiagnosticChart() {
-            const canvas = document.getElementById('diagnosticChartCanvas');
-            if (!canvas || !window.Chart) return;
-            const avg = (type) => {
-                const rows = diagnosticCache.filter(d => d.user_type === type);
-                const out = [];
-                for (let i = 1; i <= 6; i++) {
-                    const vals = rows.filter(r => r.question_id === i).map(r => r.answer_value).filter(v => typeof v === 'number');
-                    out.push(vals.length ? (vals.reduce((a, b) => a + b, 0) / vals.length) : 0);
-                }
-                return out;
-            };
-            if (charts.diagnostic) charts.diagnostic.destroy();
-            charts.diagnostic = new Chart(canvas.getContext('2d'), {
-                type: 'bar',
-                data: {
-                    labels: ['Q1', 'Q2', 'Q3', 'Q4', 'Q5', 'Q6'],
-                    datasets: [
-                        { label: 'Rata-rata Pemuda', data: avg('pemuda'), backgroundColor: '#f5b942cc', borderRadius: 8 },
-                        { label: 'Rata-rata Senior', data: avg('senior'), backgroundColor: '#3fa9ffcc', borderRadius: 8 },
-                    ]
-                },
-                options: {
-                    responsive: true, maintainAspectRatio: false,
-                    scales: {
-                        y: { min: 0, max: 5, ticks: { color: '#cfcbe0' }, grid: { color: 'rgba(255,255,255,.08)' } },
-                        x: { ticks: { color: '#cfcbe0' }, grid: { display: false } },
-                    },
-                    plugins: { legend: { labels: { color: '#f5f3ee' } } }
-                }
-            });
-        }
+function renderDiagnosticChart(){
+  const canvas = document.getElementById('diagnosticChartCanvas');
+  if (!canvas || !window.Chart) return;
+  const avg = (type)=>{
+    const rows = diagnosticCache.filter(d=>d.user_type===type);
+    const out = [];
+    for (let i=1;i<=6;i++){
+      const vals = rows.filter(r=>r.question_id===i).map(r=>r.answer_value).filter(v=>typeof v === 'number');
+      out.push(vals.length ? (vals.reduce((a,b)=>a+b,0)/vals.length) : 0);
+    }
+    return out;
+  };
+  if (charts.diagnostic) charts.diagnostic.destroy();
+  charts.diagnostic = new Chart(canvas.getContext('2d'), {
+    type:'bar',
+    data:{
+      labels:['Q1','Q2','Q3','Q4','Q5','Q6'],
+      datasets:[
+        { label:'Rata-rata Pemuda', data:avg('pemuda'), backgroundColor:'#f5b942cc', borderRadius:8 },
+        { label:'Rata-rata Senior', data:avg('senior'), backgroundColor:'#3fa9ffcc', borderRadius:8 },
+      ]
+    },
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      scales:{
+        y:{ min:0, max:5, ticks:{ color:'#cfcbe0' }, grid:{ color:'rgba(255,255,255,.08)' } },
+        x:{ ticks:{ color:'#cfcbe0' }, grid:{ display:false } },
+      },
+      plugins:{ legend:{ labels:{ color:'#f5f3ee' } } }
+    }
+  });
+}
 
-        /* ---- Slide 7: Live Role Assessment Dashboard ---- */
-        async function loadRoleResults() {
-            if (!sb) return;
-            const { data, error } = await sb.from('role_results').select('*');
-            if (!error && data) {
-                roleResultsCache = data;
-                if (PRESENTER_SLIDES[presenterSlideIndex] === 'roles') renderRoleChart();
-            }
-        }
-        function subscribeRoleResultsRealtime() {
-            if (!sb) return;
-            sb.channel('role_results_changes')
-                .on('postgres_changes', { event: '*', schema: 'public', table: 'role_results' }, () => loadRoleResults())
-                .subscribe();
-        }
+/* ---- Slide 7: Live Role Assessment Dashboard ---- */
+async function loadRoleResults(){
+  if (!sb) return;
+  const { data, error } = await sb.from('role_results').select('*');
+  if (!error && data){
+    roleResultsCache = data;
+    if (PRESENTER_SLIDES[presenterSlideIndex] === 'roles') renderRoleChart();
+  }
+}
+function subscribeRoleResultsRealtime(){
+  if (!sb) return;
+  sb.channel('role_results_changes')
+    .on('postgres_changes', { event:'*', schema:'public', table:'role_results' }, ()=>loadRoleResults())
+    .subscribe();
+}
 
-        function presenterSlideRoles() {
-            return `
+function presenterSlideRoles(){
+  return `
   <div>
     <p class="text-xs uppercase tracking-[0.3em] opacity-50 mb-3 text-center">Live Dashboard</p>
     <h2 class="font-display font-bold text-center mb-2" style="font-size:clamp(1.6rem,3.6vw,2.6rem);">6 Peran Pelayanan <span class="text-gradient-gold">Realtime</span></h2>
@@ -2195,73 +1748,73 @@
         <canvas id="roleChartCanvas"></canvas>
       </div>
       <div class="lg:col-span-2 grid grid-cols-2 gap-3">
-        ${ROLE_ORDER.map(r => {
-                const meta = ROLE_META[r];
-                const count = roleResultsCache.filter(x => x.role_name === r).length;
-                return `<div class="glass glass-card p-3 text-center">
+        ${ROLE_ORDER.map(r=>{
+          const meta = ROLE_META[r];
+          const count = roleResultsCache.filter(x=>x.role_name===r).length;
+          return `<div class="glass glass-card p-3 text-center">
             <i class="fa-solid ${meta.icon} mb-1" style="color:${meta.color}"></i>
             <p class="text-[10px] opacity-60 leading-tight">${meta.title}</p>
             <p class="font-display text-lg font-bold" style="color:${meta.color}">${count}</p>
           </div>`;
-            }).join('')}
+        }).join('')}
       </div>
     </div>
   </div>`;
-        }
+}
 
-        function renderRoleChart() {
-            const canvas = document.getElementById('roleChartCanvas');
-            if (!canvas || !window.Chart) return;
-            const counts = ROLE_ORDER.map(r => roleResultsCache.filter(x => x.role_name === r).length);
-            const colors = ROLE_ORDER.map(r => ROLE_META[r].color);
-            if (charts.role) charts.role.destroy();
-            charts.role = new Chart(canvas.getContext('2d'), {
-                type: 'bar',
-                data: {
-                    labels: ROLE_ORDER.map(r => ROLE_META[r].title),
-                    datasets: [{ label: 'Jumlah Peserta', data: counts, backgroundColor: colors, borderRadius: 10 }]
-                },
-                options: {
-                    indexAxis: 'y',
-                    responsive: true, maintainAspectRatio: false,
-                    scales: {
-                        x: { beginAtZero: true, ticks: { color: '#cfcbe0', stepSize: 1 }, grid: { color: 'rgba(255,255,255,.08)' } },
-                        y: { ticks: { color: '#f5f3ee', font: { size: 11 } }, grid: { display: false } },
-                    },
-                    plugins: { legend: { display: false } }
-                }
-            });
-        }
+function renderRoleChart(){
+  const canvas = document.getElementById('roleChartCanvas');
+  if (!canvas || !window.Chart) return;
+  const counts = ROLE_ORDER.map(r=>roleResultsCache.filter(x=>x.role_name===r).length);
+  const colors = ROLE_ORDER.map(r=>ROLE_META[r].color);
+  if (charts.role) charts.role.destroy();
+  charts.role = new Chart(canvas.getContext('2d'), {
+    type:'bar',
+    data:{
+      labels: ROLE_ORDER.map(r=>ROLE_META[r].title),
+      datasets:[{ label:'Jumlah Peserta', data:counts, backgroundColor:colors, borderRadius:10 }]
+    },
+    options:{
+      indexAxis:'y',
+      responsive:true, maintainAspectRatio:false,
+      scales:{
+        x:{ beginAtZero:true, ticks:{ color:'#cfcbe0', stepSize:1 }, grid:{ color:'rgba(255,255,255,.08)' } },
+        y:{ ticks:{ color:'#f5f3ee', font:{ size:11 } }, grid:{ display:false } },
+      },
+      plugins:{ legend:{ display:false } }
+    }
+  });
+}
 
-        /* ---- Slide 8: Master Control Timer ---- */
-        async function loadPresenterControl() {
-            if (!sb) return;
-            const { data, error } = await sb.from('presenter_control').select('*').eq('id', 1).single();
-            if (!error && data) {
-                presenterControl = data;
-                renderFloatingTimer();
-                updatePresenterTimerDisplay();
-            }
-        }
-        function subscribePresenterControlRealtime() {
-            if (!sb) return;
-            sb.channel('presenter_control_changes')
-                .on('postgres_changes', { event: '*', schema: 'public', table: 'presenter_control' }, payload => {
-                    if (payload.new) presenterControl = payload.new;
-                    renderFloatingTimer();
-                    updatePresenterTimerDisplay();
-                })
-                .subscribe();
-        }
+/* ---- Slide 8: Master Control Timer ---- */
+async function loadPresenterControl(){
+  if (!sb) return;
+  const { data, error } = await sb.from('presenter_control').select('*').eq('id',1).single();
+  if (!error && data){
+    presenterControl = data;
+    renderFloatingTimer();
+    updatePresenterTimerDisplay();
+  }
+}
+function subscribePresenterControlRealtime(){
+  if (!sb) return;
+  sb.channel('presenter_control_changes')
+    .on('postgres_changes', { event:'*', schema:'public', table:'presenter_control' }, payload=>{
+      if (payload.new) presenterControl = payload.new;
+      renderFloatingTimer();
+      updatePresenterTimerDisplay();
+    })
+    .subscribe();
+}
 
-        function presenterSlideTimer() {
-            return `
+function presenterSlideTimer(){
+  return `
   <div class="text-center">
     <p class="text-xs uppercase tracking-[0.3em] opacity-50 mb-3">Master Control</p>
     <h2 class="font-display font-bold mb-8" style="font-size:clamp(1.8rem,4vw,3rem);">Timer Diskusi Kelompok</h2>
     <div class="glass-strong glass-card p-10 max-w-md mx-auto mb-6">
       <div id="presenter-timer-display" class="font-display font-bold text-gradient-gold" style="font-size:clamp(3.5rem,10vw,6rem); line-height:1;">${fmtTime(computeTimerRemaining() ?? presenterControl.timer_seconds ?? 900)}</div>
-      <p class="text-xs opacity-50 mt-2" id="presenter-timer-label">${escapeHtml(presenterControl.timer_label || 'Waktu Diskusi Kelompok')}</p>
+      <p class="text-xs opacity-50 mt-2" id="presenter-timer-label">${escapeHtml(presenterControl.timer_label||'Waktu Diskusi Kelompok')}</p>
     </div>
     <div class="flex items-center justify-center gap-3 mb-5 flex-wrap">
       <input type="text" id="timer-minutes-input" value="15" placeholder="Menit" class="!w-24 text-center">
@@ -2271,132 +1824,132 @@
     </div>
     <p class="text-[11px] opacity-40 max-w-sm mx-auto">Timer akan tersinkron secara realtime ke HP seluruh jemaat yang sedang membuka halaman ini.</p>
   </div>`;
-        }
+}
 
-        function updatePresenterTimerDisplay() {
-            const el = document.getElementById('presenter-timer-display');
-            if (el) el.textContent = fmtTime(computeTimerRemaining() ?? presenterControl.timer_seconds ?? 900);
-            const lbl = document.getElementById('presenter-timer-label');
-            if (lbl) lbl.textContent = presenterControl.timer_label || 'Waktu Diskusi Kelompok';
-        }
+function updatePresenterTimerDisplay(){
+  const el = document.getElementById('presenter-timer-display');
+  if (el) el.textContent = fmtTime(computeTimerRemaining() ?? presenterControl.timer_seconds ?? 900);
+  const lbl = document.getElementById('presenter-timer-label');
+  if (lbl) lbl.textContent = presenterControl.timer_label || 'Waktu Diskusi Kelompok';
+}
 
-        async function presenterStartOrResume() {
-            if (!sb) { notify('Supabase belum dikonfigurasi.', 'error'); return; }
-            if (!presenterControl.timer_started_at) {
-                const minutesInput = document.getElementById('timer-minutes-input');
-                const minutes = parseFloat(minutesInput && minutesInput.value) || 15;
-                await safeQuery(sb.from('presenter_control').update({
-                    timer_seconds: Math.round(minutes * 60),
-                    is_running: true,
-                    timer_started_at: new Date().toISOString(),
-                }).eq('id', 1), 'Gagal memulai timer.');
-            } else {
-                await safeQuery(sb.from('presenter_control').update({
-                    is_running: true,
-                    timer_started_at: new Date().toISOString(),
-                }).eq('id', 1), 'Gagal melanjutkan timer.');
-            }
-            notify('Timer dimulai / dilanjutkan.', 'success');
-        }
+async function presenterStartOrResume(){
+  if (!sb){ notify('Supabase belum dikonfigurasi.', 'error'); return; }
+  if (!presenterControl.timer_started_at){
+    const minutesInput = document.getElementById('timer-minutes-input');
+    const minutes = parseFloat(minutesInput && minutesInput.value) || 15;
+    await safeQuery(sb.from('presenter_control').update({
+      timer_seconds: Math.round(minutes*60),
+      is_running: true,
+      timer_started_at: new Date().toISOString(),
+    }).eq('id',1), 'Gagal memulai timer.');
+  } else {
+    await safeQuery(sb.from('presenter_control').update({
+      is_running: true,
+      timer_started_at: new Date().toISOString(),
+    }).eq('id',1), 'Gagal melanjutkan timer.');
+  }
+  notify('Timer dimulai / dilanjutkan.', 'success');
+}
 
-        async function presenterPauseTimer() {
-            if (!sb) { notify('Supabase belum dikonfigurasi.', 'error'); return; }
-            const remaining = computeTimerRemaining();
-            await safeQuery(sb.from('presenter_control').update({
-                is_running: false,
-                timer_seconds: Math.round(remaining || 0),
-            }).eq('id', 1), 'Gagal menjeda timer.');
-            notify('Timer dijeda.', 'info');
-        }
+async function presenterPauseTimer(){
+  if (!sb){ notify('Supabase belum dikonfigurasi.', 'error'); return; }
+  const remaining = computeTimerRemaining();
+  await safeQuery(sb.from('presenter_control').update({
+    is_running: false,
+    timer_seconds: Math.round(remaining || 0),
+  }).eq('id',1), 'Gagal menjeda timer.');
+  notify('Timer dijeda.', 'info');
+}
 
-        async function presenterResetTimer() {
-            if (!sb) { notify('Supabase belum dikonfigurasi.', 'error'); return; }
-            await safeQuery(sb.from('presenter_control').update({
-                is_running: false,
-                timer_started_at: null,
-                timer_seconds: 900,
-            }).eq('id', 1), 'Gagal mereset timer.');
-            notify('Timer direset.', 'info');
-        }
+async function presenterResetTimer(){
+  if (!sb){ notify('Supabase belum dikonfigurasi.', 'error'); return; }
+  await safeQuery(sb.from('presenter_control').update({
+    is_running: false,
+    timer_started_at: null,
+    timer_seconds: 900,
+  }).eq('id',1), 'Gagal mereset timer.');
+  notify('Timer direset.', 'info');
+}
 
-        /* ---- Slide 9: Live Digital Commitment Wall ---- */
-        function presenterSlideWall() {
-            return `
+/* ---- Slide 9: Live Digital Commitment Wall ---- */
+function presenterSlideWall(){
+  return `
   <div>
     <p class="text-xs uppercase tracking-[0.3em] opacity-50 mb-3 text-center">Live</p>
     <h2 class="font-display font-bold text-center mb-2" style="font-size:clamp(1.6rem,3.6vw,2.6rem);">Dinding Komitmen <span class="text-gradient-gold">Digital</span></h2>
     <p class="text-center text-xs opacity-50 mb-8"><i class="fa-solid fa-circle-notch fa-spin mr-1"></i>Kartu baru muncul otomatis saat kelompok mengirim refleksi</p>
     <div id="presenter-wall-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 max-h-[52vh] overflow-y-auto pr-1"></div>
   </div>`;
-        }
+}
 
-        function renderPresenterCommitmentWallSlide() {
-            const grid = document.getElementById('presenter-wall-grid');
-            if (!grid) return;
-            const completed = groupDiscussionsCache.filter(g => g.commitments && g.commitments.note);
-            if (!completed.length) {
-                grid.innerHTML = `<div class="glass glass-card p-8 text-center opacity-50 text-sm col-span-full">Menunggu komitmen kelompok pertama...</div>`;
-                return;
-            }
-            grid.innerHTML = completed.map(g => {
-                const c = CASE_STUDIES.find(cs => cs.id === g.case_id) || {};
-                return `<div class="glass glass-card p-5 animate__animated animate__fadeInUp">
+function renderPresenterCommitmentWallSlide(){
+  const grid = document.getElementById('presenter-wall-grid');
+  if (!grid) return;
+  const completed = groupDiscussionsCache.filter(g=>g.commitments && g.commitments.note);
+  if (!completed.length){
+    grid.innerHTML = `<div class="glass glass-card p-8 text-center opacity-50 text-sm col-span-full">Menunggu komitmen kelompok pertama...</div>`;
+    return;
+  }
+  grid.innerHTML = completed.map(g=>{
+    const c = CASE_STUDIES.find(cs=>cs.id===g.case_id) || {};
+    return `<div class="glass glass-card p-5 animate__animated animate__fadeInUp">
       <div class="flex items-center justify-between mb-2">
         <h3 class="font-display font-bold text-sm">${escapeHtml(g.group_name)}</h3>
         <span class="text-[10px] opacity-50">Case ${g.case_id}</span>
       </div>
-      <p class="text-[10px] opacity-50 mb-2">${escapeHtml(c.title || '')}</p>
+      <p class="text-[10px] opacity-50 mb-2">${escapeHtml(c.title||'')}</p>
       <p class="text-xs italic opacity-90" style="color:var(--gold)">"${escapeHtml(g.commitments.note)}"</p>
     </div>`;
-            }).join('');
-        }
+  }).join('');
+}
 
-        /* ---- Slide 10+: Penutup, dipecah jadi satu slide per ayat/kutipan (gaya PPT) ---- */
+/* ---- Slide 10+: Penutup, dipecah jadi satu slide per ayat/kutipan (gaya PPT) ---- */
 
-        function presenterSlideClosingIntro() {
-            return `
+function presenterSlideClosingIntro(){
+  return `
   <div class="text-center">
     <p class="text-xs uppercase tracking-[0.3em] opacity-50 mb-4">Penutup</p>
     <h2 class="font-display font-bold mb-6" style="font-size:clamp(2.2rem,5.5vw,4rem);">Firman, Nasihat, & <span class="text-gradient-gold">Doa Komitmen</span></h2>
     <p class="opacity-60 text-sm sm:text-base max-w-lg mx-auto leading-relaxed">Firman Tuhan, nasihat Roh Nubuat, dan doa komitmen bersama untuk menutup sesi malam ini.</p>
   </div>`;
-        }
+}
 
-        function presenterSlideVerse(v, idx, total) {
-            return `
+function presenterSlideVerse(v, idx, total){
+  return `
   <div class="text-center max-w-3xl mx-auto">
     <p class="text-xs uppercase tracking-[0.3em] opacity-50 mb-2"><i class="fa-solid fa-book-bible mr-1"></i> Firman Tuhan</p>
-    <p class="text-[10px] uppercase tracking-widest opacity-35 mb-8">Ayat ${idx + 1} / ${total}</p>
+    <p class="text-[10px] uppercase tracking-widest opacity-35 mb-8">Ayat ${idx+1} / ${total}</p>
     <p class="font-display italic leading-snug mb-8" style="font-size:clamp(1.7rem,3.8vw,2.8rem);">"${escapeHtml(v.text)}"</p>
     <p class="text-sm sm:text-base uppercase tracking-widest" style="color:var(--gold)">${escapeHtml(v.ref)}</p>
   </div>`;
-        }
+}
 
-        function presenterSlideEgw(q, idx, total) {
-            return `
+function presenterSlideEgw(q, idx, total){
+  return `
   <div class="text-center max-w-3xl mx-auto">
     <p class="text-xs uppercase tracking-[0.3em] opacity-50 mb-2"><i class="fa-solid fa-feather mr-1"></i> Roh Nubuat</p>
-    <p class="text-[10px] uppercase tracking-widest opacity-35 mb-8">Kutipan ${idx + 1} / ${total}</p>
+    <p class="text-[10px] uppercase tracking-widest opacity-35 mb-8">Kutipan ${idx+1} / ${total}</p>
     <p class="italic leading-snug mb-8" style="font-size:clamp(1.3rem,3vw,2.1rem);">"${escapeHtml(q.text)}"</p>
     <p class="text-xs sm:text-sm uppercase tracking-widest opacity-60">${escapeHtml(q.source)}</p>
   </div>`;
-        }
+}
 
-        function presenterSlideClosingPrayer() {
-            return `
+function presenterSlideClosingPrayer(){
+  return `
   <div class="max-w-2xl mx-auto">
     <p class="text-xs uppercase tracking-[0.3em] opacity-50 mb-8 text-center"><i class="fa-solid fa-hands-praying mr-1"></i> Tata Cara Doa Komitmen</p>
     <div class="space-y-6 text-left">
-      ${PRAYER_STEPS.map((s, i) => `<div class="flex items-start gap-4">
-        <span class="w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0 mt-0.5" style="background:rgba(232,196,104,.18); color:var(--gold);">${i + 1}</span>
+      ${PRAYER_STEPS.map((s,i)=>`<div class="flex items-start gap-4">
+        <span class="w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0 mt-0.5" style="background:rgba(232,196,104,.18); color:var(--gold);">${i+1}</span>
         <p class="opacity-85 leading-relaxed" style="font-size:clamp(1.05rem,2.1vw,1.4rem);">${escapeHtml(s)}</p>
       </div>`).join('')}
     </div>
   </div>`;
-        }
+}
 
-        function presenterSlideClosingThanks() {
-            return `
+function presenterSlideClosingThanks(){
+  return `
   <div class="text-center animate__animated animate__fadeIn">
     <div class="flex items-center justify-center gap-6 mb-8">
       <div class="w-16 h-px" style="background:linear-gradient(90deg, transparent, var(--gold), transparent)"></div>
@@ -2410,60 +1963,59 @@
       Kiranya Kekuatan Pemuda dan Hikmat Orang Tua terus menyatu, membangun gereja yang kita cintai bersama.
     </p>
   </div>`;
-        }
+}
 
-        /* =========================================================================
-           14. STARFIELD PARTICLES (dekorasi latar cinematic, ringan)
-           ========================================================================= */
+/* =========================================================================
+   14. STARFIELD PARTICLES (dekorasi latar cinematic, ringan)
+   ========================================================================= */
 
-        function initStarfield() {
-            const canvas = document.getElementById('bg-canvas');
-            if (!canvas || !canvas.getContext) return;
-            const ctx = canvas.getContext('2d');
-            let w, h, stars = [];
-            function resize() {
-                w = canvas.width = window.innerWidth;
-                h = canvas.height = window.innerHeight;
-                const count = Math.min(90, Math.floor((w * h) / 18000));
-                stars = Array.from({ length: count }, () => ({
-                    x: Math.random() * w, y: Math.random() * h,
-                    r: Math.random() * 1.4 + 0.3,
-                    a: Math.random(), da: (Math.random() * 0.008 + 0.003) * (Math.random() < 0.5 ? -1 : 1),
-                }));
-            }
-            function tick() {
-                ctx.clearRect(0, 0, w, h);
-                stars.forEach(s => {
-                    s.a += s.da;
-                    if (s.a <= 0 || s.a >= 1) s.da *= -1;
-                    ctx.beginPath();
-                    ctx.fillStyle = `rgba(232,196,104,${Math.max(0, Math.min(1, s.a)) * 0.85})`;
-                    ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-                    ctx.fill();
-                });
-                requestAnimationFrame(tick);
-            }
-            resize();
-            window.addEventListener('resize', resize);
-            tick();
-        }
+function initStarfield(){
+  const canvas = document.getElementById('bg-canvas');
+  if (!canvas || !canvas.getContext) return;
+  const ctx = canvas.getContext('2d');
+  let w, h, stars = [];
+  function resize(){
+    w = canvas.width = window.innerWidth;
+    h = canvas.height = window.innerHeight;
+    const count = Math.min(90, Math.floor((w*h)/18000));
+    stars = Array.from({length:count}, ()=>({
+      x: Math.random()*w, y: Math.random()*h,
+      r: Math.random()*1.4 + 0.3,
+      a: Math.random(), da: (Math.random()*0.008 + 0.003) * (Math.random()<0.5?-1:1),
+    }));
+  }
+  function tick(){
+    ctx.clearRect(0,0,w,h);
+    stars.forEach(s=>{
+      s.a += s.da;
+      if (s.a <= 0 || s.a >= 1) s.da *= -1;
+      ctx.beginPath();
+      ctx.fillStyle = `rgba(232,196,104,${Math.max(0,Math.min(1,s.a))*0.85})`;
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI*2);
+      ctx.fill();
+    });
+    requestAnimationFrame(tick);
+  }
+  resize();
+  window.addEventListener('resize', resize);
+  tick();
+}
 
-        /* =========================================================================
-           15. BOOTSTRAP
-           ========================================================================= */
+/* =========================================================================
+   15. BOOTSTRAP
+   ========================================================================= */
 
-        function init() {
-            initStarfield();
-            startTimerTicker();
-            route();
-        }
+function init(){
+  initStarfield();
+  startTimerTicker();
+  route();
+}
 
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', init);
-        } else {
-            init();
-        }
-    </script>
+if (document.readyState === 'loading'){
+  document.addEventListener('DOMContentLoaded', init);
+} else {
+  init();
+}
+</script>
 </body>
-
 </html>
