@@ -84,18 +84,46 @@ BEGIN
 END $$;
 
 -- ------------------------------------------------------------
--- CATATAN KEAMANAN (opsional)
+-- ROW LEVEL SECURITY (WAJIB)
 -- ------------------------------------------------------------
--- Keempat tabel di atas dibuat TANPA Row Level Security (RLS).
--- Di Supabase, tabel publik tanpa RLS tetap bisa diakses lewat
--- anon key (perilaku default), jadi aplikasi ini akan berfungsi
--- apa adanya — cocok untuk kebutuhan acara satu malam tanpa login.
---
--- Jika suatu saat ingin diperketat, aktifkan RLS + policy publik
--- eksplisit seperti ini (opsional, tidak wajib untuk acara ini):
---
--- ALTER TABLE diagnostic_responses ENABLE ROW LEVEL SECURITY;
--- CREATE POLICY "public read"   ON diagnostic_responses FOR SELECT USING (true);
--- CREATE POLICY "public insert" ON diagnostic_responses FOR INSERT WITH CHECK (true);
--- (ulangi pola yang sama untuk role_results, group_discussions, presenter_control,
---  dengan tambahan policy UPDATE untuk group_discussions & presenter_control)
+-- Supabase mengaktifkan RLS secara default untuk tabel yang dibuat
+-- lewat SQL Editor. Tanpa policy eksplisit, SEMUA akses (termasuk
+-- lewat anon key dari frontend) akan ditolak dengan error 42501
+-- ("new row violates row-level security policy"). Blok di bawah ini
+-- membuka akses publik (cocok untuk acara satu malam tanpa login) —
+-- aman dijalankan ulang.
+ALTER TABLE diagnostic_responses ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS "public read diagnostic"   ON diagnostic_responses;
+DROP POLICY IF EXISTS "public insert diagnostic" ON diagnostic_responses;
+DROP POLICY IF EXISTS "public delete diagnostic" ON diagnostic_responses;
+CREATE POLICY "public read diagnostic"   ON diagnostic_responses FOR SELECT USING (true);
+CREATE POLICY "public insert diagnostic" ON diagnostic_responses FOR INSERT WITH CHECK (true);
+CREATE POLICY "public delete diagnostic" ON diagnostic_responses FOR DELETE USING (true);
+
+ALTER TABLE role_results ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS "public read role_results"   ON role_results;
+DROP POLICY IF EXISTS "public insert role_results" ON role_results;
+DROP POLICY IF EXISTS "public delete role_results" ON role_results;
+CREATE POLICY "public read role_results"   ON role_results FOR SELECT USING (true);
+CREATE POLICY "public insert role_results" ON role_results FOR INSERT WITH CHECK (true);
+CREATE POLICY "public delete role_results" ON role_results FOR DELETE USING (true);
+
+ALTER TABLE group_discussions ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS "public read group_discussions"   ON group_discussions;
+DROP POLICY IF EXISTS "public insert group_discussions" ON group_discussions;
+DROP POLICY IF EXISTS "public update group_discussions" ON group_discussions;
+DROP POLICY IF EXISTS "public delete group_discussions" ON group_discussions;
+CREATE POLICY "public read group_discussions"   ON group_discussions FOR SELECT USING (true);
+CREATE POLICY "public insert group_discussions" ON group_discussions FOR INSERT WITH CHECK (true);
+CREATE POLICY "public update group_discussions" ON group_discussions FOR UPDATE USING (true) WITH CHECK (true);
+CREATE POLICY "public delete group_discussions" ON group_discussions FOR DELETE USING (true);
+
+ALTER TABLE presenter_control ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS "public read presenter_control"   ON presenter_control;
+DROP POLICY IF EXISTS "public update presenter_control" ON presenter_control;
+CREATE POLICY "public read presenter_control"   ON presenter_control FOR SELECT USING (true);
+CREATE POLICY "public update presenter_control" ON presenter_control FOR UPDATE USING (true) WITH CHECK (true);
+
+-- Policy DELETE di atas (diagnostic_responses, role_results, group_discussions) dibutuhkan
+-- oleh tombol sapu "Reset Semua Data" di Presenter View (index.html), yang menghapus semua
+-- baris di ketiga tabel itu dan mereset presenter_control ke kondisi awal sebelum acara baru.

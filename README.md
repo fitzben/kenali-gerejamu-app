@@ -4,9 +4,11 @@ Single-file web app (`index.html`) untuk Kebaktian Pemuda Advent. Frontend: Tail
 
 ## 1. Setup Supabase
 
-Skema tabel di `schema.sql` sudah disesuaikan dengan skema yang sudah Anda buat di project Supabase (`diagnostic_responses`, `role_results`, `group_discussions`, `presenter_control`). Jalankan `schema.sql` di **SQL Editor** Supabase Anda — aman dijalankan ulang meskipun tabelnya sudah ada (`CREATE TABLE IF NOT EXISTS`), dan akan otomatis menambahkan 2 kolom baru yang dibutuhkan di `presenter_control` (`timer_started_at`, `timer_label`) lewat `ALTER TABLE ... ADD COLUMN IF NOT EXISTS` — tanpa menghapus data yang sudah ada.
+Skema tabel di `schema.sql` sudah disesuaikan dengan skema yang sudah Anda buat di project Supabase (`diagnostic_responses`, `role_results`, `group_discussions`, `presenter_control`). Jalankan `schema.sql` di **SQL Editor** Supabase Anda — aman dijalankan ulang meskipun tabelnya sudah ada (`CREATE TABLE IF NOT EXISTS`), dan akan otomatis:
+- menambahkan 2 kolom baru yang dibutuhkan di `presenter_control` (`timer_started_at`, `timer_label`) lewat `ALTER TABLE ... ADD COLUMN IF NOT EXISTS` — tanpa menghapus data yang sudah ada;
+- mengaktifkan Row Level Security + policy akses publik di keempat tabel (**wajib** — lihat catatan RLS di bawah).
 
-> Kenapa 2 kolom itu perlu? Supaya timer sinkron secara **akurat** untuk HP yang baru dibuka di tengah hitung mundur (perhitungan sisa waktu dihitung dari `timer_started_at`, bukan dengan mengandalkan tick per detik dari server).
+> Kenapa 2 kolom timer itu perlu? Supaya timer sinkron secara **akurat** untuk HP yang baru dibuka di tengah hitung mundur (perhitungan sisa waktu dihitung dari `timer_started_at`, bukan dengan mengandalkan tick per detik dari server).
 
 Setelah itu, buka **Database → Replication** dan pastikan keempat tabel berstatus aktif untuk Realtime.
 
@@ -42,5 +44,7 @@ Ganti dengan **Project URL** dan **anon public key** dari **Project Settings →
 - Kuis Penemuan 6 Peran, 5 Studi Kasus, ayat Alkitab, dan kutipan Roh Nubuat sudah dimasukkan sesuai dokumen yang diberikan.
 - Akses **Presenter View**: `https://domain-anda.pages.dev/#presenter` (atau klik tautan kecil "Mode Presenter" di pojok bawah Beranda).
 - Akses **Client View** (default): `https://domain-anda.pages.dev/`.
-- Tabel-tabel di atas dibuat tanpa RLS eksplisit — di Supabase ini tetap bisa diakses via anon key (perilaku default), cocok untuk acara satu malam. Lihat komentar di akhir `schema.sql` jika ingin mengaktifkan RLS.
-- Reset data sebelum acara berikutnya: `TRUNCATE diagnostic_responses, role_results, group_discussions;` lalu `UPDATE presenter_control SET is_running=false, timer_started_at=null, timer_seconds=900 WHERE id=1;`.
+- Supabase mengaktifkan **Row Level Security secara default** untuk tabel yang dibuat lewat SQL Editor. Tanpa policy eksplisit, semua insert/update/delete dari frontend (lewat anon key) akan ditolak dengan error `42501` ("new row violates row-level security policy"). `schema.sql` sudah menyertakan `ENABLE ROW LEVEL SECURITY` + policy akses publik (SELECT/INSERT/UPDATE/DELETE sesuai kebutuhan tiap tabel) untuk keempat tabel — pastikan bagian itu sudah dijalankan di project Anda.
+- **Reset data sebelum acara berikutnya**: klik ikon sapu (🧹) di pojok kanan atas **Presenter View** — ini akan menghapus semua jawaban diagnostik, hasil kuis peran, dan diskusi kelompok, lalu mereset timer ke kondisi awal (900 detik, berhenti). Ada konfirmasi sebelum aksi ini dijalankan karena tidak bisa dibatalkan. Tombol ini butuh policy DELETE di `schema.sql` (lihat catatan RLS di atas) sudah dijalankan.
+  - Catatan: tombol ini hanya membersihkan data di database. HP peserta yang sebelumnya sudah submit tetap menyimpan status "sudah selesai" secara lokal di browser masing-masing — mereka bisa memakai tombol "Isi ulang jawaban diagnostik" / "Ulangi kuis peran" di HP mereka, atau paling gampang buka link acara di tab/perangkat baru untuk sesi berikutnya.
+  - Alternatif manual lewat SQL Editor (kalau perlu): `TRUNCATE diagnostic_responses, role_results, group_discussions;` lalu `UPDATE presenter_control SET is_running=false, timer_started_at=null, timer_seconds=900 WHERE id=1;`.
