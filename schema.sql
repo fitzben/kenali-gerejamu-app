@@ -48,15 +48,23 @@ CREATE TABLE IF NOT EXISTS presenter_control (
   is_running BOOLEAN DEFAULT FALSE,
   timer_started_at TIMESTAMPTZ,             -- ditambahkan agar countdown akurat untuk HP yang baru join
   timer_label TEXT DEFAULT 'Waktu Diskusi Kelompok',
+  phase TEXT DEFAULT 'locked',              -- gerbang fase acara: locked | diagnostic | quiz | cases | done
   updated_at TIMESTAMPTZ DEFAULT NOW()
 );
 
 -- Kalau tabel presenter_control ini sudah lebih dulu Anda buat TANPA
--- kolom timer_started_at / timer_label (versi awal), dua baris ALTER
--- di bawah ini akan menambahkannya dengan aman (tidak akan error jika
--- sudah ada):
+-- kolom timer_started_at / timer_label / phase (versi awal), baris-baris
+-- ALTER di bawah ini akan menambahkannya dengan aman (tidak akan error
+-- jika sudah ada). PENTING: begitu baris ALTER "phase" ini dijalankan,
+-- baris presenter_control yang sudah ada akan otomatis terisi 'locked'
+-- (nilai default) — artinya begitu SQL ini dijalankan, Kuesioner
+-- Diagnostik / Kuis Peran / Pilih Studi Kasus di HP peserta akan langsung
+-- terkunci sampai Anda membukanya lewat tombol gembok di Presenter View.
+-- Jalankan SQL ini saat gereja belum mulai mengisi (mis. sebelum acara
+-- berikutnya), bukan di tengah-tengah acara yang sedang berjalan.
 ALTER TABLE presenter_control ADD COLUMN IF NOT EXISTS timer_started_at TIMESTAMPTZ;
 ALTER TABLE presenter_control ADD COLUMN IF NOT EXISTS timer_label TEXT DEFAULT 'Waktu Diskusi Kelompok';
+ALTER TABLE presenter_control ADD COLUMN IF NOT EXISTS phase TEXT DEFAULT 'locked';
 
 -- Insert row default untuk timer control
 INSERT INTO presenter_control (id, timer_seconds, is_running)

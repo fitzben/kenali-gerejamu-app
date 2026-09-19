@@ -680,40 +680,22 @@
         // kebutuhan jemaat Anda. Skala jawaban 1 (Sangat Tidak Setuju) - 5 (Sangat Setuju).
         const LIKERT_LABELS = ['Sangat\nTidak Setuju', 'Tidak\nSetuju', 'Netral', 'Setuju', 'Sangat\nSetuju'];
 
-        // const DIAGNOSTIC_QUESTIONS = {
-        //     pemuda: [
-        //         'Saya merasa ide dan pendapat saya didengar serta dihargai oleh Majelis/senior di gereja.',
-        //         'Saya merasa aman untuk mencoba dan boleh salah ketika melayani, tanpa takut dikritik tajam di depan umum.',
-        //         'Saya merasa dipercaya untuk memegang tanggung jawab pelayanan, bukan cuma dijadikan "tenaga bantuan" pas ada acara.',
-        //         'Saya merasa ada pendampingan / mentoring yang nyata dari orang yang lebih senior ketika saya melayani.',
-        //         'Saya merasa gereja adalah tempat yang hangat dan nyaman, bukan tempat yang penuh tuntutan.',
-        //         'Saya siap dan bersedia dilatih untuk menjadi Majelis / pemimpin departemen di masa depan.',
-        //     ],
-        //     senior: [
-        //         'Saya memahami dengan jelas alasan jujur mengapa pemuda di gereja kami enggan atau ragu melayani.',
-        //         'Saya merasa yakin dengan cara pendekatan saya terhadap pemuda: merangkul, bukan menuntut atau mengkritik.',
-        //         'Saya secara aktif memberi ruang dan kepercayaan bagi pemuda untuk mencoba ide-ide baru mereka.',
-        //         'Saya meluangkan waktu untuk mendampingi / mentoring pemuda secara personal, bukan hanya formal.',
-        //         'Saya percaya generasi muda gereja kami mampu dipersiapkan menjadi pemimpin masa depan.',
-        //         'Saya terbuka menerima masukan dan kritik yang membangun dari generasi muda tanpa merasa direndahkan.',
-        //     ],
-        // };
         const DIAGNOSTIC_QUESTIONS = {
             pemuda: [
                 'Saya merasa ide dan pendapat saya didengar serta dihargai oleh Majelis/senior di gereja.',
-                'Saya merasa aman untuk mencoba dan boleh salah saat melayani, tanpa takut dikritik tajam di depan umum.',
-                'Saya merasa dipercaya memegang tanggung jawab pelayanan, bukan sekadar bahan suruhan.',
-                'Saya merasa ada pendampingan atau mentoring yang nyata dari senior saat saya melayani.',
+                'Saya merasa aman untuk mencoba dan boleh salah ketika melayani, tanpa takut dikritik tajam di depan umum.',
+                'Saya merasa dipercaya untuk memegang tanggung jawab pelayanan, bukan hanya menjadi "tenaga kasar".',
+                'Saya merasa ada pendampingan / mentoring yang nyata dari orang yang lebih senior ketika saya melayani.',
                 'Saya merasa gereja adalah tempat yang hangat dan nyaman, bukan tempat yang penuh tuntutan.',
-                'Saya siap dan bersedia dilatih untuk menjadi Majelis atau pemimpin departemen di masa depan.',
+                'Saya siap dan bersedia dilatih untuk menjadi Majelis / pemimpin departemen di masa depan.',
             ],
             senior: [
                 'Saya memahami dengan jelas alasan jujur mengapa pemuda di gereja kami enggan atau ragu melayani.',
-                'Saya yakin cara pendekatan saya ke pemuda sudah tepat: merangkul, bukan menuntut atau mengkritik.',
+                'Saya merasa yakin dengan cara pendekatan saya terhadap pemuda: merangkul, bukan menuntut atau mengkritik.',
                 'Saya secara aktif memberi ruang dan kepercayaan bagi pemuda untuk mencoba ide-ide baru mereka.',
-                'Saya meluangkan waktu untuk mendampingi dan mem-mentoring pemuda secara personal, bukan sekadar formalitas.',
+                'Saya meluangkan waktu untuk mendampingi / mentoring pemuda secara personal, bukan hanya formal.',
                 'Saya percaya generasi muda gereja kami mampu dipersiapkan menjadi pemimpin masa depan.',
-                'Saya terbuka menerima masukan dan kritik yang membangun dari pemuda tanpa merasa direndahkan.',
+                'Saya terbuka menerima masukan dan kritik yang membangun dari generasi muda tanpa merasa direndahkan.',
             ],
         };
 
@@ -757,7 +739,7 @@
             },
             {
                 label: 'Kepercayaan & Ruang Berkarya',
-                seniorHigh: 'Senior merasa sudah memberi ruang dan kepercayaan, sementara Pemuda masih merasa hanya dipakai sebagai "tenaga bantuan", bukan pemegang tanggung jawab.',
+                seniorHigh: 'Senior merasa sudah memberi ruang dan kepercayaan, sementara Pemuda masih merasa hanya dipakai sebagai "tenaga kasar", bukan pemegang tanggung jawab.',
                 pemudaHigh: 'Pemuda merasa cukup dipercaya memegang tanggung jawab, namun Senior sendiri masih ragu untuk aktif memberi ruang bagi ide-ide baru pemuda.'
             },
             {
@@ -913,7 +895,7 @@
                 icon: 'fa-battery-quarter'
             },
             {
-                id: 3, title: 'Hanya Dipakai Jadi "Tenaga Bantuan"', subtitle: 'Kepercayaan & Apresiasi',
+                id: 3, title: 'Hanya Dipakai Jadi Tenaga Kasar', subtitle: 'Kepercayaan & Apresiasi',
                 subjects: 'Sarah (Pemuda Kreatif) & Panitia Acara Gereja',
                 scenario: 'Sarah memiliki banyak ide segar untuk membuat konsep acara gereja yang menarik bagi orang luar, lengkap dengan dekorasi estetis dan konten media sosial.\n\nNamun di gereja, Sarah dan teman-teman pemuda hanya dipanggil saat panitia butuh tenaga untuk: angkat-angkat kursi, pasang terop, cuci piring, atau bikin spanduk dadakan. Ketika Sarah mencoba memberikan usulan konsep acara di rapat panitia, usulannya dipotong dengan alasan: "Sudah, kita pakai cara yang biasa saja seperti tahun lalu, yang penting cepat beres."\n\nSarah merasa bakat dan pikirannya tidak dihargai, melainkan hanya tenaganya yang diperas tanpa diberi ruang berkreasi.',
                 focus: 'Bagaimana melibatkan pemuda sejak tahap konsep/perencanaan, bukan hanya sebagai pelaksana teknis?',
@@ -1062,13 +1044,39 @@
             clientScreen: 'welcome',   // welcome | diagnostic | quiz | quizResult | cases | reflection | wall
         }, loadLocalState());
 
-        let presenterControl = { timer_seconds: 900, is_running: false, timer_started_at: null, timer_label: 'Waktu Diskusi Kelompok' };
+        let presenterControl = { timer_seconds: 900, is_running: false, timer_started_at: null, timer_label: 'Waktu Diskusi Kelompok', phase: null };
         let presenterSlideIndex = 0;
         let groupDiscussionsCache = [];
         let diagnosticCache = [];
         let roleResultsCache = [];
         let charts = {};
         let timerInterval = null;
+        let controlDataLoaded = false;   // presenter_control (timer + gerbang fase) — dimuat sekali untuk client MAUPUN presenter
+        let controlSubscribed = false;
+
+        // Gerbang fase acara — supaya peserta yang sudah scan link/QR tidak bisa langsung
+        // mengisi Kuesioner Diagnostik / Kuis Peran / Pilih Studi Kasus sebelum dipersilakan
+        // oleh pembawa acara. Dikontrol dari tombol gembok di header Presenter View.
+        const EVENT_PHASES = ['locked', 'diagnostic', 'quiz', 'cases', 'done'];
+        const PHASE_LABELS = {
+            locked: 'Terkunci — Belum Ada yang Dibuka',
+            diagnostic: 'Kuesioner Diagnostik Dibuka',
+            quiz: 'Kuis Penemuan Peran Dibuka',
+            cases: 'Pilih Studi Kasus Dibuka',
+            done: 'Semua Sesi Dibuka',
+        };
+        const PHASE_ICONS = { locked: 'fa-lock', diagnostic: 'fa-clipboard-question', quiz: 'fa-star', cases: 'fa-layer-group', done: 'fa-lock-open' };
+
+        // Kalau kolom `phase` belum ada di database (schema.sql belum dijalankan ulang) atau
+        // nilainya tidak dikenali, anggap 'done' (semua terbuka) — supaya update index.html ini
+        // TIDAK langsung mengunci acara yang sedang berjalan sebelum Anda sempat menjalankan SQL-nya.
+        function currentEventPhase() {
+            const p = presenterControl && presenterControl.phase;
+            return (p && EVENT_PHASES.indexOf(p) !== -1) ? p : 'done';
+        }
+        function isPhaseUnlocked(required) {
+            return EVENT_PHASES.indexOf(currentEventPhase()) >= EVENT_PHASES.indexOf(required);
+        }
 
         /* ---------------------- 5. ROUTER / APP SHELL --------------------------- */
 
@@ -1079,6 +1087,7 @@
         function route() {
             const app = document.getElementById('app');
             app.classList.add('animate__animated', 'animate__fadeIn');
+            ensureControlSynced(); // muat + subscribe presenter_control (timer & gerbang fase) — dipakai client maupun presenter
             if (isPresenterRoute()) {
                 document.getElementById('bottom-nav').style.display = 'none';
                 renderPresenter();
@@ -1090,6 +1099,11 @@
         }
 
         window.addEventListener('hashchange', route);
+
+        function ensureControlSynced() {
+            if (!controlDataLoaded) { controlDataLoaded = true; loadPresenterControl(); }
+            if (!controlSubscribed) { controlSubscribed = true; subscribePresenterControlRealtime(); }
+        }
 
         function goClientScreen(screen) {
             STATE.clientScreen = screen;
@@ -1158,8 +1172,8 @@
         function renderClientScreen() {
             const app = document.getElementById('app');
             switch (STATE.clientScreen) {
-                case 'diagnostic': app.innerHTML = screenDiagnostic(); attachDiagnosticHandlers(); break;
-                case 'quiz': app.innerHTML = screenQuiz(); attachQuizHandlers(); break;
+                case 'diagnostic': attachDiagnosticHandlers(); app.innerHTML = screenDiagnostic(); break;
+                case 'quiz': attachQuizHandlers(); app.innerHTML = screenQuiz(); break;
                 case 'quizResult': app.innerHTML = screenQuizResult(); break;
                 case 'cases': app.innerHTML = screenCases(); subscribeGroupDiscussionsClient(); loadGroupDiscussions(); break;
                 case 'reflection': app.innerHTML = screenReflection(); break;
@@ -1167,6 +1181,31 @@
                 default: app.innerHTML = screenWelcome();
             }
             renderFloatingTimer();
+        }
+
+        // Dipanggil tiap kali presenter_control berubah (mis. presenter membuka fase baru) supaya
+        // layar yang sedang menampilkan "Belum Dibuka" langsung update TANPA refresh dan TANPA
+        // menghapus jawaban yang sedang diisi peserta (beda dengan renderClientScreen() yang
+        // mereset diagnosticAnswers/quizAnswers tiap dipanggil).
+        function refreshClientScreenIfLocked() {
+            if (isPresenterRoute()) return;
+            const app = document.getElementById('app');
+            if (!app) return;
+            if (STATE.clientScreen === 'diagnostic' && !STATE.diagnosticDone) app.innerHTML = screenDiagnostic();
+            else if (STATE.clientScreen === 'quiz' && STATE.diagnosticDone && !(STATE.quizDone && STATE.dominantRole)) app.innerHTML = screenQuiz();
+            else if (STATE.clientScreen === 'cases' && STATE.dominantRole && !STATE.groupCaseId) app.innerHTML = screenCases();
+        }
+
+        // Kartu "Belum Dibuka" — ditampilkan sebagai pengganti form ketika presenter belum
+        // membuka fase terkait lewat tombol gembok di Presenter View.
+        function phaseLockedCardHtml(label) {
+            return wrapClientPage(`
+    <div class="glass glass-card p-8 text-center mt-10 animate__animated animate__fadeIn">
+      <i class="fa-solid fa-lock text-3xl mb-4 opacity-50"></i>
+      <h2 class="font-display text-lg font-bold mb-2">${escapeHtml(label)} Belum Dibuka</h2>
+      <p class="opacity-70 text-sm leading-relaxed">Mohon tunggu instruksi dari pembawa acara. Halaman ini akan otomatis terbuka begitu sesi dimulai — tidak perlu refresh.</p>
+    </div>
+  `);
         }
 
         function wrapClientPage(innerHtml, opts) {
@@ -1237,9 +1276,9 @@
       </div>
     </div>
 
-    <div class="text-center mt-10">
+    <!-- <div class="text-center mt-10">
       <a href="#presenter" class="text-[10px] opacity-30 hover:opacity-60 transition-opacity"><i class="fa-solid fa-tv mr-1"></i>Mode Presenter</a>
-    </div>
+    </div> -->
   `);
         }
 
@@ -1252,7 +1291,10 @@
         /* ---------------------- 8. DIAGNOSTIC QUESTIONNAIRE ----------------------- */
 
         let diagnosticAnswers = {};
+        let diagnosticStepIndex = 0; // tampilkan 1 pertanyaan per layar (lebih fokus & fontnya bisa lebih besar di HP)
 
+        // Ditampilkan satu pertanyaan per layar, dengan tombol Lanjut/Kembali — supaya
+        // pemuda maupun senior bisa lebih fokus dan font pertanyaan bisa lebih besar di HP.
         function screenDiagnostic() {
             if (!STATE.identity) {
                 return wrapClientPage(`<div class="glass glass-card p-6 text-center mt-10">
@@ -1263,31 +1305,56 @@
             if (STATE.diagnosticDone) {
                 return wrapClientPage(diagnosticReflectionCardHtml());
             }
+            if (!isPhaseUnlocked('diagnostic')) {
+                return phaseLockedCardHtml('Kuesioner Diagnostik');
+            }
             const questions = DIAGNOSTIC_QUESTIONS[STATE.identity];
+            const total = questions.length;
+            const i = Math.max(0, Math.min(total - 1, diagnosticStepIndex));
+            const q = questions[i];
+            const answered = diagnosticAnswers[i];
+            const isLast = i === total - 1;
             return wrapClientPage(`
     <div class="animate__animated animate__fadeInUp">
-      <h2 class="font-display text-2xl font-bold mb-1">Kuesioner Diagnostik</h2>
-      <p class="opacity-60 text-xs mb-6">Jawab sejujurnya. Tidak ada jawaban benar/salah — suaramu berharga bagi gereja.</p>
-      <div id="diagnostic-form" class="space-y-5">
-        ${questions.map((q, i) => `
-          <div class="glass glass-card p-5">
-            <p class="text-sm font-medium mb-4 leading-relaxed">${i + 1}. ${escapeHtml(q)}</p>
-            <div class="grid grid-cols-5 gap-1.5" data-qindex="${i}">
-              ${[1, 2, 3, 4, 5].map(v => `
-                <div class="likert-opt text-[10px] py-2 px-1" data-value="${v}" onclick="setDiagnosticAnswer(${i},${v})">${v}</div>
-              `).join('')}
-            </div>
-            <div class="flex justify-between text-[9px] opacity-50 mt-1.5 px-0.5">
-              <span>Sangat Tidak Setuju</span><span>Sangat Setuju</span>
-            </div>
-          </div>
-        `).join('')}
+      <div class="flex items-center justify-between mb-2">
+        <h2 class="font-display text-2xl font-bold">Kuesioner Diagnostik</h2>
+        <span class="text-xs opacity-50 font-semibold flex-shrink-0 ml-3">${i + 1} / ${total}</span>
       </div>
-      <button id="diagnostic-submit" onclick="submitDiagnostic()" class="btn-gold w-full rounded-2xl py-4 font-bold mt-6">
-        Kirim Jawaban <i class="fa-solid fa-paper-plane ml-1"></i>
-      </button>
+      <p class="opacity-60 text-xs mb-4">Jawab sejujurnya. Tidak ada jawaban benar/salah — suaramu berharga bagi gereja.</p>
+      <div class="w-full h-1.5 rounded-full bg-white/10 mb-6 overflow-hidden">
+        <div class="h-full rounded-full" style="width:${(((i + 1) / total) * 100).toFixed(0)}%; background:linear-gradient(90deg,var(--gold),#c99a35); transition:width .35s ease;"></div>
+      </div>
+      <div class="glass glass-card p-7 mb-6 animate__animated animate__fadeIn">
+        <p class="text-lg sm:text-xl font-semibold mb-7 leading-relaxed">${escapeHtml(q)}</p>
+        <div class="grid grid-cols-5 gap-2" data-qindex="${i}">
+          ${[1, 2, 3, 4, 5].map(v => `
+            <div class="likert-opt text-sm sm:text-base py-4 ${answered === v ? 'selected' : ''}" data-value="${v}" onclick="setDiagnosticAnswer(${i},${v})">${v}</div>
+          `).join('')}
+        </div>
+        <div class="flex justify-between text-[11px] sm:text-xs opacity-50 mt-2 px-0.5">
+          <span>Sangat Tidak Setuju</span><span>Sangat Setuju</span>
+        </div>
+      </div>
+      <div class="flex items-center gap-3">
+        ${i > 0 ? `<button onclick="diagnosticGoStep(${i - 1})" class="btn-ghost rounded-2xl py-4 px-5 font-bold flex items-center justify-center"><i class="fa-solid fa-arrow-left"></i></button>` : ''}
+        ${isLast
+                    ? `<button id="diagnostic-submit" onclick="submitDiagnostic()" class="btn-gold flex-1 rounded-2xl py-4 font-bold">Kirim Jawaban <i class="fa-solid fa-paper-plane ml-1"></i></button>`
+                    : `<button onclick="diagnosticGoStep(${i + 1})" class="btn-gold flex-1 rounded-2xl py-4 font-bold">Lanjut <i class="fa-solid fa-arrow-right ml-1"></i></button>`}
+      </div>
     </div>
   `);
+        }
+
+        function diagnosticGoStep(i) {
+            const total = DIAGNOSTIC_QUESTIONS[STATE.identity].length;
+            if (i > diagnosticStepIndex && diagnosticAnswers[diagnosticStepIndex] === undefined) {
+                notify('Pilih salah satu jawaban terlebih dahulu.', 'error');
+                return;
+            }
+            diagnosticStepIndex = Math.max(0, Math.min(total - 1, i));
+            const app = document.getElementById('app');
+            if (app) app.innerHTML = screenDiagnostic();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         // Kartu Refleksi Diagnostik Pribadi, ditampilkan setelah peserta submit —
@@ -1319,10 +1386,11 @@
             });
         }
 
-        function attachDiagnosticHandlers() { diagnosticAnswers = {}; }
+        function attachDiagnosticHandlers() { diagnosticAnswers = {}; diagnosticStepIndex = 0; }
 
         function resetDiagnostic() {
             STATE.diagnosticDone = false;
+            diagnosticStepIndex = 0;
             saveLocalState();
             goClientScreen('diagnostic');
         }
@@ -1354,13 +1422,16 @@
         /* ---------------------- 9. KUIS PENEMUAN PERAN ---------------------------- */
 
         let quizShuffled = null;
-        let quizAnswers = {};
+        let quizAnswers = {};       // { [qIndex]: { oi, role } }
+        let quizStepIndex = 0;      // tampilkan 1 pertanyaan per layar
 
         function buildQuizShuffled() {
             const src = STATE.identity === 'pemuda' ? QUIZ_PEMUDA : QUIZ_SENIOR;
             quizShuffled = src.map(item => ({ q: item.q, options: shuffle(item.options) }));
         }
 
+        // Ditampilkan satu pertanyaan per layar (sama seperti Kuesioner Diagnostik), dengan
+        // tombol Lanjut/Kembali — supaya lebih fokus dan opsi jawaban bisa pakai font besar di HP.
         function screenQuiz() {
             if (!STATE.identity) {
                 return wrapClientPage(`<div class="glass glass-card p-6 text-center mt-10">
@@ -1383,47 +1454,72 @@
       <button onclick="resetQuiz()" class="text-[11px] opacity-40 hover:opacity-70 mt-4">Ulangi kuis peran</button>
     </div>`);
             }
+            if (!isPhaseUnlocked('quiz')) {
+                return phaseLockedCardHtml('Kuis Penemuan Peran');
+            }
             if (!quizShuffled) buildQuizShuffled();
+            const total = quizShuffled.length;
+            const i = Math.max(0, Math.min(total - 1, quizStepIndex));
+            const item = quizShuffled[i];
+            const answered = quizAnswers[i];
+            const isLast = i === total - 1;
             return wrapClientPage(`
     <div class="animate__animated animate__fadeInUp">
-      <h2 class="font-display text-2xl font-bold mb-1">Temukan Peranmu</h2>
-      <p class="opacity-60 text-xs mb-6">7 pertanyaan singkat. Pilih yang paling menggambarkan dirimu.</p>
-      <div id="quiz-form" class="space-y-5">
-        ${quizShuffled.map((item, i) => `
-          <div class="glass glass-card p-5">
-            <p class="text-sm font-semibold mb-3 leading-relaxed">${i + 1}. ${escapeHtml(item.q)}</p>
-            <div class="space-y-2" data-qindex="${i}">
-              ${item.options.map((opt, oi) => `
-                <div class="quiz-opt" data-oi="${oi}" data-role="${opt.role}" onclick="setQuizAnswer(${i},${oi},'${opt.role}')">
-                  <div class="quiz-letter">${String.fromCharCode(65 + oi)}</div>
-                  <div class="text-xs leading-relaxed opacity-90">${escapeHtml(opt.text)}</div>
-                </div>
-              `).join('')}
-            </div>
-          </div>
-        `).join('')}
+      <div class="flex items-center justify-between mb-2">
+        <h2 class="font-display text-2xl font-bold">Temukan Peranmu</h2>
+        <span class="text-xs opacity-50 font-semibold flex-shrink-0 ml-3">${i + 1} / ${total}</span>
       </div>
-      <button onclick="submitQuiz()" class="btn-gold w-full rounded-2xl py-4 font-bold mt-6">
-        Lihat Hasil Peranku <i class="fa-solid fa-wand-magic-sparkles ml-1"></i>
-      </button>
+      <p class="opacity-60 text-xs mb-4">Pilih yang paling menggambarkan dirimu.</p>
+      <div class="w-full h-1.5 rounded-full bg-white/10 mb-6 overflow-hidden">
+        <div class="h-full rounded-full" style="width:${(((i + 1) / total) * 100).toFixed(0)}%; background:linear-gradient(90deg,var(--gold),#c99a35); transition:width .35s ease;"></div>
+      </div>
+      <div class="glass glass-card p-7 mb-6 animate__animated animate__fadeIn">
+        <p class="text-lg sm:text-xl font-semibold mb-6 leading-relaxed">${escapeHtml(item.q)}</p>
+        <div class="space-y-3" data-qindex="${i}">
+          ${item.options.map((opt, oi) => `
+            <div class="quiz-opt ${answered && answered.oi === oi ? 'selected' : ''}" data-oi="${oi}" data-role="${opt.role}" onclick="setQuizAnswer(${i},${oi},'${opt.role}')">
+              <div class="quiz-letter">${String.fromCharCode(65 + oi)}</div>
+              <div class="text-sm sm:text-base leading-relaxed opacity-90">${escapeHtml(opt.text)}</div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+      <div class="flex items-center gap-3">
+        ${i > 0 ? `<button onclick="quizGoStep(${i - 1})" class="btn-ghost rounded-2xl py-4 px-5 font-bold flex items-center justify-center"><i class="fa-solid fa-arrow-left"></i></button>` : ''}
+        ${isLast
+                    ? `<button onclick="submitQuiz()" class="btn-gold flex-1 rounded-2xl py-4 font-bold">Lihat Hasil Peranku <i class="fa-solid fa-wand-magic-sparkles ml-1"></i></button>`
+                    : `<button onclick="quizGoStep(${i + 1})" class="btn-gold flex-1 rounded-2xl py-4 font-bold">Lanjut <i class="fa-solid fa-arrow-right ml-1"></i></button>`}
+      </div>
     </div>
   `);
         }
 
-        function attachQuizHandlers() { quizAnswers = {}; }
+        function quizGoStep(i) {
+            if (i > quizStepIndex && quizAnswers[quizStepIndex] === undefined) {
+                notify('Pilih salah satu jawaban terlebih dahulu.', 'error');
+                return;
+            }
+            quizStepIndex = Math.max(0, Math.min(quizShuffled.length - 1, i));
+            const app = document.getElementById('app');
+            if (app) app.innerHTML = screenQuiz();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function attachQuizHandlers() { quizAnswers = {}; quizStepIndex = 0; }
 
         function resetQuiz() {
             STATE.quizDone = false;
             STATE.dominantRole = null;
             STATE.roleScores = null;
             quizShuffled = null;
+            quizStepIndex = 0;
             saveLocalState();
             goClientScreen('quiz');
         }
 
         function setQuizAnswer(qIndex, oi, role) {
-            quizAnswers[qIndex] = role;
-            const group = document.querySelector(`#quiz-form [data-qindex="${qIndex}"]`);
+            quizAnswers[qIndex] = { oi, role };
+            const group = document.querySelector(`[data-qindex="${qIndex}"]`);
             if (!group) return;
             group.querySelectorAll('.quiz-opt').forEach(el => {
                 el.classList.toggle('selected', parseInt(el.dataset.oi, 10) === oi);
@@ -1436,7 +1532,7 @@
                 return;
             }
             const scores = {}; ROLE_ORDER.forEach(r => scores[r] = 0);
-            Object.values(quizAnswers).forEach(role => { scores[role] = (scores[role] || 0) + 1; });
+            Object.values(quizAnswers).forEach(a => { scores[a.role] = (scores[a.role] || 0) + 1; });
             let dominant = ROLE_ORDER[0];
             ROLE_ORDER.forEach(r => { if (scores[r] > scores[dominant]) dominant = r; });
 
@@ -1508,7 +1604,7 @@
             const { data, error } = await sb.from('group_discussions').select('*').order('case_id', { ascending: true });
             if (!error && data) {
                 groupDiscussionsCache = data;
-                if (isPresenterRoute()) renderPresenterCommitmentWallSlide();
+                if (isPresenterRoute()) { renderPresenterCommitmentWallSlide(); refreshPresenterCasesSlide(); }
                 else if (STATE.clientScreen === 'cases') refreshCaseGridLocks();
                 else if (STATE.clientScreen === 'wall') refreshWallList();
             }
@@ -1545,6 +1641,9 @@
         ${STATE.reflectionDone ? 'Lihat / Ubah Refleksi Kelompok' : 'Lanjut ke Form Refleksi'} <i class="fa-solid fa-arrow-right ml-1"></i>
       </button>
     `);
+            }
+            if (!isPhaseUnlocked('cases')) {
+                return phaseLockedCardHtml('Pilih Studi Kasus');
             }
             if (previewCaseId) {
                 const c = CASE_STUDIES.find(cs => cs.id === previewCaseId);
@@ -1863,9 +1962,11 @@
             'closingPrayer',
             'closingThanks',
         ];
-        const PRESENTER_SLIDES = ['title', 'why', 'reality', 'stages', 'qr', 'diagnostic', 'roles', 'timer', 'wall', ...CLOSING_SUBSLIDES];
+        const PRESENTER_SLIDES = ['title', 'why', 'reality', 'stages', 'qr', 'diagnostic', 'roles', 'cases', 'timer', 'wall', ...CLOSING_SUBSLIDES];
         let presenterSubscribed = false;
         let presenterDataLoaded = false;
+        let presenterCaseDetailId = null;   // id studi kasus yang sedang ditampilkan detailnya ke audience (slide 'cases')
+        let presenterSlideDirection = 1;    // 1 = maju (next), -1 = mundur (prev) — dipakai untuk arah transisi slide
 
         function renderPresenter() {
             const app = document.getElementById('app');
@@ -1876,9 +1977,14 @@
           <i class="fa-solid fa-cross" style="color:var(--gold)"></i> Presenter Mode
         </div>
         <div class="flex items-center gap-1.5" id="presenter-dots"></div>
-        <div class="flex items-center gap-3">
+        <div class="flex items-center gap-2 sm:gap-3">
+          <button onclick="openPhaseModal()" id="presenter-phase-badge" title="Kontrol fase acara — buka sesi berikutnya untuk peserta"
+            class="glass-card px-3 h-8 rounded-full flex items-center gap-2 btn-ghost text-[11px] font-semibold" style="color:var(--gold)">
+            <i class="fa-solid fa-lock text-xs" id="presenter-phase-icon"></i>
+            <span id="presenter-phase-label" class="hidden sm:inline"></span>
+          </button>
           <div class="text-xs opacity-50" id="presenter-counter"></div>
-          <button onclick="resetAllEventData()" title="Reset semua data peserta (diagnostik, kuis peran, kelompok, timer)"
+          <button onclick="openResetModal()" title="Reset data peserta (pilih bagian yang ingin direset)"
             class="glass-card w-8 h-8 rounded-full flex items-center justify-center btn-ghost" style="color:#ff6b6b;">
             <i class="fa-solid fa-broom text-xs"></i>
           </button>
@@ -1892,20 +1998,27 @@
       </div>
     </div>
   `;
+            updatePresenterPhaseBadge();
             if (!presenterDataLoaded) {
                 presenterDataLoaded = true;
-                loadPresenterControl();
                 loadDiagnosticData();
                 loadRoleResults();
                 loadGroupDiscussions();
             }
             if (!presenterSubscribed) {
                 presenterSubscribed = true;
-                subscribePresenterControlRealtime();
                 subscribeDiagnosticRealtime();
                 subscribeRoleResultsRealtime();
             }
             renderPresenterSlide();
+        }
+
+        function updatePresenterPhaseBadge() {
+            const label = document.getElementById('presenter-phase-label');
+            const icon = document.getElementById('presenter-phase-icon');
+            const cur = currentEventPhase();
+            if (label) label.textContent = PHASE_LABELS[cur] || PHASE_LABELS.done;
+            if (icon) icon.className = 'fa-solid ' + (PHASE_ICONS[cur] || PHASE_ICONS.done) + ' text-xs';
         }
 
         function renderPresenterDots() {
@@ -1917,7 +2030,10 @@
         }
 
         function goToSlide(i) {
-            presenterSlideIndex = Math.max(0, Math.min(PRESENTER_SLIDES.length - 1, i));
+            const clamped = Math.max(0, Math.min(PRESENTER_SLIDES.length - 1, i));
+            presenterSlideDirection = clamped >= presenterSlideIndex ? 1 : -1;
+            presenterSlideIndex = clamped;
+            presenterCaseDetailId = null; // selalu mulai dari daftar kasus tiap kali slide 'cases' dibuka ulang
             renderPresenterSlide();
         }
         function nextSlide() { goToSlide(presenterSlideIndex + 1); }
@@ -1929,15 +2045,31 @@
             if (e.key === 'ArrowLeft') { prevSlide(); }
         });
 
+        // Transisi slide "eye-catching": slide yang lama meluncur+memudar keluar ke satu sisi,
+        // slide baru masuk dengan sedikit efek "bounce" (backInRight/backInLeft) dari sisi
+        // berlawanan sesuai arah navigasi (next = dari kanan, prev = dari kiri).
         function renderPresenterSlide() {
             renderPresenterDots();
             const slide = PRESENTER_SLIDES[presenterSlideIndex];
             const container = document.getElementById('presenter-slide');
             if (!container) return;
-            container.innerHTML = `<div class="w-full max-w-5xl mx-auto animate__animated animate__fadeIn">${renderPresenterSlideContent(slide)}</div>`;
-            if (slide === 'diagnostic') requestAnimationFrame(() => { renderDiagnosticChart(); renderDiagnosticGapCard(); });
-            if (slide === 'roles') requestAnimationFrame(renderRoleChart);
-            if (slide === 'wall') renderPresenterCommitmentWallSlide();
+
+            const mountSlide = () => {
+                const enterAnim = presenterSlideDirection >= 0 ? 'animate__backInRight' : 'animate__backInLeft';
+                container.innerHTML = `<div class="w-full max-w-5xl mx-auto animate__animated ${enterAnim}">${renderPresenterSlideContent(slide)}</div>`;
+                if (slide === 'diagnostic') requestAnimationFrame(() => { renderDiagnosticChart(); renderDiagnosticGapCard(); });
+                if (slide === 'roles') requestAnimationFrame(renderRoleChart);
+                if (slide === 'wall') renderPresenterCommitmentWallSlide();
+            };
+
+            const existing = container.firstElementChild;
+            if (existing) {
+                const exitAnim = presenterSlideDirection >= 0 ? 'animate__fadeOutLeft' : 'animate__fadeOutRight';
+                existing.classList.add('animate__animated', exitAnim, 'animate__faster');
+                setTimeout(mountSlide, 200);
+            } else {
+                mountSlide();
+            }
         }
 
         function renderPresenterSlideContent(slide) {
@@ -1949,6 +2081,7 @@
                 qr: presenterSlideQr,
                 diagnostic: presenterSlideDiagnostic,
                 roles: presenterSlideRoles,
+                cases: presenterSlideCases,
                 timer: presenterSlideTimer,
                 wall: presenterSlideWall,
                 closingIntro: presenterSlideClosingIntro,
@@ -1995,19 +2128,19 @@
         function presenterSlideWhy() {
             return `
   <div>
-    <p class="text-xs uppercase tracking-[0.3em] opacity-50 mb-3 text-center">Mengapa Kita Ada di Sini Sore Ini?</p>
-    <h2 class="font-display font-bold text-center mb-10" style="font-size:clamp(1.8rem,4vw,3rem);">Bukan Menunjuk Jari, <span class="text-gradient-gold">Tapi Saling Mendengar</span></h2>
+    <p class="text-xs uppercase tracking-[0.3em] opacity-50 mb-3 text-center animate__animated animate__fadeInDown">Mengapa Kita Ada di Sini Sore Ini?</p>
+    <h2 class="font-display font-bold text-center mb-10 animate__animated animate__fadeInUp" style="font-size:clamp(1.8rem,4vw,3rem);">Bukan Menunjuk Jari, <span class="text-gradient-gold">Tapi Saling Mendengar</span></h2>
     <div class="grid sm:grid-cols-2 gap-5 mb-10">
-      <div class="glass glass-card p-6 flex items-start gap-4">
+      <div class="glass glass-card p-6 flex items-start gap-4 animate__animated animate__fadeInUp" style="animation-delay:.1s">
         <i class="fa-solid fa-hand-point-right text-xl opacity-40 mt-1"></i>
         <p class="text-sm opacity-85 leading-relaxed">Kita tidak hadir untuk saling menunjuk jari atau mencari siapa yang salah.</p>
       </div>
-      <div class="glass glass-card p-6 flex items-start gap-4">
+      <div class="glass glass-card p-6 flex items-start gap-4 animate__animated animate__fadeInUp" style="animation-delay:.22s">
         <i class="fa-solid fa-heart text-xl mt-1" style="color:var(--rose)"></i>
         <p class="text-sm opacity-85 leading-relaxed">Kita hadir untuk saling mendengar, memahami, dan membangun gereja yang kita cintai bersama.</p>
       </div>
     </div>
-    <div class="glass-strong glass-card p-7 text-center max-w-2xl mx-auto" style="border-color:rgba(232,196,104,.4)">
+    <div class="glass-strong glass-card p-7 text-center max-w-2xl mx-auto animate__animated animate__zoomIn" style="border-color:rgba(232,196,104,.4); animation-delay:.36s">
       <i class="fa-solid fa-quote-left opacity-30 text-xl mb-2"></i>
       <p class="font-display text-lg sm:text-xl italic mb-2">"Kemuliaan orang muda ialah kekuatannya, dan semarak orang tua ialah uban."</p>
       <p class="text-xs uppercase tracking-widest opacity-50">Amsal 20:29</p>
@@ -2019,21 +2152,21 @@
         function presenterSlideReality() {
             return `
   <div>
-    <p class="text-xs uppercase tracking-[0.3em] opacity-50 mb-3 text-center">Menghadapi Realita</p>
-    <h2 class="font-display font-bold text-center mb-10" style="font-size:clamp(1.8rem,4vw,3rem);">Gereja Hari Ini</h2>
+    <p class="text-xs uppercase tracking-[0.3em] opacity-50 mb-3 text-center animate__animated animate__fadeInDown">Menghadapi Realita</p>
+    <h2 class="font-display font-bold text-center mb-10 animate__animated animate__fadeInUp" style="font-size:clamp(1.8rem,4vw,3rem);">Gereja Hari Ini</h2>
     <div class="grid sm:grid-cols-2 gap-5 mb-6">
-      <div class="glass glass-card p-6">
+      <div class="glass glass-card p-6 animate__animated animate__fadeInUp" style="animation-delay:.1s">
         <i class="fa-solid fa-fire text-2xl mb-3" style="color:var(--amber)"></i>
         <h3 class="font-display font-bold mb-2">Realita Pemuda</h3>
         <p class="text-sm opacity-75 leading-relaxed">Ingin berkontribusi, tetapi sering ragu, takut salah, atau merasa kurang dirangkul.</p>
       </div>
-      <div class="glass glass-card p-6">
+      <div class="glass glass-card p-6 animate__animated animate__fadeInUp" style="animation-delay:.22s">
         <i class="fa-solid fa-seedling text-2xl mb-3" style="color:var(--gold)"></i>
         <h3 class="font-display font-bold mb-2">Realita Orang Tua / Majelis</h3>
         <p class="text-sm opacity-75 leading-relaxed">Rindu ada penerus yang setia, tetapi bingung bagaimana cara pendekatan yang tepat bagi generasi muda.</p>
       </div>
     </div>
-    <div class="glass-strong glass-card p-6 text-center">
+    <div class="glass-strong glass-card p-6 text-center animate__animated animate__zoomIn" style="animation-delay:.36s">
       <p class="text-sm opacity-60 mb-1">Solusi Hari Ini</p>
       <p class="font-display text-xl font-bold text-gradient-gold">Mengubah Asumsi menjadi Aksi, dan Kritik menjadi Kemitraan.</p>
     </div>
@@ -2051,11 +2184,11 @@
             ];
             return `
   <div>
-    <p class="text-xs uppercase tracking-[0.3em] opacity-50 mb-3 text-center">Alur Acara</p>
-    <h2 class="font-display font-bold text-center mb-10" style="font-size:clamp(1.8rem,4vw,3rem);">Tahapan Interaktif Sore Ini</h2>
+    <p class="text-xs uppercase tracking-[0.3em] opacity-50 mb-3 text-center animate__animated animate__fadeInDown">Alur Acara</p>
+    <h2 class="font-display font-bold text-center mb-10 animate__animated animate__fadeInUp" style="font-size:clamp(1.8rem,4vw,3rem);">Tahapan Interaktif Sore Ini</h2>
     <div class="grid sm:grid-cols-5 gap-4">
-      ${stages.map(s => `
-        <div class="glass glass-card p-5 text-center">
+      ${stages.map((s, i) => `
+        <div class="glass glass-card p-5 text-center animate__animated animate__fadeInUp" style="animation-delay:${(i * 0.08).toFixed(2)}s">
           <div class="w-11 h-11 rounded-full mx-auto mb-3 flex items-center justify-center font-display font-bold" style="background:rgba(232,196,104,0.15); border:1px solid rgba(232,196,104,0.4); color:var(--gold)">${s.n}</div>
           <i class="fa-solid ${s.i} text-lg mb-2 opacity-70"></i>
           <p class="font-semibold text-xs mb-1">${s.t}</p>
@@ -2071,13 +2204,13 @@
             const qrSrc = 'https://api.qrserver.com/v1/create-qr-code/?size=340x340&bgcolor=ffffff&data=' + encodeURIComponent(url);
             return `
   <div class="text-center">
-    <p class="text-xs uppercase tracking-[0.3em] opacity-50 mb-3">Mari Dimulai!</p>
-    <h2 class="font-display font-bold mb-8" style="font-size:clamp(1.8rem,4vw,3rem);">Scan QR Code / Akses Link</h2>
-    <div class="bg-white p-5 rounded-3xl inline-block shadow-2xl mb-6">
+    <p class="text-xs uppercase tracking-[0.3em] opacity-50 mb-3 animate__animated animate__fadeInDown">Mari Dimulai!</p>
+    <h2 class="font-display font-bold mb-8 animate__animated animate__fadeInUp" style="font-size:clamp(1.8rem,4vw,3rem);">Scan QR Code / Akses Link</h2>
+    <div class="bg-white p-5 rounded-3xl inline-block shadow-2xl mb-6 animate__animated animate__zoomIn" style="animation-delay:.15s">
       <img src="${qrSrc}" alt="QR Code" width="260" height="260" style="display:block;">
     </div>
-    <p class="text-base sm:text-lg font-semibold mb-2">${escapeHtml(url)}</p>
-    <p class="opacity-60 text-sm max-w-lg mx-auto leading-relaxed">
+    <p class="text-base sm:text-lg font-semibold mb-2 animate__animated animate__fadeInUp" style="animation-delay:.3s">${escapeHtml(url)}</p>
+    <p class="opacity-60 text-sm max-w-lg mx-auto leading-relaxed animate__animated animate__fadeInUp" style="animation-delay:.42s">
       Silakan siapkan smartphone masing-masing. Kuesioner ini sangat simpel, tidak perlu mengetik panjang, dan kerahasiaan Anda terjaga. Suara Anda sangat berharga bagi gereja kita!
     </p>
   </div>`;
@@ -2109,10 +2242,10 @@
             const seniorCount = diagnosticCache.filter(d => d.user_type === 'senior' && d.question_id === 1).length;
             return `
   <div>
-    <p class="text-xs uppercase tracking-[0.3em] opacity-50 mb-3 text-center">Live Results</p>
-    <h2 class="font-display font-bold text-center mb-2" style="font-size:clamp(1.6rem,3.6vw,2.6rem);">Kuesioner Diagnostik <span class="text-gradient-gold">Realtime</span></h2>
-    <p class="text-center text-xs opacity-50 mb-8"><i class="fa-solid fa-circle-notch fa-spin mr-1"></i>Diperbarui otomatis • ${pemudaCount} Pemuda • ${seniorCount} Senior mengisi</p>
-    <div class="glass glass-card p-6 mb-5" style="height:380px;">
+    <p class="text-xs uppercase tracking-[0.3em] opacity-50 mb-3 text-center animate__animated animate__fadeInDown">Live Results</p>
+    <h2 class="font-display font-bold text-center mb-2 animate__animated animate__fadeInUp" style="font-size:clamp(1.6rem,3.6vw,2.6rem);">Kuesioner Diagnostik <span class="text-gradient-gold">Realtime</span></h2>
+    <p class="text-center text-xs opacity-50 mb-8 animate__animated animate__fadeInUp" style="animation-delay:.12s"><i class="fa-solid fa-circle-notch fa-spin mr-1"></i>Diperbarui otomatis • ${pemudaCount} Pemuda • ${seniorCount} Senior mengisi</p>
+    <div class="glass glass-card p-6 mb-5 animate__animated animate__zoomIn" style="height:380px; animation-delay:.2s">
       <canvas id="diagnosticChartCanvas"></canvas>
     </div>
     <div id="diagnostic-gap-card"></div>
@@ -2211,18 +2344,18 @@
         function presenterSlideRoles() {
             return `
   <div>
-    <p class="text-xs uppercase tracking-[0.3em] opacity-50 mb-3 text-center">Live Dashboard</p>
-    <h2 class="font-display font-bold text-center mb-2" style="font-size:clamp(1.6rem,3.6vw,2.6rem);">6 Peran Pelayanan <span class="text-gradient-gold">Realtime</span></h2>
-    <p class="text-center text-xs opacity-50 mb-8"><i class="fa-solid fa-circle-notch fa-spin mr-1"></i>${roleResultsCache.length} peserta telah menemukan perannya</p>
+    <p class="text-xs uppercase tracking-[0.3em] opacity-50 mb-3 text-center animate__animated animate__fadeInDown">Live Dashboard</p>
+    <h2 class="font-display font-bold text-center mb-2 animate__animated animate__fadeInUp" style="font-size:clamp(1.6rem,3.6vw,2.6rem);">6 Peran Pelayanan <span class="text-gradient-gold">Realtime</span></h2>
+    <p class="text-center text-xs opacity-50 mb-8 animate__animated animate__fadeInUp" style="animation-delay:.12s"><i class="fa-solid fa-circle-notch fa-spin mr-1"></i>${roleResultsCache.length} peserta telah menemukan perannya</p>
     <div class="grid lg:grid-cols-5 gap-6 items-center">
-      <div class="lg:col-span-3 glass glass-card p-6" style="height:340px;">
+      <div class="lg:col-span-3 glass glass-card p-6 animate__animated animate__zoomIn" style="height:340px; animation-delay:.2s">
         <canvas id="roleChartCanvas"></canvas>
       </div>
       <div class="lg:col-span-2 grid grid-cols-2 gap-3">
-        ${ROLE_ORDER.map(r => {
+        ${ROLE_ORDER.map((r, i) => {
                 const meta = ROLE_META[r];
                 const count = roleResultsCache.filter(x => x.role_name === r).length;
-                return `<div class="glass glass-card p-3 text-center">
+                return `<div class="glass glass-card p-3 text-center animate__animated animate__fadeInUp" style="animation-delay:${(0.24 + i * 0.06).toFixed(2)}s">
             <i class="fa-solid ${meta.icon} mb-1" style="color:${meta.color}"></i>
             <p class="text-[10px] opacity-60 leading-tight">${meta.title}</p>
             <p class="font-display text-lg font-bold" style="color:${meta.color}">${count}</p>
@@ -2257,6 +2390,86 @@
             });
         }
 
+        /* ---- Slide: Tampilkan Studi Kasus ke Audience (grid + detail) ---- */
+
+        // Tap kartu kasus untuk menampilkan detail lengkapnya di layar besar untuk audience —
+        // mirroring preview kasus di Client View, plus status kelompok yang sudah mengambil.
+        function presenterSlideCases() {
+            if (presenterCaseDetailId) {
+                const c = CASE_STUDIES.find(cs => cs.id === presenterCaseDetailId);
+                if (!c) { presenterCaseDetailId = null; }
+                else {
+                    const lockedBy = groupDiscussionsCache.find(g => g.case_id === c.id);
+                    return `
+      <div class="max-w-3xl mx-auto animate__animated animate__fadeIn">
+        <button onclick="closePresenterCaseDetail()" class="text-xs opacity-60 hover:opacity-100 mb-6 inline-flex items-center gap-1.5">
+          <i class="fa-solid fa-arrow-left"></i> Kembali ke Daftar Kasus
+        </button>
+        <p class="text-xs uppercase tracking-[0.3em] opacity-50 mb-2 text-center">Studi Kasus ${c.id} • ${escapeHtml(c.subtitle)}</p>
+        <h2 class="font-display font-bold text-center mb-6" style="font-size:clamp(1.8rem,4vw,3rem);">${escapeHtml(c.title)}</h2>
+        <div class="glass glass-card p-7 mb-5">
+          <p class="text-xs uppercase tracking-widest opacity-45 mb-1">Subjek</p>
+          <p class="text-base sm:text-lg opacity-85 mb-5">${escapeHtml(c.subjects)}</p>
+          <p class="text-xs uppercase tracking-widest opacity-45 mb-1">Skenario Konflik</p>
+          <p class="text-sm sm:text-base opacity-85 leading-relaxed whitespace-pre-line">${escapeHtml(c.scenario)}</p>
+        </div>
+        <div class="glass-strong rounded-2xl p-6 text-center" style="background:rgba(232,196,104,0.08); border:1px solid rgba(232,196,104,0.25);">
+          <p class="text-xs uppercase tracking-widest mb-2" style="color:var(--gold)"><i class="fa-solid fa-compass mr-1"></i>Fokus Diskusi Kelompok</p>
+          <p class="text-base opacity-90 leading-relaxed">${escapeHtml(c.focus)}</p>
+        </div>
+        ${lockedBy
+                            ? `<p class="text-sm mt-6 opacity-70 text-center"><i class="fa-solid fa-lock mr-1.5"></i>Diambil oleh kelompok <b>${escapeHtml(lockedBy.group_name)}</b></p>`
+                            : `<p class="text-sm mt-6 opacity-40 text-center"><i class="fa-solid fa-hourglass-half mr-1.5"></i>Belum ada kelompok yang memilih kasus ini</p>`}
+      </div>`;
+                }
+            }
+            return `
+  <div>
+    <p class="text-xs uppercase tracking-[0.3em] opacity-50 mb-3 text-center animate__animated animate__fadeInDown">Sinergi Kelompok</p>
+    <h2 class="font-display font-bold text-center mb-2 animate__animated animate__fadeInUp" style="font-size:clamp(1.6rem,3.6vw,2.6rem);">5 Studi Kasus <span class="text-gradient-gold">Diskusi</span></h2>
+    <p class="text-center text-xs opacity-50 mb-8 animate__animated animate__fadeInUp" style="animation-delay:.12s">Tap salah satu kasus untuk menampilkan detail lengkapnya ke audience.</p>
+    <div id="presenter-case-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      ${presenterCaseCardsHtml()}
+    </div>
+  </div>`;
+        }
+
+        function presenterCaseCardsHtml() {
+            return CASE_STUDIES.map((c, i) => {
+                const lockedBy = groupDiscussionsCache.find(g => g.case_id === c.id);
+                return `
+    <div class="glass glass-card p-5 card-hover relative cursor-pointer animate__animated animate__fadeInUp" style="animation-delay:${(0.2 + i * 0.07).toFixed(2)}s" onclick="showPresenterCaseDetail(${c.id})">
+      ${lockedBy ? `<div class="case-locked-ribbon"><i class="fa-solid fa-lock"></i> TERPILIH</div>` : ''}
+      <div class="w-11 h-11 rounded-2xl flex items-center justify-center mb-3" style="background:rgba(232,196,104,0.14); border:1px solid rgba(232,196,104,0.35);">
+        <i class="fa-solid ${c.icon}" style="color:var(--gold)"></i>
+      </div>
+      <p class="text-[10px] uppercase tracking-widest opacity-50 mb-0.5">Case ${c.id}</p>
+      <h3 class="font-display text-base font-bold mb-1 leading-tight">${escapeHtml(c.title)}</h3>
+      <p class="text-xs opacity-60 leading-relaxed mb-2">${escapeHtml(c.subjects)}</p>
+      ${lockedBy
+                        ? `<p class="text-[11px] opacity-70"><i class="fa-solid fa-users mr-1"></i>${escapeHtml(lockedBy.group_name)}</p>`
+                        : `<p class="text-[11px] opacity-40"><i class="fa-solid fa-eye mr-1"></i>Tap untuk lihat detail</p>`}
+    </div>`;
+            }).join('');
+        }
+
+        function showPresenterCaseDetail(id) {
+            presenterCaseDetailId = id;
+            refreshPresenterCasesSlide();
+        }
+        function closePresenterCaseDetail() {
+            presenterCaseDetailId = null;
+            refreshPresenterCasesSlide();
+        }
+        // Perbarui isi slide 'cases' tanpa memicu transisi next/prev — dipakai untuk
+        // buka/tutup detail kasus, dan untuk update status "TERPILIH" secara realtime.
+        function refreshPresenterCasesSlide() {
+            if (PRESENTER_SLIDES[presenterSlideIndex] !== 'cases') return;
+            const container = document.getElementById('presenter-slide');
+            const inner = container && container.firstElementChild;
+            if (inner) inner.innerHTML = presenterSlideCases();
+        }
+
         /* ---- Slide 8: Master Control Timer ---- */
         async function loadPresenterControl() {
             if (!sb) return;
@@ -2265,47 +2478,155 @@
                 presenterControl = data;
                 renderFloatingTimer();
                 updatePresenterTimerDisplay();
+                updatePresenterPhaseBadge();
+                refreshClientScreenIfLocked();
             }
         }
 
-        // Tombol sapu di pojok kanan atas Presenter View — menghapus semua data peserta
-        // (diagnostik, hasil kuis peran, diskusi kelompok) dan mereset timer ke kondisi awal.
+        // Tombol gembok di header Presenter View — membuka modal Kontrol Fase Acara, supaya
+        // peserta yang sudah scan link/QR TIDAK bisa langsung mengisi Kuesioner Diagnostik / Kuis
+        // Peran / Pilih Studi Kasus sebelum dipersilakan. Fase disimpan di presenter_control.phase
+        // dan tersinkron realtime ke semua HP peserta (lihat refreshClientScreenIfLocked()).
+        function openPhaseModal() {
+            closePhaseModal();
+            const cur = currentEventPhase();
+            const overlay = document.createElement('div');
+            overlay.id = 'phase-modal-overlay';
+            overlay.style.cssText = 'position:fixed; inset:0; z-index:300; display:flex; align-items:center; justify-content:center; background:rgba(5,4,13,0.65); backdrop-filter:blur(4px); padding:20px;';
+            overlay.innerHTML = `
+    <div class="glass-strong glass-card p-6 max-w-sm w-full animate__animated animate__zoomIn animate__faster" style="border-color:rgba(232,196,104,.4);">
+      <div class="flex items-center gap-2 mb-1">
+        <i class="fa-solid fa-unlock-keyhole" style="color:var(--gold)"></i>
+        <h3 class="font-display font-bold text-lg">Kontrol Fase Acara</h3>
+      </div>
+      <p class="text-xs opacity-60 mb-5">Buka sesi berikutnya sesuai urutan acara. Peserta yang sudah scan link tidak bisa mengisi sampai fase ini dibuka — dan langsung terbuka di HP mereka begitu Anda pilih, tanpa perlu refresh.</p>
+      <div class="space-y-2 mb-5">
+        ${EVENT_PHASES.map(p => `
+          <button onclick="setEventPhase('${p}')" class="w-full rounded-xl py-3 px-4 text-left text-sm font-semibold flex items-center gap-3 ${p === cur ? 'btn-gold' : 'btn-ghost'}">
+            <i class="fa-solid ${PHASE_ICONS[p]} w-4 text-center"></i>
+            <span class="flex-1">${escapeHtml(PHASE_LABELS[p])}</span>
+            ${p === cur ? '<span class="text-[10px] opacity-70">● Aktif</span>' : ''}
+          </button>
+        `).join('')}
+      </div>
+      <button onclick="closePhaseModal()" class="text-xs opacity-50 hover:opacity-80 w-full text-center">Tutup</button>
+    </div>`;
+            overlay.addEventListener('click', (e) => { if (e.target === overlay) closePhaseModal(); });
+            document.body.appendChild(overlay);
+        }
+
+        function closePhaseModal() {
+            const el = document.getElementById('phase-modal-overlay');
+            if (el) el.remove();
+        }
+
+        async function setEventPhase(phase) {
+            if (!sb) { notify('Supabase belum dikonfigurasi.', 'error'); return; }
+            showLoading(true);
+            const { error } = await safeQuery(sb.from('presenter_control').update({ phase }).eq('id', 1), 'Gagal mengubah fase acara — pastikan kolom "phase" sudah ditambahkan (jalankan ulang schema.sql).');
+            showLoading(false);
+            if (error) return;
+            presenterControl.phase = phase;
+            notify('Fase acara diubah: ' + PHASE_LABELS[phase], 'success');
+            closePhaseModal();
+            updatePresenterPhaseBadge();
+        }
+
+        // Tombol sapu di pojok kanan atas Presenter View — membuka modal pilihan reset,
+        // supaya presenter bisa memilih mau reset bagian mana saja (bukan cuma "semua sekaligus").
         // Catatan: ini hanya membersihkan data di database. HP peserta yang sudah pernah
         // submit tetap menyimpan status "sudah selesai" secara lokal — mereka bisa memakai
         // tombol "Isi ulang jawaban diagnostik" / "Ulangi kuis peran" di HP masing-masing,
         // atau buka halaman dengan tab/browser baru untuk sesi berikutnya.
-        async function resetAllEventData() {
+        const RESET_SCOPE_LABELS = {
+            diagnostic: 'Kuesioner Diagnostik + hasilnya',
+            roles: 'Kuis Penemuan Peran + hasilnya',
+            cases: 'Pemilihan Studi Kasus & Diskusi Kelompok',
+            commitments: 'Checklist & catatan Komitmen kelompok saja',
+            all: 'SEMUA data peserta (diagnostik, peran, studi kasus, komitmen) + timer',
+        };
+
+        function openResetModal() {
+            closeResetModal();
+            const overlay = document.createElement('div');
+            overlay.id = 'reset-modal-overlay';
+            overlay.style.cssText = 'position:fixed; inset:0; z-index:300; display:flex; align-items:center; justify-content:center; background:rgba(5,4,13,0.65); backdrop-filter:blur(4px); padding:20px;';
+            overlay.innerHTML = `
+    <div class="glass-strong glass-card p-6 max-w-sm w-full animate__animated animate__zoomIn animate__faster" style="border-color:rgba(255,107,107,.4);">
+      <div class="flex items-center gap-2 mb-1">
+        <i class="fa-solid fa-broom" style="color:#ff6b6b;"></i>
+        <h3 class="font-display font-bold text-lg">Reset Data Peserta</h3>
+      </div>
+      <p class="text-xs opacity-60 mb-5">Pilih bagian data yang ingin dihapus. Aksi ini tidak bisa dibatalkan.</p>
+      <div class="space-y-2 mb-5">
+        <button onclick="resetAllEventData('diagnostic')" class="btn-ghost w-full rounded-xl py-3 px-4 text-left text-sm font-semibold flex items-center gap-3">
+          <i class="fa-solid fa-clipboard-question w-4 text-center" style="color:var(--blue)"></i> Kuesioner Diagnostik + Hasil
+        </button>
+        <button onclick="resetAllEventData('roles')" class="btn-ghost w-full rounded-xl py-3 px-4 text-left text-sm font-semibold flex items-center gap-3">
+          <i class="fa-solid fa-star w-4 text-center" style="color:var(--gold)"></i> Kuis Penemuan Peran + Hasil
+        </button>
+        <button onclick="resetAllEventData('cases')" class="btn-ghost w-full rounded-xl py-3 px-4 text-left text-sm font-semibold flex items-center gap-3">
+          <i class="fa-solid fa-layer-group w-4 text-center" style="color:var(--purple)"></i> Pemilihan Studi Kasus & Kelompok
+        </button>
+        <button onclick="resetAllEventData('commitments')" class="btn-ghost w-full rounded-xl py-3 px-4 text-left text-sm font-semibold flex items-center gap-3">
+          <i class="fa-solid fa-heart w-4 text-center" style="color:var(--rose)"></i> Komitmen Kelompok Saja
+        </button>
+        <button onclick="resetAllEventData('all')" class="btn-gold w-full rounded-xl py-3 px-4 text-left text-sm font-bold flex items-center gap-3">
+          <i class="fa-solid fa-trash-can w-4 text-center"></i> Reset Semuanya (+ Timer)
+        </button>
+      </div>
+      <button onclick="closeResetModal()" class="text-xs opacity-50 hover:opacity-80 w-full text-center">Batal</button>
+    </div>`;
+            overlay.addEventListener('click', (e) => { if (e.target === overlay) closeResetModal(); });
+            document.body.appendChild(overlay);
+        }
+
+        function closeResetModal() {
+            const el = document.getElementById('reset-modal-overlay');
+            if (el) el.remove();
+        }
+
+        async function resetAllEventData(scope) {
+            scope = scope || 'all';
             if (!sb) {
                 notify('Supabase belum dikonfigurasi — tidak ada data untuk direset.', 'error');
                 return;
             }
-            const ok = confirm('Yakin ingin menghapus SEMUA data peserta (jawaban diagnostik, hasil kuis peran, diskusi kelompok) dan mereset timer? Aksi ini TIDAK BISA dibatalkan.');
+            const label = RESET_SCOPE_LABELS[scope] || RESET_SCOPE_LABELS.all;
+            const ok = confirm(`Yakin ingin menghapus data: ${label}? Aksi ini TIDAK BISA dibatalkan.`);
             if (!ok) return;
+            closeResetModal();
 
             showLoading(true);
-            const results = await Promise.all([
-                sb.from('diagnostic_responses').delete().gte('id', 0),
-                sb.from('role_results').delete().gte('id', 0),
-                sb.from('group_discussions').delete().gte('id', 0),
-                sb.from('presenter_control').update({
-                    is_running: false,
-                    timer_started_at: null,
-                    timer_seconds: 900,
-                }).eq('id', 1),
-            ]);
+            const tasks = [];
+            if (scope === 'diagnostic' || scope === 'all') tasks.push(sb.from('diagnostic_responses').delete().gte('id', 0));
+            if (scope === 'roles' || scope === 'all') tasks.push(sb.from('role_results').delete().gte('id', 0));
+            if (scope === 'cases' || scope === 'all') tasks.push(sb.from('group_discussions').delete().gte('id', 0));
+            // 'commitments': hanya bersihkan checklist/catatan komitmen — nama kelompok, kasus yang
+            // sudah dikunci, dan refleksi (empathy/komunikasi) tetap dipertahankan.
+            if (scope === 'commitments') tasks.push(sb.from('group_discussions').update({ commitments: null }).gte('id', 0));
+            if (scope === 'all') tasks.push(sb.from('presenter_control').update({
+                is_running: false,
+                timer_started_at: null,
+                timer_seconds: 900,
+            }).eq('id', 1));
+
+            const results = await Promise.all(tasks);
             showLoading(false);
 
             const failed = results.find(r => r.error);
             if (failed) {
-                // Paling sering terjadi kalau policy DELETE belum dijalankan di Supabase SQL Editor (lihat schema.sql).
+                // Paling sering terjadi kalau policy DELETE/UPDATE belum dijalankan di Supabase SQL Editor (lihat schema.sql).
                 notify('Gagal reset sebagian data: ' + failed.error.message, 'error');
                 return;
             }
 
-            diagnosticCache = [];
-            roleResultsCache = [];
-            groupDiscussionsCache = [];
-            notify('Semua data peserta berhasil direset.', 'success');
+            if (scope === 'diagnostic' || scope === 'all') diagnosticCache = [];
+            if (scope === 'roles' || scope === 'all') roleResultsCache = [];
+            if (scope === 'cases' || scope === 'all') groupDiscussionsCache = [];
+            if (scope === 'commitments') groupDiscussionsCache = groupDiscussionsCache.map(g => Object.assign({}, g, { commitments: null }));
+
+            notify('Data berhasil direset: ' + label, 'success');
             loadPresenterControl();
             renderPresenterSlide();
         }
@@ -2316,6 +2637,8 @@
                     if (payload.new) presenterControl = payload.new;
                     renderFloatingTimer();
                     updatePresenterTimerDisplay();
+                    updatePresenterPhaseBadge();
+                    refreshClientScreenIfLocked();
                 })
                 .subscribe();
         }
@@ -2323,13 +2646,13 @@
         function presenterSlideTimer() {
             return `
   <div class="text-center">
-    <p class="text-xs uppercase tracking-[0.3em] opacity-50 mb-3">Master Control</p>
-    <h2 class="font-display font-bold mb-8" style="font-size:clamp(1.8rem,4vw,3rem);">Timer Diskusi Kelompok</h2>
-    <div class="glass-strong glass-card p-10 max-w-md mx-auto mb-6">
+    <p class="text-xs uppercase tracking-[0.3em] opacity-50 mb-3 animate__animated animate__fadeInDown">Master Control</p>
+    <h2 class="font-display font-bold mb-8 animate__animated animate__fadeInUp" style="font-size:clamp(1.8rem,4vw,3rem);">Timer Diskusi Kelompok</h2>
+    <div class="glass-strong glass-card p-10 max-w-md mx-auto mb-6 animate__animated animate__zoomIn" style="animation-delay:.15s">
       <div id="presenter-timer-display" class="font-display font-bold text-gradient-gold" style="font-size:clamp(3.5rem,10vw,6rem); line-height:1;">${fmtTime(computeTimerRemaining() ?? presenterControl.timer_seconds ?? 900)}</div>
       <p class="text-xs opacity-50 mt-2" id="presenter-timer-label">${escapeHtml(presenterControl.timer_label || 'Waktu Diskusi Kelompok')}</p>
     </div>
-    <div class="flex items-center justify-center gap-3 mb-5 flex-wrap">
+    <div class="flex items-center justify-center gap-3 mb-5 flex-wrap animate__animated animate__fadeInUp" style="animation-delay:.3s">
       <input type="text" id="timer-minutes-input" value="15" placeholder="Menit" class="!w-24 text-center">
       <button onclick="presenterStartOrResume()" class="btn-gold rounded-2xl px-6 py-3 font-bold text-sm"><i class="fa-solid fa-play mr-1.5"></i>Mulai / Lanjutkan</button>
       <button onclick="presenterPauseTimer()" class="btn-ghost rounded-2xl px-6 py-3 font-bold text-sm"><i class="fa-solid fa-pause mr-1.5"></i>Jeda</button>
@@ -2389,9 +2712,9 @@
         function presenterSlideWall() {
             return `
   <div>
-    <p class="text-xs uppercase tracking-[0.3em] opacity-50 mb-3 text-center">Live</p>
-    <h2 class="font-display font-bold text-center mb-2" style="font-size:clamp(1.6rem,3.6vw,2.6rem);">Dinding Komitmen <span class="text-gradient-gold">Digital</span></h2>
-    <p class="text-center text-xs opacity-50 mb-8"><i class="fa-solid fa-circle-notch fa-spin mr-1"></i>Kartu baru muncul otomatis saat kelompok mengirim refleksi</p>
+    <p class="text-xs uppercase tracking-[0.3em] opacity-50 mb-3 text-center animate__animated animate__fadeInDown">Live</p>
+    <h2 class="font-display font-bold text-center mb-2 animate__animated animate__fadeInUp" style="font-size:clamp(1.6rem,3.6vw,2.6rem);">Dinding Komitmen <span class="text-gradient-gold">Digital</span></h2>
+    <p class="text-center text-xs opacity-50 mb-8 animate__animated animate__fadeInUp" style="animation-delay:.12s"><i class="fa-solid fa-circle-notch fa-spin mr-1"></i>Kartu baru muncul otomatis saat kelompok mengirim refleksi</p>
     <div id="presenter-wall-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 max-h-[52vh] overflow-y-auto pr-1"></div>
   </div>`;
         }
@@ -2422,38 +2745,38 @@
         function presenterSlideClosingIntro() {
             return `
   <div class="text-center">
-    <p class="text-xs uppercase tracking-[0.3em] opacity-50 mb-4">Penutup</p>
-    <h2 class="font-display font-bold mb-6" style="font-size:clamp(2.2rem,5.5vw,4rem);">Firman, Nasihat, & <span class="text-gradient-gold">Doa Komitmen</span></h2>
-    <p class="opacity-60 text-sm sm:text-base max-w-lg mx-auto leading-relaxed">Firman Tuhan, nasihat Roh Nubuat, dan doa komitmen bersama untuk menutup sesi malam ini.</p>
+    <p class="text-xs uppercase tracking-[0.3em] opacity-50 mb-4 animate__animated animate__fadeInDown">Penutup</p>
+    <h2 class="font-display font-bold mb-6 animate__animated animate__fadeInUp" style="font-size:clamp(2.2rem,5.5vw,4rem); animation-delay:.1s">Firman, Nasihat, & <span class="text-gradient-gold">Doa Komitmen</span></h2>
+    <p class="opacity-60 text-sm sm:text-base max-w-lg mx-auto leading-relaxed animate__animated animate__fadeInUp" style="animation-delay:.24s">Firman Tuhan, nasihat Roh Nubuat, dan doa komitmen bersama untuk menutup sesi malam ini.</p>
   </div>`;
         }
 
         function presenterSlideVerse(v, idx, total) {
             return `
   <div class="text-center max-w-3xl mx-auto">
-    <p class="text-xs uppercase tracking-[0.3em] opacity-50 mb-2"><i class="fa-solid fa-book-bible mr-1"></i> Firman Tuhan</p>
-    <p class="text-[10px] uppercase tracking-widest opacity-35 mb-8">Ayat ${idx + 1} / ${total}</p>
-    <p class="font-display italic leading-snug mb-8" style="font-size:clamp(1.7rem,3.8vw,2.8rem);">"${escapeHtml(v.text)}"</p>
-    <p class="text-sm sm:text-base uppercase tracking-widest" style="color:var(--gold)">${escapeHtml(v.ref)}</p>
+    <p class="text-xs uppercase tracking-[0.3em] opacity-50 mb-2 animate__animated animate__fadeInDown"><i class="fa-solid fa-book-bible mr-1"></i> Firman Tuhan</p>
+    <p class="text-[10px] uppercase tracking-widest opacity-35 mb-8 animate__animated animate__fadeIn" style="animation-delay:.1s">Ayat ${idx + 1} / ${total}</p>
+    <p class="font-display italic leading-snug mb-8 animate__animated animate__zoomIn" style="font-size:clamp(1.7rem,3.8vw,2.8rem); animation-delay:.2s">"${escapeHtml(v.text)}"</p>
+    <p class="text-sm sm:text-base uppercase tracking-widest animate__animated animate__fadeInUp" style="color:var(--gold); animation-delay:.38s">${escapeHtml(v.ref)}</p>
   </div>`;
         }
 
         function presenterSlideEgw(q, idx, total) {
             return `
   <div class="text-center max-w-3xl mx-auto">
-    <p class="text-xs uppercase tracking-[0.3em] opacity-50 mb-2"><i class="fa-solid fa-feather mr-1"></i> Roh Nubuat</p>
-    <p class="text-[10px] uppercase tracking-widest opacity-35 mb-8">Kutipan ${idx + 1} / ${total}</p>
-    <p class="italic leading-snug mb-8" style="font-size:clamp(1.3rem,3vw,2.1rem);">"${escapeHtml(q.text)}"</p>
-    <p class="text-xs sm:text-sm uppercase tracking-widest opacity-60">${escapeHtml(q.source)}</p>
+    <p class="text-xs uppercase tracking-[0.3em] opacity-50 mb-2 animate__animated animate__fadeInDown"><i class="fa-solid fa-feather mr-1"></i> Roh Nubuat</p>
+    <p class="text-[10px] uppercase tracking-widest opacity-35 mb-8 animate__animated animate__fadeIn" style="animation-delay:.1s">Kutipan ${idx + 1} / ${total}</p>
+    <p class="italic leading-snug mb-8 animate__animated animate__zoomIn" style="font-size:clamp(1.3rem,3vw,2.1rem); animation-delay:.2s">"${escapeHtml(q.text)}"</p>
+    <p class="text-xs sm:text-sm uppercase tracking-widest opacity-60 animate__animated animate__fadeInUp" style="animation-delay:.38s">${escapeHtml(q.source)}</p>
   </div>`;
         }
 
         function presenterSlideClosingPrayer() {
             return `
   <div class="max-w-2xl mx-auto">
-    <p class="text-xs uppercase tracking-[0.3em] opacity-50 mb-8 text-center"><i class="fa-solid fa-hands-praying mr-1"></i> Tata Cara Doa Komitmen</p>
+    <p class="text-xs uppercase tracking-[0.3em] opacity-50 mb-8 text-center animate__animated animate__fadeInDown"><i class="fa-solid fa-hands-praying mr-1"></i> Tata Cara Doa Komitmen</p>
     <div class="space-y-6 text-left">
-      ${PRAYER_STEPS.map((s, i) => `<div class="flex items-start gap-4">
+      ${PRAYER_STEPS.map((s, i) => `<div class="flex items-start gap-4 animate__animated animate__fadeInUp" style="animation-delay:${(0.1 + i * 0.14).toFixed(2)}s">
         <span class="w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0 mt-0.5" style="background:rgba(232,196,104,.18); color:var(--gold);">${i + 1}</span>
         <p class="opacity-85 leading-relaxed" style="font-size:clamp(1.05rem,2.1vw,1.4rem);">${escapeHtml(s)}</p>
       </div>`).join('')}
@@ -2464,15 +2787,15 @@
         function presenterSlideClosingThanks() {
             return `
   <div class="text-center animate__animated animate__fadeIn">
-    <div class="flex items-center justify-center gap-6 mb-8">
+    <div class="flex items-center justify-center gap-6 mb-8 animate__animated animate__zoomIn">
       <div class="w-16 h-px" style="background:linear-gradient(90deg, transparent, var(--gold), transparent)"></div>
       <i class="fa-solid fa-cross text-3xl" style="color:var(--gold)"></i>
       <div class="w-16 h-px" style="background:linear-gradient(90deg, transparent, var(--gold), transparent)"></div>
     </div>
-    <h2 class="font-display font-bold leading-tight mb-4" style="font-size:clamp(2.4rem,6vw,4.5rem);">
+    <h2 class="font-display font-bold leading-tight mb-4 animate__animated animate__fadeInUp" style="font-size:clamp(2.4rem,6vw,4.5rem); animation-delay:.15s">
       Terima Kasih <span class="text-gradient-gold">Tuhan Memberkati</span>
     </h2>
-    <p class="opacity-70 text-base sm:text-lg max-w-xl mx-auto leading-relaxed">
+    <p class="opacity-70 text-base sm:text-lg max-w-xl mx-auto leading-relaxed animate__animated animate__fadeInUp" style="animation-delay:.3s">
       Kiranya Kekuatan Pemuda dan Hikmat Orang Tua terus menyatu, membangun gereja yang kita cintai bersama.
     </p>
   </div>`;
